@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Specification to DOM — json-to-tag</title><link rel="stylesheet" href="styles.css"></head><body><nav><div class="wrap navin"><a class="brand" href="index.html">json-to-tag / docs</a><div class="navlinks"><a href="01-ui-model.html">Previous</a><a href="03-element-builder.html">Next</a></div></div></nav><main><div class="wrap"><span class="eyebrow">02 · TRANSLATION</span><h1>One call starts the build.</h1><p class="lead">The v4 public entry point receives the specification and passes it into the build dispatcher.</p><div class="code"><pre>const element = window.ks.jsonToTag.buildSpecElement({
+  tagName: "h2",
+  textContent: "Invoice"
+});</pre></div><h2>1 · Public entry</h2><p>The entry function selects <code>spec</code>, <code>inSpec</code>, or the object itself, then calls <code>buildSpec</code>.</p><div class="code"><pre>const localSpec = localArgs?.spec ?? localArgs?.inSpec ?? localArgs;
+const element = buildSpec({ inSpec: localSpec });</pre></div><h2>2 · Dispatch</h2><div class="flow"><span class="node">spec</span><span class="arrow">→</span><span class="node">dispatch</span><span class="arrow">→</span><span class="node">null / DOM / array / single</span></div><div class="code"><pre>if (isNullOrUndefined({inSpec})) return null;
+if (isDomNode({inSpec})) return inSpec;
+if (isSpecArray({inSpec})) return buildSpecArray({inSpec});
+return buildSingleElement({inSpec});</pre></div><h2>3 · Single element</h2><p>A normal object reaches <code>buildSingleElement</code>, which uses the element builder and then assembles nested children.</p><div class="code"><pre>const elementBuilt = domElementBuilder({ inSpec: localSpec });
+// children are built and appended
+return elementBuilt;</pre></div><p class="callout">Public API → dispatcher → single-element builder is the boundary between input data and native DOM construction.</p><p><a href="03-element-builder.html">Next: open the element builder →</a></p></div></main><footer><div class="wrap">json-to-tag • Browser-first documentation</div></footer></body></html>

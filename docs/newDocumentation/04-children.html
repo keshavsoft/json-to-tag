@@ -1,7 +1,32 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Children — json-to-tag</title><link rel="stylesheet" href="styles.css"></head><body><nav><div class="wrap navin"><a class="brand" href="index.html">json-to-tag / docs</a><div class="navlinks"><a href="03-element-builder.html">Previous</a><a href="05-browser-runtime.html">Next</a></div></div></nav><main><div class="wrap"><span class="eyebrow">04 · TREE</span><h1>Nested UI becomes a DOM tree.</h1><p class="lead">A <code>children</code> array lets a parent specification contain more specifications. Each child uses the same build model.</p><div class="tree">div.card
-├─ h3 → "Invoice"
-├─ p → "2 items"
-└─ button → "Open"</div><h2>Specification</h2><div class="code"><pre>{
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Children — json-to-tag</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <nav>
+    <div class="wrap navin"><a class="brand" href="index.html">json-to-tag / docs</a>
+      <div class="navlinks"><a href="03-element-builder.html">Previous</a><a href="05-browser-runtime.html">Next</a>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div class="wrap"><span class="eyebrow">04 · TREE</span>
+      <h1>Nested UI becomes a DOM tree.</h1>
+      <p class="lead">A <code>children</code> array lets a parent specification contain more specifications. Each child
+        uses the same build model.</p>
+      <div class="tree">div.card
+        ├─ h3 → "Invoice"
+        ├─ p → "2 items"
+        └─ button → "Open"</div>
+      <h2>Specification</h2>
+      <div class="code">
+        <pre>{
   "tagName":"div",
   "classList":["card"],
   "children":[
@@ -9,10 +34,50 @@
     {"tagName":"p","textContent":"2 items"},
     {"tagName":"button","textContent":"Open"}
   ]
-}</pre></div><h2>Three operations</h2><div class="grid"><div class="card"><b>Parent</b><p>Create the parent element.</p></div><div class="card"><b>Children</b><p>Build each child specification.</p></div><div class="card"><b>Connect</b><p>Append the resulting nodes.</p></div></div><h2>Source connection</h2><div class="code"><pre>if ("children" in localSpec) {
+}</pre>
+      </div>
+      <h2>Three operations</h2>
+      <div class="grid">
+        <div class="card"><b>Parent</b>
+          <p>Create the parent element.</p>
+        </div>
+        <div class="card"><b>Children</b>
+          <p>Build each child specification.</p>
+        </div>
+        <div class="card"><b>Connect</b>
+          <p>Append the resulting nodes.</p>
+        </div>
+      </div>
+      <h2>Source connection</h2>
+      <div class="code">
+        <pre>if ("children" in localSpec) {
   localChildrenNodes = Array.isArray(localSpec.children) &&
     localSpec.children.length > 0
       ? buildChildrenNodes({inChildren: localSpec.children})
       : [];
   elementBuilt.append(...localChildrenNodes);
-}</pre></div><p class="callout">A child does not need a second renderer. It is another specification in the same tree.</p><p><a href="05-browser-runtime.html">Next: browser runtime →</a></p></div></main><footer><div class="wrap">json-to-tag • Browser-first documentation</div></footer></body></html>
+}</pre>
+      </div>
+      <p class="callout">A child does not need a second renderer. It is another specification in the same tree.</p>
+      <p><a href="05-browser-runtime.html">Next: browser runtime →</a></p>
+    </div>
+  </main>
+  <footer>
+    <div class="wrap">
+      json-to-tag • Browser-first documentation
+      <span>·</span>
+
+      <a href="https://github.com/keshavsoft/json-to-tag" target="_blank" rel="noopener noreferrer">
+        GitHub ↗
+      </a>
+
+      <span>·</span>
+
+      <a href="https://www.npmjs.com/package/@keshavsoft/json-to-tag" target="_blank" rel="noopener noreferrer">
+        npm ↗
+      </a>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,22 +1,30 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Build the Same Piece — json-to-tag</title>
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<nav><div class="wrap navin"><a class="brand" href="index.html">json-to-tag / docs</a>
-<div class="navlinks"><a href="09-original-html.html">Previous</a><a href="index.html">Home</a></div></div></nav>
-<main><div class="wrap">
-<span class="eyebrow">10 · CDN BUILD</span>
-<h1>Build the same piece</h1>
-<p class="lead">The JSON describes the same UI, the CDN provides the builder, and the browser receives a native DOM element.</p>
 
-<h2>Build code</h2>
-<div class="code" style="position:relative">
-<button id="copy-build" class="copy-btn">Copy code</button>
-<pre id="build-code">&lt;script src="https://keshavsoft.github.io/json-to-tag/dist/v4/min.js"&gt;&lt;/script&gt;
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Build the Same Piece — json-to-tag</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <nav>
+    <div class="wrap navin"><a class="brand" href="index.html">json-to-tag / docs</a>
+      <div class="navlinks"><a href="09-original-html.html">Previous</a><a href="index.html">Home</a></div>
+    </div>
+  </nav>
+  <main>
+    <div class="wrap">
+      <span class="eyebrow">10 · CDN BUILD</span>
+      <h1>Build the same piece</h1>
+      <p class="lead">The JSON describes the same UI, the CDN provides the builder, and the browser receives a native
+        DOM element.</p>
+
+      <h2>Build code</h2>
+      <div class="code" style="position:relative">
+        <button id="copy-build" class="copy-btn">Copy code</button>
+        <pre id="build-code">&lt;script src="https://keshavsoft.github.io/json-to-tag/dist/v4/min.js"&gt;&lt;/script&gt;
 
 const spec = {
   tagName: "div",
@@ -32,59 +40,78 @@ const element =
 
 document.querySelector("#browser-output")
   .replaceChildren(element);</pre>
-</div>
+      </div>
 
-<h2>Browser Output</h2>
-<div id="browser-output" class="ui">
-  <div class="mini">
-    <label style="display:block;font-weight:700;margin-bottom:6px">Name</label>
-    <p style="margin:0">Test Content</p>
-  </div>
-</div>
+      <h2>Browser Output</h2>
+      <div id="browser-output" class="ui">
+        <div class="mini">
+          <label style="display:block;font-weight:700;margin-bottom:6px">Name</label>
+          <p style="margin:0">Test Content</p>
+        </div>
+      </div>
 
-<h2>DOM</h2>
-<div class="tree">#test-content
-├─ label → Name
-└─ p → Test Content</div>
+      <h2>DOM</h2>
+      <div class="tree">#test-content
+        ├─ label → Name
+        └─ p → Test Content</div>
 
-<script>
-const spec = {
-  tagName: "div",
-  attributes: { id: "test-content" },
-  children: [
-    { tagName: "label", textContent: "Name", properties: {
-      style: "display:block;font-weight:700;margin-bottom:6px"
-    }},
-    { tagName: "p", textContent: "Test Content" }
-  ]
-};
+      <script>
+        const spec = {
+          tagName: "div",
+          attributes: { id: "test-content" },
+          children: [
+            {
+              tagName: "label", textContent: "Name", properties: {
+                style: "display:block;font-weight:700;margin-bottom:6px"
+              }
+            },
+            { tagName: "p", textContent: "Test Content" }
+          ]
+        };
 
-function render() {
-  const output = document.querySelector("#browser-output");
-  if (output && window.ks?.jsonToTag?.buildSpecElement) {
-    output.replaceChildren(window.ks.jsonToTag.buildSpecElement(spec));
-  }
-}
+        function render() {
+          const output = document.querySelector("#browser-output");
+          if (output && window.ks?.jsonToTag?.buildSpecElement) {
+            output.replaceChildren(window.ks.jsonToTag.buildSpecElement(spec));
+          }
+        }
 
-const script = document.createElement("script");
-script.src = "https://keshavsoft.github.io/json-to-tag/dist/v4/min.js";
-script.onload = render;
-document.head.appendChild(script);
+        const script = document.createElement("script");
+        script.src = "https://keshavsoft.github.io/json-to-tag/dist/v4/min.js";
+        script.onload = render;
+        document.head.appendChild(script);
 
-document.querySelector("#copy-build").addEventListener("click", async () => {
-  const code = document.querySelector("#build-code").textContent;
-  const button = document.querySelector("#copy-build");
-  try {
-    await navigator.clipboard.writeText(code);
-    button.textContent = "Copied!";
-    setTimeout(() => button.textContent = "Copy code", 1400);
-  } catch {
-    button.textContent = "Copy failed";
-    setTimeout(() => button.textContent = "Copy code", 1400);
-  }
-});
-</script>
-</div></main>
-<footer><div class="wrap">JSON specification → CDN → native DOM</div></footer>
+        document.querySelector("#copy-build").addEventListener("click", async () => {
+          const code = document.querySelector("#build-code").textContent;
+          const button = document.querySelector("#copy-build");
+          try {
+            await navigator.clipboard.writeText(code);
+            button.textContent = "Copied!";
+            setTimeout(() => button.textContent = "Copy code", 1400);
+          } catch {
+            button.textContent = "Copy failed";
+            setTimeout(() => button.textContent = "Copy code", 1400);
+          }
+        });
+      </script>
+    </div>
+  </main>
+  <footer>
+    <div class="wrap">
+      json-to-tag • Browser-first documentation
+      <span>·</span>
+
+      <a href="https://github.com/keshavsoft/json-to-tag" target="_blank" rel="noopener noreferrer">
+        GitHub ↗
+      </a>
+
+      <span>·</span>
+
+      <a href="https://www.npmjs.com/package/@keshavsoft/json-to-tag" target="_blank" rel="noopener noreferrer">
+        npm ↗
+      </a>
+    </div>
+  </footer>
 </body>
+
 </html>

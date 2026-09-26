@@ -1,33 +1,36 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Vanilla JavaScript — json-to-tag</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Vanilla JavaScript — json-to-tag</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-<nav>
-  <div class="wrap navin">
-    <a class="brand" href="index.html">json-to-tag / docs</a>
-    <div class="navlinks">
-      <a href="09-original-html.html">Original HTML</a>
-      <a href="10-build-same-piece.html">CDN Build</a>
-      <a href="index.html">Home</a>
+  <nav>
+    <div class="wrap navin">
+      <a class="brand" href="index.html">json-to-tag / docs</a>
+      <div class="navlinks">
+        <a href="09-original-html.html">Original HTML</a>
+        <a href="10-build-same-piece.html">CDN Build</a>
+        <a href="index.html">Home</a>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<main>
-<div class="wrap">
-<span class="eyebrow">11 · VANILLA JAVASCRIPT</span>
-<h1>Create the same UI with plain JavaScript.</h1>
-<p class="lead">This version does not use json-to-tag. It uses only browser-native JavaScript APIs such as <code>document.createElement()</code>, <code>textContent</code>, and <code>append()</code>.</p>
+  <main>
+    <div class="wrap">
+      <span class="eyebrow">11 · VANILLA JAVASCRIPT</span>
+      <h1>Create the same UI with plain JavaScript.</h1>
+      <p class="lead">This version does not use json-to-tag. It uses only browser-native JavaScript APIs such as
+        <code>document.createElement()</code>, <code>textContent</code>, and <code>append()</code>.</p>
 
-<h2>Build code</h2>
-<div class="code" style="position:relative">
-<button id="copy-build" class="copy-btn">Copy code</button>
-<pre id="build-code">const wrapper = document.createElement("div");
+      <h2>Build code</h2>
+      <div class="code" style="position:relative">
+        <button id="copy-build" class="copy-btn">Copy code</button>
+        <pre id="build-code">const wrapper = document.createElement("div");
 wrapper.id = "test-content";
 
 const label = document.createElement("label");
@@ -40,68 +43,95 @@ wrapper.append(label, text);
 
 document.querySelector("#browser-output")
   .replaceChildren(wrapper);</pre>
-</div>
+      </div>
 
-<h2>Browser Output</h2>
-<div id="browser-output" class="ui">
-  <div class="mini">
-    <label style="display:block;font-weight:700;margin-bottom:6px">Name</label>
-    <p style="margin:0">Test Content</p>
-  </div>
-</div>
+      <h2>Browser Output</h2>
+      <div id="browser-output" class="ui">
+        <div class="mini">
+          <label style="display:block;font-weight:700;margin-bottom:6px">Name</label>
+          <p style="margin:0">Test Content</p>
+        </div>
+      </div>
 
-<h2>DOM</h2>
-<div class="tree">#test-content
-├─ label → Name
-└─ p → Test Content</div>
+      <h2>DOM</h2>
+      <div class="tree">#test-content
+        ├─ label → Name
+        └─ p → Test Content</div>
 
-<h2>Three ways to create the same UI</h2>
-<table>
-<tr><th>Approach</th><th>What creates the DOM?</th></tr>
-<tr><td>Original HTML</td><td>HTML parser</td></tr>
-<tr><td>CDN Build</td><td><code>json-to-tag</code> through <code>buildSpecElement()</code></td></tr>
-<tr><td>Vanilla JavaScript</td><td>Browser-native <code>document.createElement()</code></td></tr>
-</table>
+      <h2>Three ways to create the same UI</h2>
+      <table>
+        <tr>
+          <th>Approach</th>
+          <th>What creates the DOM?</th>
+        </tr>
+        <tr>
+          <td>Original HTML</td>
+          <td>HTML parser</td>
+        </tr>
+        <tr>
+          <td>CDN Build</td>
+          <td><code>json-to-tag</code> through <code>buildSpecElement()</code></td>
+        </tr>
+        <tr>
+          <td>Vanilla JavaScript</td>
+          <td>Browser-native <code>document.createElement()</code></td>
+        </tr>
+      </table>
 
-<div class="callout">
-The output is intentionally the same in all three examples. The difference is how the DOM structure is described and created.
-</div>
+      <div class="callout">
+        The output is intentionally the same in all three examples. The difference is how the DOM structure is described
+        and created.
+      </div>
 
-<script>
-const wrapper = document.createElement("div");
-wrapper.id = "test-content";
+      <script>
+        const wrapper = document.createElement("div");
+        wrapper.id = "test-content";
 
-const label = document.createElement("label");
-label.textContent = "Name";
-label.style.display = "block";
-label.style.fontWeight = "700";
-label.style.marginBottom = "6px";
+        const label = document.createElement("label");
+        label.textContent = "Name";
+        label.style.display = "block";
+        label.style.fontWeight = "700";
+        label.style.marginBottom = "6px";
 
-const text = document.createElement("p");
-text.textContent = "Test Content";
-text.style.margin = "0";
+        const text = document.createElement("p");
+        text.textContent = "Test Content";
+        text.style.margin = "0";
 
-wrapper.append(label, text);
-document.querySelector("#browser-output").replaceChildren(wrapper);
+        wrapper.append(label, text);
+        document.querySelector("#browser-output").replaceChildren(wrapper);
 
-document.querySelector("#copy-build").addEventListener("click", async () => {
-  const code = document.querySelector("#build-code").textContent;
-  const button = document.querySelector("#copy-build");
-  try {
-    await navigator.clipboard.writeText(code);
-    button.textContent = "Copied!";
-    setTimeout(() => button.textContent = "Copy code", 1400);
-  } catch {
-    button.textContent = "Copy failed";
-    setTimeout(() => button.textContent = "Copy code", 1400);
-  }
-});
-</script>
-</div>
-</main>
+        document.querySelector("#copy-build").addEventListener("click", async () => {
+          const code = document.querySelector("#build-code").textContent;
+          const button = document.querySelector("#copy-build");
+          try {
+            await navigator.clipboard.writeText(code);
+            button.textContent = "Copied!";
+            setTimeout(() => button.textContent = "Copy code", 1400);
+          } catch {
+            button.textContent = "Copy failed";
+            setTimeout(() => button.textContent = "Copy code", 1400);
+          }
+        });
+      </script>
+    </div>
+  </main>
 
-<footer>
-<div class="wrap">Vanilla JavaScript → native DOM</div>
-</footer>
+  <footer>
+    <div class="wrap">
+      json-to-tag • Browser-first documentation
+      <span>·</span>
+
+      <a href="https://github.com/keshavsoft/json-to-tag" target="_blank" rel="noopener noreferrer">
+        GitHub ↗
+      </a>
+
+      <span>·</span>
+
+      <a href="https://www.npmjs.com/package/@keshavsoft/json-to-tag" target="_blank" rel="noopener noreferrer">
+        npm ↗
+      </a>
+    </div>
+  </footer>
 </body>
+
 </html>

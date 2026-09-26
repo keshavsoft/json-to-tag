@@ -1,8 +1,72 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Browser Runtime — json-to-tag</title><link rel="stylesheet" href="styles.css"></head><body><nav><div class="wrap navin"><a class="brand" href="index.html">json-to-tag / docs</a><div class="navlinks"><a href="04-children.html">Previous</a><a href="06-complete-example.html">Next</a></div></div></nav><main><div class="wrap"><span class="eyebrow">05 · BROWSER RUNTIME</span><h1>Load once. Build in the browser.</h1><p class="lead">The browser page loads the v4 bundle through CDN and then calls the registered browser API.</p><h2>1 · Load</h2><div class="code"><pre>&lt;script src="https://keshavsoft.github.io/json-to-tag/dist/v4/min.js"&gt;&lt;/script&gt;</pre></div><h2>2 · Get the entry</h2><div class="code"><pre>const buildSpecElement = window.ks.jsonToTag.buildSpecElement;</pre></div><h2>3 · Build and mount</h2><div class="code"><pre>const element = buildSpecElement({
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Browser Runtime — json-to-tag</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <nav>
+    <div class="wrap navin"><a class="brand" href="index.html">json-to-tag / docs</a>
+      <div class="navlinks"><a href="04-children.html">Previous</a><a href="06-complete-example.html">Next</a></div>
+    </div>
+  </nav>
+  <main>
+    <div class="wrap"><span class="eyebrow">05 · BROWSER RUNTIME</span>
+      <h1>Load once. Build in the browser.</h1>
+      <p class="lead">The browser page loads the v4 bundle through CDN and then calls the registered browser API.</p>
+      <h2>1 · Load</h2>
+      <div class="code">
+        <pre>&lt;script src="https://keshavsoft.github.io/json-to-tag/dist/v4/min.js"&gt;&lt;/script&gt;</pre>
+      </div>
+      <h2>2 · Get the entry</h2>
+      <div class="code">
+        <pre>const buildSpecElement = window.ks.jsonToTag.buildSpecElement;</pre>
+      </div>
+      <h2>3 · Build and mount</h2>
+      <div class="code">
+        <pre>const element = buildSpecElement({
   tagName: "p",
   textContent: "Hello from json-to-tag"
 });
-document.body.append(element);</pre></div><h2>Runtime flow</h2><div class="flow"><span class="node">&lt;script&gt;</span><span class="arrow">→</span><span class="node">CDN</span><span class="arrow">→</span><span class="node">global API</span><span class="arrow">→</span><span class="node">builder</span><span class="arrow">→</span><span class="node">DOM</span></div><h2>Global registration</h2><div class="code"><pre>registerGlobal({
+document.body.append(element);</pre>
+      </div>
+      <h2>Runtime flow</h2>
+      <div class="flow"><span class="node">&lt;script&gt;</span><span class="arrow">→</span><span
+          class="node">CDN</span><span class="arrow">→</span><span class="node">global API</span><span
+          class="arrow">→</span><span class="node">builder</span><span class="arrow">→</span><span
+          class="node">DOM</span></div>
+      <h2>Global registration</h2>
+      <div class="code">
+        <pre>registerGlobal({
   inFuncDefinition: buildSpecElement,
   inReviewSpec: reviewSpec
-});</pre></div><p class="callout">This page defines only the browser loading model. Internal construction remains on the Builder page.</p><p><a href="06-complete-example.html">Next: one complete example →</a></p></div></main><footer><div class="wrap">json-to-tag • Browser-first documentation</div></footer></body></html>
+});</pre>
+      </div>
+      <p class="callout">This page defines only the browser loading model. Internal construction remains on the Builder
+        page.</p>
+      <p><a href="06-complete-example.html">Next: one complete example →</a></p>
+    </div>
+  </main>
+  <footer>
+    <div class="wrap">
+      json-to-tag • Browser-first documentation
+      <span>·</span>
+
+      <a href="https://github.com/keshavsoft/json-to-tag" target="_blank" rel="noopener noreferrer">
+        GitHub ↗
+      </a>
+
+      <span>·</span>
+
+      <a href="https://www.npmjs.com/package/@keshavsoft/json-to-tag" target="_blank" rel="noopener noreferrer">
+        npm ↗
+      </a>
+    </div>
+  </footer>
+</body>
+
+</html>

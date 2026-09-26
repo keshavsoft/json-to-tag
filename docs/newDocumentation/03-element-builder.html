@@ -1,7 +1,102 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Element Builder — json-to-tag</title><link rel="stylesheet" href="styles.css"></head><body><nav><div class="wrap navin"><a class="brand" href="index.html">json-to-tag / docs</a><div class="navlinks"><a href="02-spec-to-dom.html">Previous</a><a href="04-children.html">Next</a></div></div></nav><main><div class="wrap"><span class="eyebrow">03 · ELEMENT BUILDER</span><h1>The element is assembled in stages.</h1><p class="lead">The v4 element builder separates creation from text, properties, attributes, classes and children.</p><div class="flow"><span class="node">0 Create</span><span class="arrow">→</span><span class="node">1 Text</span><span class="arrow">→</span><span class="node">2 Properties</span><span class="arrow">→</span><span class="node">3 Attributes</span><span class="arrow">→</span><span class="node">4 Classes</span><span class="arrow">→</span><span class="node">5 Children</span></div><table><tr><th>Stage</th><th>Input</th><th>Purpose</th></tr><tr><td>0</td><td><code>tagName</code></td><td>Create native element.</td></tr><tr><td>1</td><td><code>textContent</code></td><td>Set visible text.</td></tr><tr><td>2</td><td><code>properties</code></td><td>Apply DOM state.</td></tr><tr><td>3</td><td><code>attributes</code></td><td>Apply HTML attributes.</td></tr><tr><td>4</td><td><code>classList</code></td><td>Apply CSS classes.</td></tr><tr><td>5</td><td><code>children</code></td><td>Accept child nodes.</td></tr></table><h2>Source shape</h2><div class="code"><pre>const element = createElement({inTagName: localSpec.tagName});
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Element Builder — json-to-tag</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav>
+        <div class="wrap navin"><a class="brand" href="index.html">json-to-tag / docs</a>
+            <div class="navlinks"><a href="02-spec-to-dom.html">Previous</a><a href="04-children.html">Next</a></div>
+        </div>
+    </nav>
+    <main>
+        <div class="wrap"><span class="eyebrow">03 · ELEMENT BUILDER</span>
+            <h1>The element is assembled in stages.</h1>
+            <p class="lead">The v4 element builder separates creation from text, properties, attributes, classes and
+                children.</p>
+            <div class="flow"><span class="node">0 Create</span><span class="arrow">→</span><span class="node">1
+                    Text</span><span class="arrow">→</span><span class="node">2 Properties</span><span
+                    class="arrow">→</span><span class="node">3 Attributes</span><span class="arrow">→</span><span
+                    class="node">4 Classes</span><span class="arrow">→</span><span class="node">5 Children</span></div>
+            <table>
+                <tr>
+                    <th>Stage</th>
+                    <th>Input</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td><code>tagName</code></td>
+                    <td>Create native element.</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><code>textContent</code></td>
+                    <td>Set visible text.</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><code>properties</code></td>
+                    <td>Apply DOM state.</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><code>attributes</code></td>
+                    <td>Apply HTML attributes.</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><code>classList</code></td>
+                    <td>Apply CSS classes.</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><code>children</code></td>
+                    <td>Accept child nodes.</td>
+                </tr>
+            </table>
+            <h2>Source shape</h2>
+            <div class="code">
+                <pre>const element = createElement({inTagName: localSpec.tagName});
 applyTextContent({inElement: element, inTextContent: localSpec.textContent});
 applyProperties({inElement: element, inProperties: localSpec.properties});
 applyAttributes({inElement: element, inAttributes: localSpec.attributes});
 applyClassList({inElement: element, inClassList: localClassList});
 appendChildren({inElement: element, inChildren: localSpec.children});
-return element;</pre></div><div class="grid2"><div class="card"><b>Debuggable</b><p>Each UI concern has a visible construction stage.</p></div><div class="card"><b>Predictable</b><p>The JSON fields map directly to construction work.</p></div></div><p><a href="04-children.html">Next: see how nested UI becomes a tree →</a></p></div></main><footer><div class="wrap">json-to-tag • Browser-first documentation</div></footer></body></html>
+return element;</pre>
+            </div>
+            <div class="grid2">
+                <div class="card"><b>Debuggable</b>
+                    <p>Each UI concern has a visible construction stage.</p>
+                </div>
+                <div class="card"><b>Predictable</b>
+                    <p>The JSON fields map directly to construction work.</p>
+                </div>
+            </div>
+            <p><a href="04-children.html">Next: see how nested UI becomes a tree →</a></p>
+        </div>
+    </main>
+    <footer>
+        <div class="wrap">
+            json-to-tag • Browser-first documentation
+            <span>·</span>
+
+            <a href="https://github.com/keshavsoft/json-to-tag" target="_blank" rel="noopener noreferrer">
+                GitHub ↗
+            </a>
+
+            <span>·</span>
+
+            <a href="https://www.npmjs.com/package/@keshavsoft/json-to-tag" target="_blank" rel="noopener noreferrer">
+                npm ↗
+            </a>
+        </div>
+    </footer>
+</body>
+
+</html>

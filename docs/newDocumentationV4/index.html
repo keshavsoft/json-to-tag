@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>json-to-tag — Browser Architecture</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Full-width, compact desktop layout. No transform or clipped page. */
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; min-height: 100%; }
+    body { overflow-x: hidden; }
+    nav { height: 43px; min-height: 43px; }
+    nav .wrap { height: 100%; display: flex; align-items: center; }
+    main { padding: 0 !important; }
+    main > .wrap, nav > .wrap, footer > .wrap {
+      width: min(1280px, calc(100% - 32px)) !important;
+      max-width: 1280px !important; margin: 0 auto !important;
+      transform: none !important;
+    }
+    main > .wrap { padding: 8px 0 5px !important; }
+    .eyebrow, .badge { font-size: 10px; }
+    h1 { font-size: 25px; line-height: 1.15; margin: 3px 0 4px; }
+    h2 { font-size: 16px; margin: 9px 0 6px; }
+    .lead { font-size: 12px; line-height: 1.35; margin: 3px 0 7px; max-width: none; }
+    .flow { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 5px 0 8px; padding: 0; }
+    .node { font-size: 10px; padding: 4px 8px; }
+    .grid { display: grid !important; grid-template-columns: repeat(3, minmax(0,1fr)) !important; gap: 7px !important; }
+    .grid .card { padding: 8px 11px !important; min-width: 0; }
+    .grid .card b { font-size: 12px; }
+    .grid .card p { font-size: 10px; line-height: 1.25; margin: 4px 0 !important; }
+    .grid .card a { font-size: 10px; }
+    .grid3 { display: grid !important; grid-template-columns: repeat(3,minmax(0,1fr)) !important; gap: 10px !important; }
+    .grid3 .card { min-width: 0; padding: 11px !important; }
+    .grid3 .num { font-size: 10px; }
+    .grid3 h3 { font-size: 13px; margin: 7px 0 !important; }
+    .grid3 .code { position: relative; height: 111px; min-height: 0 !important; max-height: none !important; overflow: hidden; padding: 9px !important; }
+    .grid3 pre { font-size: 10px; line-height: 1.3; white-space: pre; overflow: hidden; margin: 0; }
+    .grid3 .ui { min-height: 75px !important; padding: 8px !important; }
+    .grid3 .mini { padding: 8px !important; font-size: 11px; }
+    .grid3 .mini label { margin-bottom: 3px !important; }
+    .grid3 .mini p { font-size: 11px; }
+    .grid3 .copy-btn { font-size: 10px; padding: 4px 7px; right: 6px; top: 6px; }
+    .grid3 .card > p:last-child { margin: 6px 0 0; font-size: 11px; }
+    .callout { margin-top: 8px; padding: 7px 10px; font-size: 11px; line-height: 1.3; }
+    footer { padding: 5px 0 !important; font-size: 10px; }
+    .view-code { position: absolute; bottom: 5px; right: 6px; border: 1px solid #456384; border-radius: 6px; background: #193149; color: #d8efff; padding: 4px 8px; font-size: 10px; cursor: pointer; }
+    #code-dialog { width: min(850px, 92vw); max-height: 85vh; border: 1px solid #456384; border-radius: 12px; background: #111c2b; color: #eaf4ff; padding: 18px; }
+    #code-dialog::backdrop { background: rgba(0,0,0,.72); }
+    #code-dialog pre { overflow: auto; max-height: 65vh; white-space: pre; font: 13px/1.5 monospace; }
+    #code-dialog button { float: right; cursor: pointer; }
+    @media (min-width: 1000px) and (min-height: 690px) { html, body { height: 100%; overflow: hidden; } }
+    @media (max-width: 900px), (max-height: 689px) { html, body { height: auto; overflow-y: auto; } }
+    @media (max-width: 650px) { .grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; } .grid3 { grid-template-columns: 1fr !important; } }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="wrap navin"><a class="brand" href="index.html">json-to-tag / docs</a>
+      <div class="navlinks"></div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="wrap"><span class="eyebrow">BROWSER + CDN</span><span class="badge">v4 engine • source-mapped •
+        non-repeating documentation</span>
+      <h1>JSON to Native DOM</h1>
+      <p class="lead">Start from a visible UI, split it into small DOM elements, describe those elements as JSON, and
+        follow the browser build path to the native DOM.</p>
+
+      <div class="flow"><span class="node">UI piece</span><span class="arrow">→</span><span class="node">JSON
+          spec</span><span class="arrow">→</span><span class="node">buildSpecElement()</span><span
+          class="arrow">→</span><span class="node">DOM node</span></div>
+
+      <h2>Documentation map</h2>
+      <div class="grid">
+        <div class="card"><b>01 · UI Model</b>
+          <p>UI → small specification pieces.</p><a href="01-ui-model.html">Open →</a>
+        </div>
+        <div class="card"><b>02 · Spec → DOM</b>
+          <p>Public API and dispatch path.</p><a href="02-spec-to-dom.html">Open →</a>
+        </div>
+        <div class="card"><b>03 · Builder</b>
+          <p>Six stages that assemble one element.</p><a href="03-element-builder.html">Open →</a>
+        </div>
+        <div class="card"><b>04 · Children</b>
+          <p>Nested specifications become a tree.</p><a href="04-children.html">Open →</a>
+        </div>
+        <div class="card"><b>05 · Runtime</b>
+          <p>CDN and browser global.</p><a href="05-browser-runtime.html">Open →</a>
+        </div>
+        <div class="card"><b>06–08</b>
+          <p>Complete example, debugging, reference.</p><a href="06-complete-example.html">Open →</a>
+        </div>
+      </div>
+
+      <h2>HTML → Label → Test Content → DOM</h2>
+      <p class="lead">Compare the original HTML piece with the same piece built through the browser CDN. Each card has
+        its own browser output, so the visual result can be compared directly.</p>
+
+      <div class="grid3">
+
+        <div class="card">
+          <span class="num">01 · ORIGINAL HTML</span>
+          <h3>Original HTML piece</h3>
+          <div class="code">
+            <pre>&lt;div id="test-content"&gt;
+  &lt;label&gt;Name&lt;/label&gt;
+  &lt;p&gt;Test Content&lt;/p&gt;
+&lt;/div&gt;</pre>
+          </div>
+
+          <h3 style="margin-top:12px">Browser Output</h3>
+          <div class="ui">
+            <div class="mini">
+              <label style="display:block;font-weight:700;margin-bottom:6px">Name</label>
+              <p style="margin:0">Test Content</p>
+            </div>
+          </div>
+          <p><a href="09-original-html.html">Open this HTML example →</a></p>
+        </div>
+
+        <div class="card">
+          <span class="num">03 · VANILLA JAVASCRIPT</span>
+          <h3>Create the same piece with JavaScript</h3>
+          <div class="code" style="position:relative">
+            <button class="copy-btn" data-copy-target="vanilla-code">Copy code</button>
+            <pre id="vanilla-code">const wrapper = document.createElement("div");
+wrapper.id = "test-content";
+
+const label = document.createElement("label");
+label.textContent = "Name";
+
+const text = document.createElement("p");
+text.textContent = "Test Content";
+
+wrapper.append(label, text);
+
+document.querySelector("#vanilla-output")
+  .replaceChildren(wrapper);</pre>
+          </div>
+
+          <h3 style="margin-top:12px">Browser Output</h3>
+          <div id="vanilla-output" class="ui">
+            <div class="mini">
+              <label style="display:block;font-weight:700;margin-bottom:6px">Name</label>
+              <p style="margin:0">Test Content</p>
+            </div>
+          </div>
+          <p><a href="11-vanilla-javascript.html">Open the Vanilla JavaScript example →</a></p>
+        </div>
+
+        <div class="card">
+          <span class="num">02 · CDN BUILD</span>
+          <h3>Build the same piece</h3>
+          <div class="code" style="position:relative">
+            <button class="copy-btn" data-copy-target="build-code">Copy code</button>
+            <pre id="build-code">&lt;script src="https://keshavsoft.github.io/json-to-tag/dist/v4/min.js"&gt;&lt;/script&gt;
+
+const spec = {
+  tagName: "div",
+  attributes: { id: "test-content" },
+  children: [
+    { tagName: "label", textContent: "Name" },
+    { tagName: "p", textContent: "Test Content" }
+  ]
+};
+
+const element =
+  window.ks.jsonToTag.buildSpecElement(spec);
+
+document.querySelector("#build-output")
+  .replaceChildren(element);</pre>
+          </div>
+
+          <h3 style="margin-top:12px">Browser Output</h3>
+          <div id="build-output" class="ui">
+            <div class="mini">
+              <label style="display:block;font-weight:700;margin-bottom:6px">Name</label>
+              <p style="margin:0">Test Content</p>
+            </div>
+          </div>
+          <p><a href="10-build-same-piece.html">Open the CDN build example →</a></p>
+        </div>
+
+      </div>
+
+      <div class="callout">
+        Three cards, three outputs: the cards show the original HTML, Vanilla JavaScript, and the result produced
+        by <code>json-to-tag</code> through CDN. The output is intentionally identical so the build process is easy to
+        understand.
+      </div>
+
+      <script>
+        (function () {
+          const spec = {
+            tagName: "div",
+            attributes: { id: "test-content" },
+            children: [
+              {
+                tagName: "label",
+                textContent: "Name",
+                properties: {
+                  style: "display:block;font-weight:700;margin-bottom:6px"
+                }
+              },
+              { tagName: "p", textContent: "Test Content" }
+            ]
+          };
+
+          const output = document.querySelector("#build-output");
+
+          function render() {
+            if (!output || !window.ks?.jsonToTag?.buildSpecElement) return;
+            output.replaceChildren(window.ks.jsonToTag.buildSpecElement(spec));
+          }
+
+          if (window.ks?.jsonToTag?.buildSpecElement) {
+            render();
+          } else {
+            const script = document.createElement("script");
+            script.src = "https://keshavsoft.github.io/json-to-tag/dist/v4/min.js";
+            script.onload = render;
+            document.head.appendChild(script);
+          }
+
+          document.querySelectorAll(".copy-btn").forEach(button => {
+            button.addEventListener("click", async () => {
+              const target = document.getElementById(button.dataset.copyTarget);
+              if (!target) return;
+              const source = target.textContent;
+              try {
+                await navigator.clipboard.writeText(source);
+                button.textContent = "Copied!";
+                setTimeout(() => button.textContent = "Copy code", 1400);
+              } catch {
+                button.textContent = "Copy failed";
+                setTimeout(() => button.textContent = "Copy code", 1400);
+              }
+            });
+          });
+
+          const vanillaOutput = document.querySelector("#vanilla-output");
+          if (vanillaOutput) {
+            const wrapper = document.createElement("div");
+            wrapper.id = "test-content";
+
+            const label = document.createElement("label");
+            label.textContent = "Name";
+            label.style.display = "block";
+            label.style.fontWeight = "700";
+            label.style.marginBottom = "6px";
+
+            const text = document.createElement("p");
+            text.textContent = "Test Content";
+            text.style.margin = "0";
+
+            wrapper.append(label, text);
+            vanillaOutput.replaceChildren(wrapper);
+          }
+
+        })();
+      </script>
+
+
+      <dialog id="code-dialog" aria-label="Complete example code">
+        <button type="button" id="close-code">Close ✕</button>
+        <h3>Complete example code</h3>
+        <pre id="dialog-code"></pre>
+      </dialog>
+      <script>
+        document.querySelectorAll('.grid3 .code').forEach(block => {
+          const btn = document.createElement('button');
+          btn.type = 'button'; btn.className = 'view-code'; btn.textContent = 'View full code ↗';
+          btn.addEventListener('click', () => {
+            document.getElementById('dialog-code').textContent = block.querySelector('pre').textContent;
+            document.getElementById('code-dialog').showModal();
+          });
+          block.appendChild(btn);
+        });
+        document.getElementById('close-code').addEventListener('click', () => document.getElementById('code-dialog').close());
+      </script>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">json-to-tag • Browser-first documentation</div>
+  </footer>
+</body>
+
+</html>

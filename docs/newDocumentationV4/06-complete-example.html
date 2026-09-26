@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Complete Browser Example — json-to-tag</title><link rel="stylesheet" href="styles.css"></head><body><nav><div class="wrap navin"><a class="brand" href="index.html">json-to-tag / docs</a><div class="navlinks"><a href="05-browser-runtime.html">Previous</a><a href="07-debugging.html">Next</a></div></div></nav><main><div class="wrap"><span class="eyebrow">06 · BUILD</span><h1>Build a small UI from one specification.</h1><p class="lead">This page combines the earlier concepts without repeating their explanations.</p><div class="ui"><div class="mini"><strong>Invoice</strong><p>2 items</p><button>Open</button></div></div><h2>Complete page</h2><div class="code"><pre>&lt;div id="app"&gt;&lt;/div&gt;
+
+&lt;script src="https://keshavsoft.github.io/json-to-tag/dist/v4/min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+const spec = {
+  tagName: "div",
+  classList: ["mini"],
+  children: [
+    {tagName:"strong", textContent:"Invoice"},
+    {tagName:"p", textContent:"2 items"},
+    {tagName:"button", textContent:"Open",
+     attributes:{type:"button"}}
+  ]
+};
+
+const element =
+  window.ks.jsonToTag.buildSpecElement(spec);
+
+document.querySelector("#app").append(element);
+&lt;/script&gt;</pre></div><h2>Resulting tree</h2><div class="tree">#app
+└─ div.mini
+   ├─ strong → Invoice
+   ├─ p → 2 items
+   └─ button[type="button"] → Open</div><h2>Build checkpoints</h2><table><tr><th>Checkpoint</th><th>Question</th></tr><tr><td>Input</td><td>Is the specification the intended object?</td></tr><tr><td>Dispatch</td><td>Did it choose the expected path?</td></tr><tr><td>Element</td><td>Was the correct native element created?</td></tr><tr><td>Details</td><td>Did text, properties, attributes and classes apply?</td></tr><tr><td>Tree</td><td>Were children appended?</td></tr><tr><td>Mount</td><td>Was the returned node inserted?</td></tr></table><p><a href="07-debugging.html">Next: debugging →</a></p></div></main><footer><div class="wrap">json-to-tag • Browser-first documentation</div></footer></body></html>
