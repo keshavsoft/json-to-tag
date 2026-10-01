@@ -52,6 +52,9 @@
       vertical-align: middle;
       font-size: 0.85rem;
     }
+    .border-dashed {
+      border: 2px dashed #cbd5e1 !important;
+    }
   </style>
 </head>
 
@@ -59,26 +62,28 @@
   <div class="container-fluid" style="max-width: 980px;">
 
     <!-- Top Navigation / Header -->
-    <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom flex-wrap gap-2">
-      <div>
-        <h1 class="h4 fw-bold mb-1 text-dark d-flex align-items-center gap-2">
+    <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom flex-wrap flex-md-nowrap gap-2">
+      <div class="d-flex align-items-center gap-2 flex-shrink-0">
+        <h1 class="h4 fw-bold mb-0 text-dark d-flex align-items-center gap-2">
           <i class="bi bi-journal-check text-primary"></i> Tag Analysis
           <span class="badge bg-primary-subtle text-primary border border-primary-subtle fs-6 fw-normal">Analysis Mode</span>
         </h1>
-        <p class="text-muted small mb-0">Inspect tag counts, structural flavors, and catalog compliance of your JSON specification.</p>
       </div>
-      <div class="d-flex gap-2">
-        <a href="./index.html" class="btn btn-outline-secondary btn-sm">
+      <div class="d-flex align-items-center gap-2 ms-auto flex-nowrap">
+        <a href="./index.html" class="btn btn-outline-secondary btn-sm" title="Back to JSON Upload Menu">
           <i class="bi bi-grid me-1"></i> Menu
         </a>
-        <a href="./editor.html" class="btn btn-outline-primary btn-sm">
+        <a href="./editor.html" class="btn btn-outline-primary btn-sm" title="Live Editor">
           <i class="bi bi-layout-split me-1"></i> Live Editor
         </a>
-        <a href="./show.html" class="btn btn-outline-success btn-sm">
+        <a href="./show.html" class="btn btn-outline-success btn-sm" title="Visual Renderer">
           <i class="bi bi-display me-1"></i> Visual Renderer
         </a>
-        <a href="./summery.html" class="btn btn-outline-info btn-sm active">
+        <a href="./summery.html" class="btn btn-outline-info btn-sm active" title="Current view: Tag Analysis">
           <i class="bi bi-journal-check me-1"></i> Tag Analysis
+        </a>
+        <a href="../samples/index.html" class="btn btn-outline-warning btn-sm" title="Download & View Samples">
+          <i class="bi bi-collection me-1"></i> Samples
         </a>
       </div>
     </div>
@@ -89,13 +94,15 @@
         <i class="bi bi-file-earmark-code text-primary me-1"></i>Select JSON:
       </label>
       <input type="file" id="jsonFileInput" class="form-control form-control-sm" accept=".json,application/json" style="max-width: 280px;" />
-      <button class="btn btn-outline-primary btn-sm" type="button" id="btnSampleSpec">
-        <i class="bi bi-file-earmark-arrow-down me-1"></i> Sample
-      </button>
-      <button class="btn btn-outline-secondary btn-sm" type="button" id="btnLoadSession" style="display: none;">
-        <i class="bi bi-arrow-repeat me-1"></i> Load from Session
-      </button>
-      <span class="badge bg-light text-secondary border small ms-auto" id="activeFileNameBadge">No file loaded</span>
+    </div>
+
+    <!-- Empty State Placeholder (shown until a file is selected) -->
+    <div id="emptyPlaceholder" class="card text-center p-5 border-dashed bg-white shadow-sm mb-4">
+      <div class="py-3">
+        <i class="bi bi-journal-code text-primary display-4 mb-3 d-inline-block"></i>
+        <h5 class="fw-semibold text-secondary">No JSON Loaded for Tag Analysis</h5>
+        <p class="text-muted small mb-0">Select or upload a JSON specification file above to inspect tag counts, structural flavors, and compliance.</p>
+      </div>
     </div>
 
     <!-- Output Section (Tag Analysis Only, hidden until loaded) -->
@@ -219,9 +226,8 @@
     import { reviewSpec } from "https://keshavsoft.github.io/json-to-tag/dist/v3/min.js";
 
     const fileInput = document.getElementById("jsonFileInput");
-    const btnSampleSpec = document.getElementById("btnSampleSpec");
     const outputSection = document.getElementById("outputSection");
-    const activeFileNameBadge = document.getElementById("activeFileNameBadge");
+    const emptyPlaceholder = document.getElementById("emptyPlaceholder");
 
     const statTotalTags = document.getElementById("statTotalTags");
     const statUniqueTags = document.getElementById("statUniqueTags");
@@ -508,9 +514,6 @@
       try {
         sessionStorage.setItem("json_to_tag_active_spec", JSON.stringify(localSpec));
         sessionStorage.setItem("json_to_tag_active_name", localFileName);
-        if (activeFileNameBadge) {
-          activeFileNameBadge.textContent = localFileName;
-        }
 
         const tagsCatalog = await fetchCatalog();
         const analysis = analyzeSpecData({ inSpec: localSpec, inCatalog: tagsCatalog });
@@ -532,8 +535,8 @@
 
         const unrecogNames = analysis.unrecognized.map(t => `&lt;${t.tag}&gt;`).join(", ");
         storyNarrative.innerHTML = isCompliant
-          ? `Great news! <strong>${localFileName}</strong> contains <strong>${analysis.totalTags}</strong> total tag instances across <strong>${analysis.uniqueTags}</strong> distinct elements (${analysis.containers.length} containers, ${analysis.textElements.length} text elements, ${analysis.leafElements.length} void/leaf tags). All tags are fully declared in <code>tags.json</code>.`
-          : `Notice: <strong>${localFileName}</strong> contains <strong>${analysis.totalTags}</strong> tags, but has <strong>${analysis.unrecognized.length}</strong> incorrect/unsupported tag(s): <code>${unrecogNames}</code> not recognized in <code>tags.json</code>.`;
+          ? `Great news! Your specification contains <strong>${analysis.totalTags}</strong> total tag instances across <strong>${analysis.uniqueTags}</strong> distinct elements (${analysis.containers.length} containers, ${analysis.textElements.length} text elements, ${analysis.leafElements.length} void/leaf tags). All tags are fully declared in <code>tags.json</code>.`
+          : `Notice: Your specification contains <strong>${analysis.totalTags}</strong> tags, but has <strong>${analysis.unrecognized.length}</strong> incorrect/unsupported tag(s): <code>${unrecogNames}</code> not recognized in <code>tags.json</code>.`;
 
         tagPillsContainer.innerHTML = analysis.allTags.map(t => {
           const isOk = t.inCatalog;
@@ -558,6 +561,9 @@
         // Render Matrix
         renderMatrixRows({ inTags: analysis.allTags, inFilter: activeFilter });
 
+        if (emptyPlaceholder) {
+          emptyPlaceholder.style.display = "none";
+        }
         outputSection.style.display = "block";
       } catch (err) {
         alert("Error analyzing JSON: " + err.message);
@@ -605,46 +611,6 @@
       };
       reader.readAsText(file);
     });
-
-    btnSampleSpec.addEventListener("click", () => {
-      processSpecAnalysis({ inSpec: SAMPLE_SPEC, inFileName: "Sample Spec" });
-    });
-
-    // Check if session storage has an uploaded spec
-    const checkSessionSpec = () => {
-      try {
-        const savedSpec = sessionStorage.getItem("json_to_tag_active_spec");
-        const savedName = sessionStorage.getItem("json_to_tag_active_name") || "Uploaded Spec";
-        if (savedSpec) {
-          if (btnLoadSession) {
-            btnLoadSession.style.display = "inline-block";
-            btnLoadSession.title = `Load "${savedName}" from Session`;
-          }
-          // Automatically analyze the uploaded spec from session
-          const parsed = JSON.parse(savedSpec);
-          processSpecAnalysis({ inSpec: parsed, inFileName: savedName });
-        }
-      } catch (e) {
-        console.error("Session load error:", e);
-      }
-    };
-
-    if (btnLoadSession) {
-      btnLoadSession.addEventListener("click", () => {
-        try {
-          const savedSpec = sessionStorage.getItem("json_to_tag_active_spec");
-          const savedName = sessionStorage.getItem("json_to_tag_active_name") || "Uploaded Spec";
-          if (savedSpec) {
-            const parsed = JSON.parse(savedSpec);
-            processSpecAnalysis({ inSpec: parsed, inFileName: savedName });
-          }
-        } catch (err) {
-          alert("Failed to load spec from session: " + err.message);
-        }
-      });
-    }
-
-    checkSessionSpec();
   </script>
 </body>
 

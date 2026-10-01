@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentation &amp; Tools • @keshavsoft/json-to-tag</title>
+  <meta name="description" content="Central documentation and tools index for @keshavsoft/json-to-tag declarative JSON-to-DOM compiler." />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: #1e293b;
+    }
+    .section-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.15s;
+    }
+    .section-card:hover {
+      border-color: #94a3b8;
+    }
+    .code-box {
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: monospace;
+      font-size: 0.85rem;
+      padding: 0.85rem 1rem;
+      border-radius: 0.375rem;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body class="p-3 p-md-4">
+  <div class="container" style="max-width: 860px;">
+    
+    <!-- Unified Top Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark px-3 py-2 rounded-3 mb-4 shadow-sm">
+      <div class="container-fluid p-0">
+        <a class="navbar-brand fw-bold fs-6 d-flex align-items-center gap-2" href="./index.html">
+          <i class="bi bi-tag-fill text-primary"></i> json-to-tag
+        </a>
+        <div class="navbar-nav d-flex flex-row gap-1 flex-wrap">
+          <a class="nav-link active px-2 fw-semibold text-white" href="./index.html">Home</a>
+          <a class="nav-link px-2 text-info" href="./tags/index.html">Tags Catalog</a>
+          <a class="nav-link px-2 text-light" href="./menu/index.html"><i class="bi bi-layout-text-window-reverse me-1"></i>Headers</a>
+          <a class="nav-link px-2" href="./summary/index.html"><i class="bi bi-cloud-arrow-up me-1"></i>Upload JSON (Review)</a>
+          <a class="nav-link px-2 text-warning" href="./playground/index.html"><i class="bi bi-play-circle me-1"></i>Playground</a>
+          <a class="nav-link px-2 text-primary fw-bold" href="./jsonUpload/index.html"><i class="bi bi-cloud-arrow-up-fill me-1"></i>jsonUpload Hub</a>
+          <!-- <a class="nav-link px-2 text-success" href="./form/index.html"><i class="bi bi-ui-checks me-1"></i>Form Sample (v4)</a> -->
+          <a class="nav-link px-2 text-light" href="./menuHub.html"><i class="bi bi-layout-text-window-reverse me-1"></i>Tags-menu</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="pb-3 mb-4 border-bottom">
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <i class="bi bi-tag-fill text-primary fs-3"></i>
+        <h1 class="h3 fw-bold mb-0">@keshavsoft/json-to-tag</h1>
+        <span class="badge bg-success-subtle text-success border border-success-subtle ms-2">v4 Engine</span>
+      </div>
+      <p class="text-muted mb-0">
+        Fast, zero-dependency declarative JSON-to-DOM compiler &amp; specification reviewer. Transforms serializable JSON specifications into native DOM elements with strict catalog validation.
+      </p>
+    </header>
+
+    <!-- Navigation Directory -->
+    <main>
+      <h2 class="h5 fw-bold mb-3 text-secondary text-uppercase" style="letter-spacing: 0.05em; font-size: 0.85rem;">
+        Documentation &amp; Tools Directory
+      </h2>
+
+      <!-- 0. JSON Upload & Live Rendering Hub (New) -->
+      <div class="section-card border-start border-4 border-primary shadow-sm">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-cloud-arrow-up-fill text-primary fs-4"></i>
+            <h3 class="h5 fw-bold mb-0">JSON Upload &amp; Live Rendering Hub</h3>
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle">jsonUpload</span>
+          </div>
+          <a href="./jsonUpload/index.html" class="btn btn-primary btn-sm px-3 fw-semibold">
+            Open Upload Hub <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+        <p class="text-muted small mb-2">
+          Upload JSON specifications to edit, inspect, and render live DOM elements. Includes split-pane Monaco Editor, single-view DOM renderer, and tag compliance analysis.
+        </p>
+        <div class="d-flex gap-3 small flex-wrap">
+          <a href="./jsonUpload/index.html" class="text-decoration-none fw-semibold text-primary"><i class="bi bi-grid-fill me-1"></i>Upload Hub (index.html)</a>
+          <span class="text-muted">•</span>
+          <a href="./jsonUpload/editor.html" class="text-decoration-none fw-semibold text-primary"><i class="bi bi-layout-split me-1"></i>Live Monaco Editor</a>
+          <span class="text-muted">•</span>
+          <a href="./jsonUpload/show.html" class="text-decoration-none fw-semibold text-success"><i class="bi bi-display me-1"></i>Visual Renderer</a>
+          <span class="text-muted">•</span>
+          <a href="./jsonUpload/summery.html" class="text-decoration-none fw-semibold text-info"><i class="bi bi-journal-check me-1"></i>Tag Analysis Summary</a>
+          <span class="text-muted">•</span>
+          <a href="./samples/index.html" class="text-decoration-none fw-semibold text-warning"><i class="bi bi-collection-fill me-1"></i>Spec Samples</a>
+        </div>
+      </div>
+
+      <!-- 1. Tags Catalog & Rules Analysis -->
+      <div class="section-card">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-journal-code text-primary fs-4"></i>
+            <h3 class="h5 fw-bold mb-0">Tags Catalog &amp; Rules Analysis</h3>
+          </div>
+          <a href="./tags/index.html" class="btn btn-primary btn-sm px-3 fw-semibold">
+            Open Catalog <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+        <p class="text-muted small mb-2">
+          Detailed visual breakdown of all 30 supported HTML tags defined in the Single Source of Truth (<code>tags.json</code>). Inspect capability flags (<code>allowsChildren</code>, <code>allowsTextContent</code>), allowed attribute schemas, permitted child tags, and JSON authoring templates.
+        </p>
+        <div class="d-flex gap-3 small flex-wrap">
+          <a href="./tags/index.html" class="text-decoration-none fw-semibold text-primary">Interactive Catalog</a>
+          <span class="text-muted">•</span>
+          <a href="./tags/individualTags/index.html" class="text-decoration-none fw-semibold text-primary"><i class="bi bi-folder2-open me-1"></i>Individual Tags</a>
+          <span class="text-muted">•</span>
+          <a href="./tags/tags.json" target="_blank" class="text-decoration-none">Raw tags.json (SSOT)</a>
+          <span class="text-muted">•</span>
+          <a href="./tags/tags.schema.json" target="_blank" class="text-decoration-none">JSON Schema</a>
+        </div>
+      </div>
+
+      <!-- 2. Specification Review Hub -->
+      <div class="section-card">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-pie-chart-fill text-warning fs-4"></i>
+            <h3 class="h5 fw-bold mb-0"><i class="bi bi-cloud-arrow-up text-warning me-2"></i>Upload JSON Specification &amp; Review Hub</h3>
+          </div>
+          <a href="./summary/index.html" class="btn btn-warning text-dark btn-sm px-3 fw-semibold">
+            <i class="bi bi-cloud-arrow-up me-1"></i> Upload JSON Spec <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+        <p class="text-muted small mb-2">
+          Upload or select any JSON specification to inspect tag usage, frequency counts, unrecognized tags audit, and catalog compliance verification.
+        </p>
+        <div class="d-flex gap-3 small flex-wrap">
+          <a href="./summary/index.html" class="text-decoration-none">Hub Overview</a>
+          <span class="text-muted">•</span>
+          <a href="./summary/tags-only.html" class="text-decoration-none">Tags Only Breakdown</a>
+          <span class="text-muted">•</span>
+          <a href="./summary/not-present.html" class="text-decoration-none text-danger">Not Present Audit</a>
+          <span class="text-muted">•</span>
+          <a href="./summary/present.html" class="text-decoration-none text-success">Present Validation</a>
+        </div>
+      </div>
+
+      <!-- 3. Live Interactive Playground -->
+      <div class="section-card">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-sliders text-success fs-4"></i>
+            <h3 class="h5 fw-bold mb-0">Live Interactive Playground</h3>
+          </div>
+          <a href="./playground/index.html" class="btn btn-outline-success btn-sm px-3 fw-semibold">
+            Open Playground <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+        <p class="text-muted small mb-2">
+          Edit JSON specifications live and instantly see compiled DOM output, with tabs for visual rendered elements and compiled HTML markup.
+        </p>
+        <div class="d-flex gap-3 small">
+          <a href="./playground/index.html" class="text-decoration-none">Launch Playground</a>
+        </div>
+      </div>
+
+      <!-- 4. Header Templates Catalog (Bootstrap 5.3 + Purchases) -->
+      <div class="section-card">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-layout-text-window-reverse text-info fs-4"></i>
+            <h3 class="h5 fw-bold mb-0">Header Templates Catalog (9 Variants)</h3>
+          </div>
+          <a href="./menu/index.html" class="btn btn-outline-info btn-sm px-3 fw-semibold">
+            Open Headers <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+        <p class="text-muted small mb-2">
+          Explore all 8 official Bootstrap 5.3 header patterns plus the responsive hybrid Purchases menu with mobile hamburger collapse, compiled seamlessly from <code>menu.json</code>.
+        </p>
+        <div class="d-flex gap-3 small flex-wrap">
+          <a href="./menu/index.html" class="text-decoration-none fw-semibold text-info">Live Header Switcher</a>
+          <span class="text-muted">•</span>
+          <a href="./menu/menu.json" target="_blank" class="text-decoration-none">Raw menu.json</a>
+        </div>
+      </div>
+
+      <!-- 5. Interactive Form Sample (v4 Direct Spec Input) -->
+      <div class="section-card border-start border-4 border-success">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-ui-checks text-success fs-4"></i>
+            <h3 class="h5 fw-bold mb-0">Voucher Entry Form Sample</h3>
+            <span class="badge bg-success-subtle text-success border border-success-subtle">v4 Feature</span>
+          </div>
+          <a href="./form/index.html" class="btn btn-success btn-sm px-3 fw-semibold">
+            Open Form Sample <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+        <p class="text-muted small mb-2">
+          Live voucher entry form compiled via <code>window.ks.jsonToTag.buildSpecElement(spec)</code>. Demonstrates the v4 direct spec input where the JSON spec is passed directly as a single argument without wrapper objects.
+        </p>
+        <div class="d-flex gap-3 small flex-wrap">
+          <a href="./form/index.html" class="text-decoration-none fw-semibold text-success">Live Form Demo</a>
+          <span class="text-muted">•</span>
+          <a href="./form/spec.json" target="_blank" class="text-decoration-none">Raw spec.json</a>
+          <span class="text-muted">•</span>
+          <span class="text-secondary font-monospace small">window.ks.jsonToTag.buildSpecElement(spec)</span>
+        </div>
+      </div>
+
+      <!-- 6. Quick Installation & Usage -->
+      <div class="section-card">
+        <h3 class="h6 fw-bold mb-2 text-secondary text-uppercase" style="letter-spacing: 0.05em; font-size: 0.8rem;">
+          Quick Installation &amp; Scaffolding
+        </h3>
+        <div class="code-box mb-3">
+          <code>npm install @keshavsoft/json-to-tag<br /># or scaffold directly with NPX:<br />npx @keshavsoft/json-to-tag</code>
+        </div>
+        <h3 class="h6 fw-bold mb-2 text-secondary text-uppercase" style="letter-spacing: 0.05em; font-size: 0.8rem;">
+          ES Module &amp; Browser Global Usage
+        </h3>
+        <div class="code-box mb-0">
+          <code>// v4 Direct Spec Input (single argument - no object wrapper needed!):<br />import { buildSpecElement } from "@keshavsoft/json-to-tag";<br />const button = buildSpecElement(spec);<br /><br />// Browser Global (registered automatically onto window.ks.jsonToTag):<br />const form = window.ks.jsonToTag.buildSpecElement(spec);<br />document.getElementById("container").append(form);</code>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center text-muted small py-4 border-top mt-4">
+      <p class="mb-0">
+        <strong>@keshavsoft/json-to-tag</strong> • 
+        <a href="https://github.com/keshavsoft/json-to-tag" target="_blank" class="text-secondary text-decoration-none">GitHub Repository</a> • 
+        <a href="https://www.npmjs.com/package/@keshavsoft/json-to-tag" target="_blank" class="text-secondary text-decoration-none">NPM Package</a>
+      </p>
+    </footer>
+
+  </div>
+</body>
+</html>

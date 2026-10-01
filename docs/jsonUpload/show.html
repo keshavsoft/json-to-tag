@@ -42,6 +42,9 @@
         <a href="./summery.html" class="btn btn-outline-info btn-sm">
           <i class="bi bi-journal-check me-1"></i> Tag Analysis
         </a>
+        <a href="../samples/index.html" class="btn btn-outline-warning btn-sm" title="Download & View Samples">
+          <i class="bi bi-collection me-1"></i> Samples
+        </a>
       </div>
     </div>
 
@@ -51,9 +54,6 @@
         <i class="bi bi-file-earmark-code text-primary me-1"></i>Select JSON:
       </label>
       <input type="file" id="jsonFileInput" class="form-control form-control-sm" accept=".json,application/json" style="max-width: 280px;" />
-      <button class="btn btn-outline-primary btn-sm" type="button" id="btnSampleSpec">
-        <i class="bi bi-file-earmark-arrow-down me-1"></i> Sample
-      </button>
       <button class="btn btn-outline-secondary btn-sm" type="button" id="btnLoadSession" style="display: none;">
         <i class="bi bi-arrow-repeat me-1"></i> Load from Analysis
       </button>
@@ -198,9 +198,11 @@
       reader.readAsText(file);
     });
 
-    btnSampleSpec.addEventListener("click", () => {
-      renderSpec({ inSpec: SAMPLE_SPEC, inFileName: "Sample Spec" });
-    });
+    if (btnSampleSpec) {
+      btnSampleSpec.addEventListener("click", () => {
+        renderSpec({ inSpec: SAMPLE_SPEC, inFileName: "Sample Spec" });
+      });
+    }
 
     checkSessionSpec();
   </script>

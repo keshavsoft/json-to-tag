@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSON Specification Samples &amp; Downloads • @keshavsoft/json-to-tag</title>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <style>
+    :root {
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+      --bg-page: #f8fafc;
+      --card-border: #e2e8f0;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --brand-primary: #0284c7;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      font-family: var(--font-sans);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sample-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      transition: all 0.2s ease-in-out;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sample-card:hover {
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+      border-color: #cbd5e1;
+    }
+
+    .sample-card-header {
+      padding: 14px 18px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .live-render-box {
+      background: #fbfcfe;
+      border-bottom: 1px solid var(--card-border);
+      padding: 18px;
+      min-height: 180px;
+      overflow-x: auto;
+    }
+
+    .code-preview-box {
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 14px;
+      max-height: 220px;
+      overflow-y: auto;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .sample-card-footer {
+      padding: 12px 18px;
+      background: #f8fafc;
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: gap-2;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 24px 28px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+    }
+
+    .nav-tab-btn {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+
+<body class="p-3 p-md-4">
+  <div class="container-fluid" style="max-width: 1240px;">
+
+    <!-- Top Navigation Header -->
+    <header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom flex-wrap flex-md-nowrap gap-2">
+      <div class="d-flex align-items-center gap-2 flex-shrink-0">
+        <h1 class="h4 fw-bold mb-0 text-dark d-flex align-items-center gap-2" title="JSON Specification Samples &amp; Downloads">
+          <i class="bi bi-collection-fill text-warning fs-3"></i> JSON Samples
+        </h1>
+      </div>
+
+      <!-- Navigation group matching all other tools -->
+      <div class="d-flex align-items-center gap-2 ms-auto flex-nowrap">
+        <a href="../index.html" class="btn btn-outline-secondary btn-sm" title="Back to Documentation Home">
+          <i class="bi bi-house-door me-1"></i> Home
+        </a>
+        <a href="../jsonUpload/index.html" class="btn btn-outline-secondary btn-sm" title="Back to JSON Upload Menu">
+          <i class="bi bi-grid me-1"></i> Hub
+        </a>
+        <a href="../jsonUpload/editor.html" class="btn btn-outline-primary btn-sm" title="Open Live Editor">
+          <i class="bi bi-layout-split me-1"></i> Live Editor
+        </a>
+        <a href="../jsonUpload/show.html" class="btn btn-outline-success btn-sm" title="Open Visual Renderer">
+          <i class="bi bi-display me-1"></i> Visual Renderer
+        </a>
+        <a href="../jsonUpload/summery.html" class="btn btn-outline-info btn-sm" title="Open Tag Analysis">
+          <i class="bi bi-journal-check me-1"></i> Tag Analysis
+        </a>
+        <a href="./index.html" class="btn btn-outline-warning btn-sm active" title="Current view: Samples">
+          <i class="bi bi-collection me-1"></i> Samples
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero Banner with Filter and Batch Download -->
+    <div class="hero-banner mb-4">
+      <div class="row align-items-center g-3">
+        <div class="col-lg-7">
+          <h2 class="h5 fw-bold mb-1 d-flex align-items-center gap-2">
+            <i class="bi bi-box-arrow-down text-warning"></i> Production-Ready JSON Templates
+          </h2>
+          <p class="small text-light text-opacity-75 mb-0">
+            Each sample specification is fully verified and catalog-compliant with <code>tags.json</code>. Download the raw <code>.json</code> file or open directly in the Live Editor.
+          </p>
+        </div>
+        <div class="col-lg-5 text-lg-end">
+          <button class="btn btn-warning btn-sm fw-semibold" id="btnDownloadAll">
+            <i class="bi bi-cloud-arrow-down-fill me-1"></i> Download All Samples (.json)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Samples Grid -->
+    <div class="row g-4" id="samplesContainer">
+
+      <!-- Sample 1: Data Table Specification -->
+      <div class="col-12 col-lg-6">
+        <div class="sample-card h-100">
+          <div class="sample-card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+              <h3 class="h6 fw-bold mb-0 text-dark d-flex align-items-center gap-2">
+                <i class="bi bi-table text-primary"></i> Data Table (Dark Header)
+              </h3>
+              <span class="badge bg-light text-secondary border font-monospace small">table-spec.json</span>
+            </div>
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Table &amp; Grid</span>
+          </div>
+
+          <div class="p-2 bg-light border-bottom d-flex justify-content-between align-items-center px-3">
+            <span class="small text-muted fw-semibold">Live Native DOM Render:</span>
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-sm btn-outline-secondary py-0 active" onclick="toggleView('sample1', 'render')">Preview</button>
+              <button class="btn btn-sm btn-outline-secondary py-0" onclick="toggleView('sample1', 'code')">JSON Code</button>
+            </div>
+          </div>
+
+          <div id="sample1-render" class="live-render-box"></div>
+          <pre id="sample1-code" class="code-preview-box d-none m-0"></pre>
+
+          <div class="sample-card-footer">
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-primary" onclick="downloadSample('sample1', 'table-spec.json')">
+                <i class="bi bi-download me-1"></i> Download .json
+              </button>
+              <button class="btn btn-outline-secondary" onclick="copySample('sample1')">
+                <i class="bi bi-clipboard me-1"></i> Copy
+              </button>
+            </div>
+            <div class="d-flex gap-1">
+              <button class="btn btn-outline-primary btn-sm" onclick="openInTool('sample1', '../jsonUpload/editor.html', 'table-spec.json')" title="Open in Live Editor">
+                <i class="bi bi-layout-split"></i> Editor
+              </button>
+              <button class="btn btn-outline-success btn-sm" onclick="openInTool('sample1', '../jsonUpload/show.html', 'table-spec.json')" title="Open in Visual Renderer">
+                <i class="bi bi-display"></i> Render
+              </button>
+              <button class="btn btn-outline-info btn-sm" onclick="openInTool('sample1', '../jsonUpload/summery.html', 'table-spec.json')" title="Open in Tag Analysis">
+                <i class="bi bi-journal-check"></i> Analysis
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sample 2: Interactive Card Component -->
+      <div class="col-12 col-lg-6">
+        <div class="sample-card h-100">
+          <div class="sample-card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+              <h3 class="h6 fw-bold mb-0 text-dark d-flex align-items-center gap-2">
+                <i class="bi bi-card-heading text-success"></i> Interactive Card Component
+              </h3>
+              <span class="badge bg-light text-secondary border font-monospace small">card-component.json</span>
+            </div>
+            <span class="badge bg-success-subtle text-success border border-success-subtle">UI Card</span>
+          </div>
+
+          <div class="p-2 bg-light border-bottom d-flex justify-content-between align-items-center px-3">
+            <span class="small text-muted fw-semibold">Live Native DOM Render:</span>
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-sm btn-outline-secondary py-0 active" onclick="toggleView('sample2', 'render')">Preview</button>
+              <button class="btn btn-sm btn-outline-secondary py-0" onclick="toggleView('sample2', 'code')">JSON Code</button>
+            </div>
+          </div>
+
+          <div id="sample2-render" class="live-render-box"></div>
+          <pre id="sample2-code" class="code-preview-box d-none m-0"></pre>
+
+          <div class="sample-card-footer">
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-success" onclick="downloadSample('sample2', 'card-component.json')">
+                <i class="bi bi-download me-1"></i> Download .json
+              </button>
+              <button class="btn btn-outline-secondary" onclick="copySample('sample2')">
+                <i class="bi bi-clipboard me-1"></i> Copy
+              </button>
+            </div>
+            <div class="d-flex gap-1">
+              <button class="btn btn-outline-primary btn-sm" onclick="openInTool('sample2', '../jsonUpload/editor.html', 'card-component.json')" title="Open in Live Editor">
+                <i class="bi bi-layout-split"></i> Editor
+              </button>
+              <button class="btn btn-outline-success btn-sm" onclick="openInTool('sample2', '../jsonUpload/show.html', 'card-component.json')" title="Open in Visual Renderer">
+                <i class="bi bi-display"></i> Render
+              </button>
+              <button class="btn btn-outline-info btn-sm" onclick="openInTool('sample2', '../jsonUpload/summery.html', 'card-component.json')" title="Open in Tag Analysis">
+                <i class="bi bi-journal-check"></i> Analysis
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sample 3: Form Input Specification -->
+      <div class="col-12 col-lg-6">
+        <div class="sample-card h-100">
+          <div class="sample-card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+              <h3 class="h6 fw-bold mb-0 text-dark d-flex align-items-center gap-2">
+                <i class="bi bi-ui-checks text-info"></i> Voucher Entry Form
+              </h3>
+              <span class="badge bg-light text-secondary border font-monospace small">voucher-form.json</span>
+            </div>
+            <span class="badge bg-info-subtle text-info border border-info-subtle">Form Controls</span>
+          </div>
+
+          <div class="p-2 bg-light border-bottom d-flex justify-content-between align-items-center px-3">
+            <span class="small text-muted fw-semibold">Live Native DOM Render:</span>
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-sm btn-outline-secondary py-0 active" onclick="toggleView('sample3', 'render')">Preview</button>
+              <button class="btn btn-sm btn-outline-secondary py-0" onclick="toggleView('sample3', 'code')">JSON Code</button>
+            </div>
+          </div>
+
+          <div id="sample3-render" class="live-render-box"></div>
+          <pre id="sample3-code" class="code-preview-box d-none m-0"></pre>
+
+          <div class="sample-card-footer">
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-info text-white" onclick="downloadSample('sample3', 'voucher-form.json')">
+                <i class="bi bi-download me-1"></i> Download .json
+              </button>
+              <button class="btn btn-outline-secondary" onclick="copySample('sample3')">
+                <i class="bi bi-clipboard me-1"></i> Copy
+              </button>
+            </div>
+            <div class="d-flex gap-1">
+              <button class="btn btn-outline-primary btn-sm" onclick="openInTool('sample3', '../jsonUpload/editor.html', 'voucher-form.json')" title="Open in Live Editor">
+                <i class="bi bi-layout-split"></i> Editor
+              </button>
+              <button class="btn btn-outline-success btn-sm" onclick="openInTool('sample3', '../jsonUpload/show.html', 'voucher-form.json')" title="Open in Visual Renderer">
+                <i class="bi bi-display"></i> Render
+              </button>
+              <button class="btn btn-outline-info btn-sm" onclick="openInTool('sample3', '../jsonUpload/summery.html', 'voucher-form.json')" title="Open in Tag Analysis">
+                <i class="bi bi-journal-check"></i> Analysis
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sample 4: Status Alerts & Feedback Banners -->
+      <div class="col-12 col-lg-6">
+        <div class="sample-card h-100">
+          <div class="sample-card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+              <h3 class="h6 fw-bold mb-0 text-dark d-flex align-items-center gap-2">
+                <i class="bi bi-bell text-warning"></i> Status Alerts &amp; Feedback
+              </h3>
+              <span class="badge bg-light text-secondary border font-monospace small">status-alerts.json</span>
+            </div>
+            <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">Feedback</span>
+          </div>
+
+          <div class="p-2 bg-light border-bottom d-flex justify-content-between align-items-center px-3">
+            <span class="small text-muted fw-semibold">Live Native DOM Render:</span>
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-sm btn-outline-secondary py-0 active" onclick="toggleView('sample4', 'render')">Preview</button>
+              <button class="btn btn-sm btn-outline-secondary py-0" onclick="toggleView('sample4', 'code')">JSON Code</button>
+            </div>
+          </div>
+
+          <div id="sample4-render" class="live-render-box"></div>
+          <pre id="sample4-code" class="code-preview-box d-none m-0"></pre>
+
+          <div class="sample-card-footer">
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-warning" onclick="downloadSample('sample4', 'status-alerts.json')">
+                <i class="bi bi-download me-1"></i> Download .json
+              </button>
+              <button class="btn btn-outline-secondary" onclick="copySample('sample4')">
+                <i class="bi bi-clipboard me-1"></i> Copy
+              </button>
+            </div>
+            <div class="d-flex gap-1">
+              <button class="btn btn-outline-primary btn-sm" onclick="openInTool('sample4', '../jsonUpload/editor.html', 'status-alerts.json')" title="Open in Live Editor">
+                <i class="bi bi-layout-split"></i> Editor
+              </button>
+              <button class="btn btn-outline-success btn-sm" onclick="openInTool('sample4', '../jsonUpload/show.html', 'status-alerts.json')" title="Open in Visual Renderer">
+                <i class="bi bi-display"></i> Render
+              </button>
+              <button class="btn btn-outline-info btn-sm" onclick="openInTool('sample4', '../jsonUpload/summery.html', 'status-alerts.json')" title="Open in Tag Analysis">
+                <i class="bi bi-journal-check"></i> Analysis
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Quick Footer -->
+    <footer class="mt-4 p-3 bg-white rounded border shadow-sm d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <div class="small text-muted">
+        <i class="bi bi-info-circle me-1"></i>Ready-to-use specifications for <strong>@keshavsoft/json-to-tag</strong>
+      </div>
+      <div class="small text-secondary fw-semibold">
+        <a href="../jsonUpload/index.html" class="text-decoration-none me-2">JSON Upload Hub</a> •
+        <a href="../index.html" class="text-decoration-none">Documentation Home</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="module">
+    // Load buildSpecElement with fallback: local v4, local v3, then CDN
+    let buildSpecElement;
+    try {
+      const localMod = await import("../dist/v4/min.js");
+      buildSpecElement = localMod.buildSpecElement || localMod.default;
+    } catch (err1) {
+      try {
+        const localModV3 = await import("../dist/v3/min.js");
+        buildSpecElement = localModV3.buildSpecElement || localModV3.default;
+      } catch (err2) {
+        try {
+          const cdnMod = await import("https://keshavsoft.github.io/json-to-tag/dist/v3/min.js");
+          buildSpecElement = cdnMod.buildSpecElement || cdnMod.default;
+        } catch (err3) {
+          console.error("Failed to load buildSpecElement:", err3);
+        }
+      }
+    }
+    window.buildSpecElement = buildSpecElement;
+
+    // 1. Data Table Spec (from user's screenshot)
+    const SAMPLE_1_SPEC = {
+      tagName: "div",
+      classList: "card shadow-sm border rounded overflow-hidden",
+      children: [
+        {
+          tagName: "table",
+          classList: "table table-hover mb-0",
+          children: [
+            {
+              tagName: "thead",
+              classList: "table-dark",
+              children: [
+                {
+                  tagName: "tr",
+                  children: [
+                    { tagName: "th", classList: "py-3 px-4", textContent: "itemName" },
+                    { tagName: "th", classList: "py-3 px-4", textContent: "baseUnit" }
+                  ]
+                }
+              ]
+            },
+            {
+              tagName: "tbody",
+              children: [
+                {
+                  tagName: "tr",
+                  children: [
+                    { tagName: "td", classList: "py-2 px-4", textContent: "0.09/30mm" },
+                    { tagName: "td", classList: "py-2 px-4", textContent: "kgs" }
+                  ]
+                },
+                {
+                  tagName: "tr",
+                  children: [
+                    { tagName: "td", classList: "py-2 px-4", textContent: "0.11-25" },
+                    { tagName: "td", classList: "py-2 px-4", textContent: "kgs" }
+                  ]
+                },
+                {
+                  tagName: "tr",
+                  children: [
+                    { tagName: "td", classList: "py-2 px-4", textContent: "0.11-30" },
+                    { tagName: "td", classList: "py-2 px-4", textContent: "kgs" }
+                  ]
+                },
+                {
+                  tagName: "tr",
+                  children: [
+                    { tagName: "td", classList: "py-2 px-4", textContent: "0.12/40mm" },
+                    { tagName: "td", classList: "py-2 px-4", textContent: "kgs" }
+                  ]
+                },
+                {
+                  tagName: "tr",
+                  children: [
+                    { tagName: "td", classList: "py-2 px-4", textContent: "1.00/50mm" },
+                    { tagName: "td", classList: "py-2 px-4", textContent: "mtr" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    // 2. Interactive Card Component
+    const SAMPLE_2_SPEC = {
+      tagName: "div",
+      classList: "card p-4 shadow-sm bg-white border",
+      children: [
+        {
+          tagName: "div",
+          classList: "d-flex align-items-center mb-3",
+          children: [
+            {
+              tagName: "div",
+              classList: "rounded-circle bg-primary-subtle text-primary p-3 me-3 d-flex align-items-center justify-content-center",
+              attributes: { style: "width: 48px; height: 48px;" },
+              children: [
+                {
+                  tagName: "i",
+                  classList: "bi bi-lightning-charge-fill fs-5"
+                }
+              ]
+            },
+            {
+              tagName: "div",
+              children: [
+                {
+                  tagName: "h5",
+                  classList: "card-title mb-0 fw-bold text-dark",
+                  textContent: "Instant Direct DOM Compilation"
+                },
+                {
+                  tagName: "small",
+                  classList: "text-muted",
+                  textContent: "High-performance native rendering"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          tagName: "p",
+          classList: "card-text text-secondary mb-3",
+          textContent: "Pass any raw JSON object specification directly into buildSpecElement(spec) to compile production-ready Web Components without Virtual DOM overhead or client build steps."
+        },
+        {
+          tagName: "div",
+          classList: "d-flex gap-2",
+          children: [
+            {
+              tagName: "button",
+              classList: "btn btn-primary btn-sm px-3",
+              attributes: { type: "button" },
+              textContent: "Run Benchmark"
+            },
+            {
+              tagName: "button",
+              classList: "btn btn-outline-secondary btn-sm px-3",
+              attributes: { type: "button" },
+              textContent: "View Schema"
+            }
+          ]
+        }
+      ]
+    };
+
+    // 3. Voucher Entry Form Spec
+    const SAMPLE_3_SPEC = {
+      tagName: "form",
+      classList: "p-3 bg-white border rounded shadow-sm",
+      attributes: { onsubmit: "return false;" },
+      children: [
+        {
+          tagName: "div",
+          classList: "row g-3",
+          children: [
+            {
+              tagName: "div",
+              classList: "col-md-6",
+              children: [
+                {
+                  tagName: "label",
+                  classList: "form-label small fw-semibold text-dark",
+                  textContent: "Voucher Reference Number"
+                },
+                {
+                  tagName: "input",
+                  classList: "form-control form-control-sm font-monospace",
+                  attributes: {
+                    type: "text",
+                    placeholder: "VCH-2026-0042",
+                    value: "VCH-2026-0042"
+                  }
+                }
+              ]
+            },
+            {
+              tagName: "div",
+              classList: "col-md-6",
+              children: [
+                {
+                  tagName: "label",
+                  classList: "form-label small fw-semibold text-dark",
+                  textContent: "Transaction Date"
+                },
+                {
+                  tagName: "input",
+                  classList: "form-control form-control-sm",
+                  attributes: {
+                    type: "date",
+                    value: "2026-10-01"
+                  }
+                }
+              ]
+            },
+            {
+              tagName: "div",
+              classList: "col-12",
+              children: [
+                {
+                  tagName: "label",
+                  classList: "form-label small fw-semibold text-dark",
+                  textContent: "Memo / Ledger Remarks"
+                },
+                {
+                  tagName: "textarea",
+                  classList: "form-control form-control-sm",
+                  attributes: {
+                    rows: "2",
+                    placeholder: "Enter internal notes or account code description..."
+                  },
+                  textContent: "Monthly vendor settlement for infrastructure and hosting services."
+                }
+              ]
+            },
+            {
+              tagName: "div",
+              classList: "col-12 text-end pt-1",
+              children: [
+                {
+                  tagName: "button",
+                  classList: "btn btn-secondary btn-sm me-2",
+                  attributes: { type: "reset" },
+                  textContent: "Discard"
+                },
+                {
+                  tagName: "button",
+                  classList: "btn btn-info btn-sm text-white px-3 fw-semibold",
+                  attributes: { type: "submit" },
+                  textContent: "Post Voucher"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    // 4. Status Alerts & Feedback Banners
+    const SAMPLE_4_SPEC = {
+      tagName: "div",
+      classList: "d-flex flex-column gap-2",
+      children: [
+        {
+          tagName: "div",
+          classList: "alert alert-success d-flex align-items-center mb-0 py-2 px-3 shadow-sm",
+          attributes: { role: "alert" },
+          children: [
+            {
+              tagName: "i",
+              classList: "bi bi-check-circle-fill me-2 fs-5"
+            },
+            {
+              tagName: "div",
+              children: [
+                {
+                  tagName: "strong",
+                  textContent: "Catalog Verification Passed! "
+                },
+                {
+                  tagName: "span",
+                  textContent: "All 30 DOM tags matched tags.json strict schema specification."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          tagName: "div",
+          classList: "alert alert-warning d-flex align-items-center mb-0 py-2 px-3 shadow-sm",
+          attributes: { role: "alert" },
+          children: [
+            {
+              tagName: "i",
+              classList: "bi bi-exclamation-triangle-fill me-2 fs-5"
+            },
+            {
+              tagName: "div",
+              children: [
+                {
+                  tagName: "strong",
+                  textContent: "Capability Warning: "
+                },
+                {
+                  tagName: "span",
+                  textContent: "Void element <input> cannot accept children nodes."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          tagName: "div",
+          classList: "alert alert-info d-flex align-items-center mb-0 py-2 px-3 shadow-sm",
+          attributes: { role: "alert" },
+          children: [
+            {
+              tagName: "i",
+              classList: "bi bi-info-circle-fill me-2 fs-5"
+            },
+            {
+              tagName: "div",
+              children: [
+                {
+                  tagName: "strong",
+                  textContent: "v4 Optimization Active: "
+                },
+                {
+                  tagName: "span",
+                  textContent: "Direct specification format detected without container wrapping."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    const SAMPLES_MAP = {
+      sample1: SAMPLE_1_SPEC,
+      sample2: SAMPLE_2_SPEC,
+      sample3: SAMPLE_3_SPEC,
+      sample4: SAMPLE_4_SPEC
+    };
+
+    function compileNode(spec) {
+      const fn = buildSpecElement || window.buildSpecElement || window.ks?.jsonToTag?.buildSpecElement;
+      if (typeof fn !== "function") {
+        throw new Error("buildSpecElement function is not available.");
+      }
+      let dom = null;
+      try {
+        dom = fn(spec);
+      } catch (e) {}
+
+      if (!(dom instanceof Node)) {
+        try {
+          dom = fn({ inSpec: spec });
+        } catch (e) {}
+      }
+
+      if (!(dom instanceof Node)) {
+        try {
+          dom = fn({ spec: spec });
+        } catch (e) {}
+      }
+
+      return dom;
+    }
+
+    // Mount all samples live using buildSpecElement
+    function mountSamples() {
+      Object.entries(SAMPLES_MAP).forEach(([key, spec]) => {
+        const renderContainer = document.getElementById(`${key}-render`);
+        const codeContainer = document.getElementById(`${key}-code`);
+
+        // Populate Code Box
+        if (codeContainer) {
+          codeContainer.textContent = JSON.stringify(spec, null, 2);
+        }
+
+        // Render Live Native DOM
+        if (renderContainer) {
+          try {
+            renderContainer.innerHTML = "";
+            const domNode = compileNode(spec);
+
+            if (domNode instanceof Node) {
+              renderContainer.appendChild(domNode);
+            } else {
+              renderContainer.innerHTML = `<div class="text-danger small">Compilation failed: Return value was not a DOM node.</div>`;
+            }
+          } catch (err) {
+            console.error(`Error compiling ${key}:`, err);
+            renderContainer.innerHTML = `<div class="text-danger small"><i class="bi bi-x-circle me-1"></i>Compile Error: ${err.message}</div>`;
+          }
+        }
+      });
+    }
+
+    // Toggle Preview vs JSON Code
+    window.toggleView = (sampleKey, mode) => {
+      const renderBox = document.getElementById(`${sampleKey}-render`);
+      const codeBox = document.getElementById(`${sampleKey}-code`);
+      const card = renderBox.closest(".sample-card");
+      const buttons = card.querySelectorAll(".btn-group button");
+
+      if (mode === "render") {
+        renderBox.classList.remove("d-none");
+        codeBox.classList.add("d-none");
+        buttons?.[0]?.classList.add("active");
+        buttons?.[1]?.classList.remove("active");
+      } else {
+        renderBox.classList.add("d-none");
+        codeBox.classList.remove("d-none");
+        buttons?.[0]?.classList.remove("active");
+        buttons?.[1]?.classList.add("active");
+      }
+    };
+
+    // Download single JSON sample
+    window.downloadSample = (sampleKey, filename) => {
+      const spec = SAMPLES_MAP[sampleKey];
+      if (!spec) return;
+
+      const blob = new Blob([JSON.stringify(spec, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename || `${sampleKey}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
+
+    // Copy sample JSON to clipboard
+    window.copySample = async (sampleKey) => {
+      const spec = SAMPLES_MAP[sampleKey];
+      if (!spec) return;
+
+      try {
+        await navigator.clipboard.writeText(JSON.stringify(spec, null, 2));
+        alert("Specification copied to clipboard!");
+      } catch (e) {
+        alert("Failed to copy: " + e.message);
+      }
+    };
+
+    // Open sample in Live Editor, Visual Renderer, or Tag Analysis
+    window.openInTool = (sampleKey, targetUrl, fileName) => {
+      const spec = SAMPLES_MAP[sampleKey];
+      if (!spec) return;
+
+      sessionStorage.setItem("json_to_tag_active_spec", JSON.stringify(spec));
+      sessionStorage.setItem("json_to_tag_active_name", fileName || `${sampleKey}.json`);
+      window.location.href = targetUrl;
+    };
+
+    // Batch download all samples
+    document.getElementById("btnDownloadAll").addEventListener("click", () => {
+      Object.entries(SAMPLES_MAP).forEach(([key, spec], idx) => {
+        setTimeout(() => {
+          const names = {
+            sample1: "table-spec.json",
+            sample2: "card-component.json",
+            sample3: "voucher-form.json",
+            sample4: "status-alerts.json"
+          };
+          window.downloadSample(key, names[key]);
+        }, idx * 250);
+      });
+    });
+
+    mountSamples();
+  </script>
+</body>
+
+</html>

@@ -241,15 +241,14 @@
 
   <!-- Top Sticky Navigation -->
   <header class="top-navbar px-3 py-2">
-    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap gap-2">
-      <div class="d-flex align-items-center gap-2">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap flex-md-nowrap gap-2">
+      <div class="d-flex align-items-center gap-2 flex-shrink-0">
         <h1 class="h5 fw-bold mb-0 text-dark d-flex align-items-center gap-2">
           <i class="bi bi-layout-split text-primary fs-4"></i> Visual Renderer
           <span class="badge bg-primary-subtle text-primary border border-primary-subtle fs-6 fw-normal">Live Editor Mode</span>
         </h1>
-        <span class="text-muted small d-none d-md-inline">| Monaco JSON Editor + Direct DOM Rendering</span>
       </div>
-      <div class="d-flex align-items-center gap-2">
+      <div class="d-flex align-items-center gap-2 ms-auto flex-nowrap">
         <a href="./index.html" class="btn btn-outline-secondary btn-sm" title="Back to JSON Upload Menu">
           <i class="bi bi-grid me-1"></i> Menu
         </a>
@@ -261,6 +260,9 @@
         </a>
         <a href="./summery.html" class="btn btn-outline-info btn-sm" title="Tag Analysis view">
           <i class="bi bi-journal-check me-1"></i> Tag Analysis
+        </a>
+        <a href="../samples/index.html" class="btn btn-outline-warning btn-sm" title="Download & View Samples">
+          <i class="bi bi-collection me-1"></i> Samples
         </a>
       </div>
     </div>
@@ -277,19 +279,6 @@
           <i class="bi bi-file-earmark-code text-primary me-1"></i>Select JSON:
         </label>
         <input type="file" id="jsonFileInput" class="form-control form-control-sm" accept=".json,application/json" style="max-width: 250px;" />
-
-        <div class="btn-group btn-group-sm">
-          <button class="btn btn-outline-primary" type="button" id="btnSampleTable" title="Load sample table with itemName and baseUnit">
-            <i class="bi bi-table me-1"></i> Sample Table
-          </button>
-          <button class="btn btn-outline-primary" type="button" id="btnSampleSpec" title="Load sample card component">
-            <i class="bi bi-card-text me-1"></i> Sample Card
-          </button>
-        </div>
-
-        <button class="btn btn-outline-secondary btn-sm" type="button" id="btnLoadSession" style="display: none;" title="Load spec stored in session">
-          <i class="bi bi-arrow-repeat me-1"></i> Load from Analysis
-        </button>
       </div>
 
       <!-- Right Controls: Status & Editor Actions -->
@@ -302,13 +291,6 @@
         <button class="btn btn-primary btn-sm" type="button" id="btnManualRender" title="Re-render output from editor JSON">
           <i class="bi bi-play-fill me-1"></i> Render
         </button>
-
-        <span class="badge bg-light text-secondary border small px-2 py-1" id="activeFileNameBadge">
-          <i class="bi bi-file-earmark me-1"></i>No file loaded
-        </span>
-        <span class="badge bg-light text-secondary border small px-2 py-1" id="syntaxStatusBadge">
-          <span class="sync-indicator" id="syncDot" style="background-color: #94a3b8;"></span><span id="syntaxStatusText">No file uploaded</span>
-        </span>
       </div>
     </div>
 
@@ -664,16 +646,16 @@
         const domCount = outputContainer.querySelectorAll("*").length;
         nodesCountBadge.textContent = `${domCount} DOM Nodes`;
 
-        // Update status indicators to green
-        syncDot.className = "sync-indicator synced";
-        syntaxStatusText.textContent = "Live Rendered";
-        syntaxStatusBadge.className = "badge bg-success-subtle text-success border border-success-subtle small px-2 py-1";
+        // Update status indicators
+        if (syncDot) syncDot.className = "sync-indicator synced";
+        if (syntaxStatusText) syntaxStatusText.textContent = "Live Rendered";
+        if (syntaxStatusBadge) syntaxStatusBadge.className = "badge bg-success-subtle text-success border border-success-subtle small px-2 py-1";
 
       } catch (err) {
         showError(err.message || String(err));
-        syncDot.className = "sync-indicator error";
-        syntaxStatusText.textContent = "Render Error";
-        syntaxStatusBadge.className = "badge bg-danger-subtle text-danger border border-danger-subtle small px-2 py-1";
+        if (syncDot) syncDot.className = "sync-indicator error";
+        if (syntaxStatusText) syntaxStatusText.textContent = "Render Error";
+        if (syntaxStatusBadge) syntaxStatusBadge.className = "badge bg-danger-subtle text-danger border border-danger-subtle small px-2 py-1";
         console.error("DOM Rendering Error:", err);
       }
     };
@@ -693,11 +675,13 @@
         `;
         nodesCountBadge.textContent = "0 DOM Nodes";
         nodesCountBadge.className = "badge bg-light text-secondary border fw-normal";
-        activeFileNameBadge.innerHTML = `<i class="bi bi-file-earmark me-1"></i>No file loaded`;
-        syncDot.className = "sync-indicator";
-        syncDot.style.backgroundColor = "#94a3b8";
-        syntaxStatusText.textContent = "No file uploaded";
-        syntaxStatusBadge.className = "badge bg-light text-secondary border small px-2 py-1";
+        if (activeFileNameBadge) activeFileNameBadge.innerHTML = `<i class="bi bi-file-earmark me-1"></i>No file loaded`;
+        if (syncDot) {
+          syncDot.className = "sync-indicator";
+          syncDot.style.backgroundColor = "#94a3b8";
+        }
+        if (syntaxStatusText) syntaxStatusText.textContent = "Ready";
+        if (syntaxStatusBadge) syntaxStatusBadge.className = "badge bg-light text-secondary border small px-2 py-1";
         clearError();
         return;
       }
@@ -707,9 +691,9 @@
         clearError();
         renderSpec({ inSpec: parsed, inFileName: currentFileName });
       } catch (err) {
-        syncDot.className = "sync-indicator error";
-        syntaxStatusText.textContent = "Syntax Error";
-        syntaxStatusBadge.className = "badge bg-danger-subtle text-danger border border-danger-subtle small px-2 py-1";
+        if (syncDot) syncDot.className = "sync-indicator error";
+        if (syntaxStatusText) syntaxStatusText.textContent = "Syntax Error";
+        if (syntaxStatusBadge) syntaxStatusBadge.className = "badge bg-danger-subtle text-danger border border-danger-subtle small px-2 py-1";
         showError("Invalid JSON syntax: " + err.message);
       }
     };
@@ -717,15 +701,15 @@
     // Debounced live change handler
     const onEditorChange = () => {
       if (!autoRenderToggle.checked) {
-        syncDot.className = "sync-indicator syncing";
-        syntaxStatusText.textContent = "Unrendered Changes";
-        syntaxStatusBadge.className = "badge bg-warning-subtle text-warning-emphasis border border-warning-subtle small px-2 py-1";
+        if (syncDot) syncDot.className = "sync-indicator syncing";
+        if (syntaxStatusText) syntaxStatusText.textContent = "Unrendered Changes";
+        if (syntaxStatusBadge) syntaxStatusBadge.className = "badge bg-warning-subtle text-warning-emphasis border border-warning-subtle small px-2 py-1";
         return;
       }
 
-      syncDot.className = "sync-indicator syncing";
-      syntaxStatusText.textContent = "Syncing...";
-      syntaxStatusBadge.className = "badge bg-warning-subtle text-warning-emphasis border border-warning-subtle small px-2 py-1";
+      if (syncDot) syncDot.className = "sync-indicator syncing";
+      if (syntaxStatusText) syntaxStatusText.textContent = "Syncing...";
+      if (syntaxStatusBadge) syntaxStatusBadge.className = "badge bg-warning-subtle text-warning-emphasis border border-warning-subtle small px-2 py-1";
 
       clearTimeout(liveRenderDebounceTimer);
       liveRenderDebounceTimer = setTimeout(() => {
@@ -818,10 +802,10 @@
           // Still put raw text in editor so user can inspect and fix
           setEditorValue(event.target.result);
           currentFileName = file.name;
-          activeFileNameBadge.innerHTML = `<i class="bi bi-file-earmark-x text-danger me-1"></i>${file.name}`;
-          syncDot.className = "sync-indicator error";
-          syntaxStatusText.textContent = "Syntax Error";
-          syntaxStatusBadge.className = "badge bg-danger-subtle text-danger border border-danger-subtle small px-2 py-1";
+          if (activeFileNameBadge) activeFileNameBadge.innerHTML = `<i class="bi bi-file-earmark-x text-danger me-1"></i>${file.name}`;
+          if (syncDot) syncDot.className = "sync-indicator error";
+          if (syntaxStatusText) syntaxStatusText.textContent = "Syntax Error";
+          if (syntaxStatusBadge) syntaxStatusBadge.className = "badge bg-danger-subtle text-danger border border-danger-subtle small px-2 py-1";
         }
       };
       reader.readAsText(file);
@@ -862,14 +846,18 @@
       reader.readAsText(file);
     });
 
-    // Sample Buttons
-    btnSampleTable.addEventListener("click", () => {
-      loadSpecIntoEditor(SAMPLE_TABLE_SPEC, "spec.json (Sample Table)");
-    });
+    // Sample Buttons (if present)
+    if (btnSampleTable) {
+      btnSampleTable.addEventListener("click", () => {
+        loadSpecIntoEditor(SAMPLE_TABLE_SPEC, "spec.json (Sample Table)");
+      });
+    }
 
-    btnSampleSpec.addEventListener("click", () => {
-      loadSpecIntoEditor(SAMPLE_CARD_SPEC, "sample-card.json");
-    });
+    if (btnSampleSpec) {
+      btnSampleSpec.addEventListener("click", () => {
+        loadSpecIntoEditor(SAMPLE_CARD_SPEC, "sample-card.json");
+      });
+    }
 
     // Load from Session Storage (Tag Analysis connection)
     const checkSessionSpec = () => {
@@ -885,18 +873,20 @@
       }
     };
 
-    btnLoadSession.addEventListener("click", () => {
-      try {
-        const savedSpec = sessionStorage.getItem("json_to_tag_active_spec");
-        const savedName = sessionStorage.getItem("json_to_tag_active_name") || "Analyzed Spec";
-        if (savedSpec) {
-          const parsed = JSON.parse(savedSpec);
-          loadSpecIntoEditor(parsed, savedName);
+    if (btnLoadSession) {
+      btnLoadSession.addEventListener("click", () => {
+        try {
+          const savedSpec = sessionStorage.getItem("json_to_tag_active_spec");
+          const savedName = sessionStorage.getItem("json_to_tag_active_name") || "Analyzed Spec";
+          if (savedSpec) {
+            const parsed = JSON.parse(savedSpec);
+            loadSpecIntoEditor(parsed, savedName);
+          }
+        } catch (err) {
+          showError("Failed to load spec from session: " + err.message);
         }
-      } catch (err) {
-        showError("Failed to load spec from session: " + err.message);
-      }
-    });
+      });
+    }
 
     // Manual Render Button
     btnManualRender.addEventListener("click", () => {
