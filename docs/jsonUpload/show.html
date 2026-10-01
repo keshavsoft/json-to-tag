@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visual Renderer • @keshavsoft/json-to-tag</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: #1e293b;
+    }
+  </style>
+</head>
+
+<body class="p-3 p-md-4">
+  <div class="container-fluid" style="max-width: 980px;">
+
+    <!-- Top Navigation / Header -->
+    <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom flex-wrap gap-2">
+      <div>
+        <h1 class="h4 fw-bold mb-1 text-dark d-flex align-items-center gap-2">
+          <i class="bi bi-display text-primary"></i> Visual Renderer
+          <span class="badge bg-success-subtle text-success border border-success-subtle fs-6 fw-normal">Render Mode</span>
+        </h1>
+        <p class="text-muted small mb-0">Direct DOM rendering of your JSON specification.</p>
+      </div>
+      <div class="d-flex gap-2">
+        <a href="./index.html" class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-grid me-1"></i> Menu
+        </a>
+        <a href="./editor.html" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-layout-split me-1"></i> Live Editor
+        </a>
+        <a href="./summery.html" class="btn btn-outline-info btn-sm">
+          <i class="bi bi-journal-check me-1"></i> Tag Analysis
+        </a>
+      </div>
+    </div>
+
+    <!-- Minimal Controls Bar -->
+    <div class="d-flex align-items-center gap-2 mb-4 p-2 bg-white rounded border shadow-sm flex-wrap">
+      <label for="jsonFileInput" class="form-label mb-0 fw-semibold small text-secondary">
+        <i class="bi bi-file-earmark-code text-primary me-1"></i>Select JSON:
+      </label>
+      <input type="file" id="jsonFileInput" class="form-control form-control-sm" accept=".json,application/json" style="max-width: 280px;" />
+      <button class="btn btn-outline-primary btn-sm" type="button" id="btnSampleSpec">
+        <i class="bi bi-file-earmark-arrow-down me-1"></i> Sample
+      </button>
+      <button class="btn btn-outline-secondary btn-sm" type="button" id="btnLoadSession" style="display: none;">
+        <i class="bi bi-arrow-repeat me-1"></i> Load from Analysis
+      </button>
+      <span class="badge bg-light text-secondary border small ms-auto" id="activeFileNameBadge">No file loaded</span>
+    </div>
+
+    <!-- Output Container -->
+    <div id="outputContainer"></div>
+
+  </div>
+
+  <!-- Live CDN import -->
+  <script type="module">
+    import { buildSpecElement } from "https://keshavsoft.github.io/json-to-tag/dist/v3/min.js";
+
+    const fileInput = document.getElementById("jsonFileInput");
+    const btnSampleSpec = document.getElementById("btnSampleSpec");
+    const btnLoadSession = document.getElementById("btnLoadSession");
+    const outputContainer = document.getElementById("outputContainer");
+    const activeFileNameBadge = document.getElementById("activeFileNameBadge");
+
+    const SAMPLE_SPEC = {
+      tagName: "div",
+      classList: "card p-4 shadow-sm bg-white border",
+      children: [
+        {
+          tagName: "div",
+          classList: "d-flex justify-content-between align-items-center mb-3",
+          children: [
+            { tagName: "h4", classList: "text-primary fw-bold mb-0", textContent: "Sample Specification" },
+            { tagName: "span", classList: "badge bg-success-subtle text-success border border-success-subtle", textContent: "Rendered Component" }
+          ]
+        },
+        {
+          tagName: "p",
+          classList: "text-muted small mb-3",
+          textContent: "This component was rendered directly from a JSON specification using buildSpecElement."
+        },
+        {
+          tagName: "div",
+          classList: "mb-3",
+          children: [
+            {
+              tagName: "label",
+              classList: "form-label small fw-semibold text-secondary",
+              textContent: "Sample Input Field"
+            },
+            {
+              tagName: "input",
+              classList: "form-control form-control-sm",
+              attributes: { type: "text", placeholder: "Type something...", value: "Pre-filled text" }
+            }
+          ]
+        },
+        {
+          tagName: "div",
+          classList: "d-flex gap-2",
+          children: [
+            {
+              tagName: "button",
+              classList: "btn btn-primary btn-sm px-3",
+              textContent: "Submit Action",
+              attributes: { type: "button" }
+            },
+            {
+              tagName: "button",
+              classList: "btn btn-outline-secondary btn-sm px-3",
+              textContent: "Reset",
+              attributes: { type: "button" }
+            }
+          ]
+        }
+      ]
+    };
+
+    const renderSpec = ({ inSpec, inFileName }) => {
+      const localSpec = inSpec;
+      const localFileName = inFileName ?? "Custom Spec";
+
+      try {
+        sessionStorage.setItem("json_to_tag_active_spec", JSON.stringify(localSpec));
+        sessionStorage.setItem("json_to_tag_active_name", localFileName);
+        if (activeFileNameBadge) {
+          activeFileNameBadge.textContent = localFileName;
+        }
+
+        outputContainer.innerHTML = "";
+        const rendered = buildSpecElement({ inSpec: localSpec });
+        if (rendered) {
+          if (Array.isArray(rendered)) {
+            outputContainer.append(...rendered);
+          } else {
+            outputContainer.appendChild(rendered);
+          }
+        }
+      } catch (err) {
+        alert("Error rendering JSON: " + err.message);
+        console.error(err);
+      }
+    };
+
+    // Check if session storage has a previously analyzed spec
+    const checkSessionSpec = () => {
+      try {
+        const savedSpec = sessionStorage.getItem("json_to_tag_active_spec");
+        const savedName = sessionStorage.getItem("json_to_tag_active_name") || "Analyzed Spec";
+        if (savedSpec && btnLoadSession) {
+          btnLoadSession.style.display = "inline-block";
+          btnLoadSession.title = `Load "${savedName}" from Tag Analysis`;
+        }
+      } catch (e) {
+        // Ignore session read errors
+      }
+    };
+
+    btnLoadSession.addEventListener("click", () => {
+      try {
+        const savedSpec = sessionStorage.getItem("json_to_tag_active_spec");
+        const savedName = sessionStorage.getItem("json_to_tag_active_name") || "Analyzed Spec";
+        if (savedSpec) {
+          const parsed = JSON.parse(savedSpec);
+          renderSpec({ inSpec: parsed, inFileName: savedName });
+        }
+      } catch (err) {
+        alert("Failed to load spec from session: " + err.message);
+      }
+    });
+
+    fileInput.addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const json = JSON.parse(event.target.result);
+          renderSpec({ inSpec: json, inFileName: file.name });
+        } catch (err) {
+          alert("Invalid JSON file: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    btnSampleSpec.addEventListener("click", () => {
+      renderSpec({ inSpec: SAMPLE_SPEC, inFileName: "Sample Spec" });
+    });
+
+    checkSessionSpec();
+  </script>
+</body>
+
+</html>
