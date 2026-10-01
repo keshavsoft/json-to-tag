@@ -5,12 +5,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>@keshavsoft/json-to-tag • Declarative JSON-to-DOM Compiler &amp; Tools</title>
-  <meta name="description" content="Official documentation, developer portal, and workspace hub for @keshavsoft/json-to-tag declarative JSON-to-DOM compiler and tag catalog." />
+  <meta name="description"
+    content="Official documentation, developer portal, and workspace hub for @keshavsoft/json-to-tag declarative JSON-to-DOM compiler and tag catalog." />
 
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
 
   <!-- Bootstrap 5.3.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -80,8 +83,8 @@
     /* Hero Section */
     .hero-wrapper {
       background: radial-gradient(circle at 85% 15%, rgba(2, 132, 199, 0.07) 0%, transparent 45%),
-                  radial-gradient(circle at 15% 85%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
-                  #ffffff;
+        radial-gradient(circle at 15% 85%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+        #ffffff;
       color: #0f172a;
       padding: 4.5rem 0 3.75rem;
       border-bottom: 1px solid #e2e8f0;
@@ -303,8 +306,15 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -313,23 +323,32 @@
 
   <!-- Top Sticky Navigation Bar -->
   <nav class="portal-nav py-2">
-    <div class="container-fluid px-3 px-md-4 d-flex justify-content-between align-items-center flex-wrap gap-2" style="max-width: 1240px;">
+    <div class="container-fluid px-3 px-md-4 d-flex justify-content-between align-items-center flex-wrap gap-2"
+      style="max-width: 1240px;">
       <a class="brand-link d-flex align-items-center gap-2 text-decoration-none fw-bold fs-6" href="./index.html">
         <i class="bi bi-tag-fill text-primary fs-5"></i>
         <span>json-to-tag</span>
-        <span class="badge bg-primary-subtle text-primary border border-primary-subtle ms-1" style="font-size: 0.7rem; font-weight: 600;">v1.4.3</span>
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle ms-1"
+          style="font-size: 0.7rem; font-weight: 600;">v1.4.3</span>
       </a>
 
       <!-- Quick Nav Links -->
       <div class="d-flex align-items-center gap-1 flex-wrap">
         <a class="nav-link active" href="./index.html"><i class="bi bi-house-door me-1"></i>Home</a>
-        <a class="nav-link text-info" href="./jsonUpload/index.html"><i class="bi bi-cloud-arrow-up me-1"></i>Upload Hub</a>
-        <a class="nav-link text-primary" href="./jsonUpload/editor.html"><i class="bi bi-layout-split me-1"></i>Live Editor</a>
-        <a class="nav-link text-success" href="./tags/index.html"><i class="bi bi-journal-code me-1"></i>Tags Catalog</a>
-        <a class="nav-link text-warning-emphasis" href="./samples/index.html"><i class="bi bi-collection me-1"></i>Samples</a>
-        <a class="nav-link" href="./playground/index.html"><i class="bi bi-sliders me-1"></i>Playground</a>
+        <a class="nav-link text-info" href="./jsonUpload/index.html"><i class="bi bi-cloud-arrow-up me-1"></i>Upload
+          Hub</a>
+        <a class="nav-link text-primary" href="./jsonUpload/editor.html"><i class="bi bi-layout-split me-1"></i>Live
+          Editor</a>
+        <!-- <a class="nav-link text-success" href="./tags/index.html"><i class="bi bi-journal-code me-1"></i>Tags
+          Catalog</a> -->
+        <a class="nav-link text-warning-emphasis" href="./samples/index.html"><i
+            class="bi bi-collection me-1"></i>Samples</a>
+        <a class="nav-link text-success" href="./tags/index.html"><i class="bi bi-sliders me-1"></i>tags
+        </a>
+        <!-- <a class="nav-link" href="./playground/index.html"><i class="bi bi-sliders me-1"></i>Playground</a> -->
         <a class="nav-link" href="./newDocumentation/Documentation.html"><i class="bi bi-book me-1"></i>Guide</a>
-        <a class="nav-link text-dark ms-1" href="https://github.com/keshavsoft/json-to-tag" target="_blank" rel="noopener">
+        <a class="nav-link text-dark ms-1" href="https://github.com/keshavsoft/json-to-tag" target="_blank"
+          rel="noopener">
           <i class="bi bi-github"></i>
         </a>
       </div>
@@ -340,7 +359,7 @@
   <header class="hero-wrapper">
     <div class="container-fluid px-3 px-md-4" style="max-width: 1240px;">
       <div class="row align-items-center g-4">
-        
+
         <!-- Left: Headline & Pitch -->
         <div class="col-lg-7">
           <div class="hero-badge">
@@ -356,7 +375,12 @@
           </h1>
 
           <p class="hero-subtitle mb-3">
-            <span class="fw-semibold text-dark">The Story of json-to-tag:</span> Building modern web interfaces shouldn't require megabytes of Virtual DOM framework overhead or endless imperative <code>createElement</code> boilerplate. <strong>json-to-tag</strong> was born from a simple belief: <em>UI should be pure, portable data.</em> Model components in clean JSON, store them in databases, stream them over APIs, and compile directly into native browser DOM elements with zero dependencies and strict schema safety.
+            <span class="fw-semibold text-dark">The Story of json-to-tag:</span> Building modern web interfaces
+            shouldn't require megabytes of Virtual DOM framework overhead or endless imperative
+            <code>createElement</code> boilerplate. <strong>json-to-tag</strong> was born from a simple belief: <em>UI
+              should be pure, portable data.</em> Model components in clean JSON, store them in databases, stream them
+            over APIs, and compile directly into native browser DOM elements with zero dependencies and strict schema
+            safety.
           </p>
 
           <!-- Action Buttons -->
@@ -402,7 +426,8 @@
                 <span class="terminal-dot bg-success"></span>
               </div>
               <span class="small text-muted font-monospace" style="font-size: 0.75rem;">quickstart.sh</span>
-              <button class="btn btn-sm btn-outline-secondary py-0 px-2 text-light" style="font-size: 0.75rem;" onclick="copyCode('npx @keshavsoft/json-to-tag')">
+              <button class="btn btn-sm btn-outline-secondary py-0 px-2 text-light" style="font-size: 0.75rem;"
+                onclick="copyCode('npx @keshavsoft/json-to-tag')">
                 <i class="bi bi-clipboard me-1"></i>Copy
               </button>
             </div>
@@ -434,7 +459,8 @@
         <div class="section-eyebrow">Engine Architecture &amp; Paradigm Comparison</div>
         <h2 class="section-title">HTML vs. Vanilla JS vs. json-to-tag: What's the Difference?</h2>
         <p class="section-subtitle mx-auto">
-          Compare how the exact same UI component is created across the three Web Platform approaches — and why declarative JSON specifications offer the ideal balance of portability, safety, and simplicity.
+          Compare how the exact same UI component is created across the three Web Platform approaches — and why
+          declarative JSON specifications offer the ideal balance of portability, safety, and simplicity.
         </p>
       </div>
 
@@ -452,29 +478,36 @@
             </div>
             <h3 class="h5 fw-bold text-dark mb-1">Normal HTML</h3>
             <p class="small text-secondary mb-2">
-              Writing direct HTML tags in files or template strings. The browser's C++ parser converts tags into DOM objects.
+              Writing direct HTML tags in files or template strings. The browser's C++ parser converts tags into DOM
+              objects.
             </p>
 
             <div class="compare-code">
               <div class="text-secondary mb-1">// Direct HTML Markup</div>
-              &lt;<span class="text-info">div</span> <span class="text-warning">id</span>=<span class="text-success">"test-content"</span>&gt;<br />
-              &nbsp;&nbsp;&lt;<span class="text-info">label</span>&gt;Name&lt;/<span class="text-info">label</span>&gt;<br />
-              &nbsp;&nbsp;&lt;<span class="text-info">p</span>&gt;Test Content&lt;/<span class="text-info">p</span>&gt;<br />
+              &lt;<span class="text-info">div</span> <span class="text-warning">id</span>=<span
+                class="text-success">"test-content"</span>&gt;<br />
+              &nbsp;&nbsp;&lt;<span class="text-info">label</span>&gt;Name&lt;/<span
+                class="text-info">label</span>&gt;<br />
+              &nbsp;&nbsp;&lt;<span class="text-info">p</span>&gt;Test Content&lt;/<span
+                class="text-info">p</span>&gt;<br />
               &lt;/<span class="text-info">div</span>&gt;
             </div>
 
             <div class="small mt-auto">
               <div class="d-flex align-items-start gap-2 mb-2">
                 <i class="bi bi-check-circle-fill text-success flex-shrink-0 mt-1"></i>
-                <span class="text-dark"><strong>Native &amp; familiar:</strong> Standard HTML tags understood natively by all browsers.</span>
+                <span class="text-dark"><strong>Native &amp; familiar:</strong> Standard HTML tags understood natively
+                  by all browsers.</span>
               </div>
               <div class="d-flex align-items-start gap-2 mb-2">
                 <i class="bi bi-x-circle-fill text-danger flex-shrink-0 mt-1"></i>
-                <span class="text-secondary"><strong>Not JSON serializable:</strong> Cannot be safely transmitted across REST APIs or stored in databases.</span>
+                <span class="text-secondary"><strong>Not JSON serializable:</strong> Cannot be safely transmitted across
+                  REST APIs or stored in databases.</span>
               </div>
               <div class="d-flex align-items-start gap-2 mb-3">
                 <i class="bi bi-exclamation-triangle-fill text-warning-emphasis flex-shrink-0 mt-1"></i>
-                <span class="text-secondary"><strong>XSS vulnerability:</strong> Dynamic rendering requires <code>innerHTML</code>, exposing apps to script injection.</span>
+                <span class="text-secondary"><strong>XSS vulnerability:</strong> Dynamic rendering requires
+                  <code>innerHTML</code>, exposing apps to script injection.</span>
               </div>
               <a href="./newDocumentation/01-normal-html.html" class="btn btn-outline-secondary btn-sm w-100">
                 <i class="bi bi-book me-1"></i> Read 01 · Normal HTML Guide
@@ -494,16 +527,20 @@
             </div>
             <h3 class="h5 fw-bold text-dark mb-1">Vanilla JavaScript</h3>
             <p class="small text-secondary mb-2">
-              Manually instantiating DOM nodes via <code>document.createElement()</code> and assembling hierarchy node-by-node.
+              Manually instantiating DOM nodes via <code>document.createElement()</code> and assembling hierarchy
+              node-by-node.
             </p>
 
             <div class="compare-code">
               <div class="text-secondary mb-1">// Imperative Node Creation</div>
-              <span class="text-info">const</span> wrap = document.<span class="text-warning">createElement</span>(<span class="text-success">"div"</span>);<br />
+              <span class="text-info">const</span> wrap = document.<span class="text-warning">createElement</span>(<span
+                class="text-success">"div"</span>);<br />
               wrap.id = <span class="text-success">"test-content"</span>;<br />
-              <span class="text-info">const</span> lbl = document.<span class="text-warning">createElement</span>(<span class="text-success">"label"</span>);<br />
+              <span class="text-info">const</span> lbl = document.<span class="text-warning">createElement</span>(<span
+                class="text-success">"label"</span>);<br />
               lbl.textContent = <span class="text-success">"Name"</span>;<br />
-              <span class="text-info">const</span> p = document.<span class="text-warning">createElement</span>(<span class="text-success">"p"</span>);<br />
+              <span class="text-info">const</span> p = document.<span class="text-warning">createElement</span>(<span
+                class="text-success">"p"</span>);<br />
               p.textContent = <span class="text-success">"Test Content"</span>;<br />
               wrap.<span class="text-warning">append</span>(lbl, p);
             </div>
@@ -511,15 +548,18 @@
             <div class="small mt-auto">
               <div class="d-flex align-items-start gap-2 mb-2">
                 <i class="bi bi-check-circle-fill text-success flex-shrink-0 mt-1"></i>
-                <span class="text-dark"><strong>Safe from innerHTML XSS:</strong> Direct property assignments prevent HTML script injection attacks.</span>
+                <span class="text-dark"><strong>Safe from innerHTML XSS:</strong> Direct property assignments prevent
+                  HTML script injection attacks.</span>
               </div>
               <div class="d-flex align-items-start gap-2 mb-2">
                 <i class="bi bi-x-circle-fill text-danger flex-shrink-0 mt-1"></i>
-                <span class="text-secondary"><strong>5x-10x code verbosity:</strong> Heavy manual boilerplate for every single tag, property, and child node.</span>
+                <span class="text-secondary"><strong>5x-10x code verbosity:</strong> Heavy manual boilerplate for every
+                  single tag, property, and child node.</span>
               </div>
               <div class="d-flex align-items-start gap-2 mb-3">
                 <i class="bi bi-x-circle-fill text-danger flex-shrink-0 mt-1"></i>
-                <span class="text-secondary"><strong>Imperative spaghetti:</strong> Executable code that cannot be transferred across networks or cached.</span>
+                <span class="text-secondary"><strong>Imperative spaghetti:</strong> Executable code that cannot be
+                  transferred across networks or cached.</span>
               </div>
               <a href="./newDocumentation/02-vanilla-javascript.html" class="btn btn-outline-secondary btn-sm w-100">
                 <i class="bi bi-book me-1"></i> Read 02 · Vanilla JS Guide
@@ -542,7 +582,8 @@
             </div>
             <h3 class="h5 fw-bold text-dark mb-1">json-to-tag Specification</h3>
             <p class="small text-secondary mb-2">
-              Pure JSON tree specification that <code>buildSpecElement(spec)</code> compiles directly into native DOM in a single call.
+              Pure JSON tree specification that <code>buildSpecElement(spec)</code> compiles directly into native DOM in
+              a single call.
             </p>
 
             <div class="compare-code">
@@ -551,8 +592,10 @@
               &nbsp;&nbsp;tagName: <span class="text-success">"div"</span>,<br />
               &nbsp;&nbsp;attributes: { id: <span class="text-success">"test-content"</span> },<br />
               &nbsp;&nbsp;children: [<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;{ tagName: <span class="text-success">"label"</span>, textContent: <span class="text-success">"Name"</span> },<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;{ tagName: <span class="text-success">"p"</span>, textContent: <span class="text-success">"Test Content"</span> }<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;{ tagName: <span class="text-success">"label"</span>, textContent: <span
+                class="text-success">"Name"</span> },<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;{ tagName: <span class="text-success">"p"</span>, textContent: <span
+                class="text-success">"Test Content"</span> }<br />
               &nbsp;&nbsp;]<br />
               };<br />
               <span class="text-info">const</span> el = <span class="text-warning">buildSpecElement</span>(spec);
@@ -561,15 +604,18 @@
             <div class="small mt-auto">
               <div class="d-flex align-items-start gap-2 mb-2">
                 <i class="bi bi-check-circle-fill text-success flex-shrink-0 mt-1"></i>
-                <span class="text-dark"><strong>100% JSON Serializable:</strong> Save in database, transmit over REST/GraphQL, or edit in Monaco.</span>
+                <span class="text-dark"><strong>100% JSON Serializable:</strong> Save in database, transmit over
+                  REST/GraphQL, or edit in Monaco.</span>
               </div>
               <div class="d-flex align-items-start gap-2 mb-2">
                 <i class="bi bi-check-circle-fill text-success flex-shrink-0 mt-1"></i>
-                <span class="text-dark"><strong>Zero Runtime Dependencies:</strong> Compiles straight to standard DOM with zero framework bloat.</span>
+                <span class="text-dark"><strong>Zero Runtime Dependencies:</strong> Compiles straight to standard DOM
+                  with zero framework bloat.</span>
               </div>
               <div class="d-flex align-items-start gap-2 mb-3">
                 <i class="bi bi-check-circle-fill text-success flex-shrink-0 mt-1"></i>
-                <span class="text-dark"><strong>Strict tags.json Validation:</strong> Single source of truth checks tag schemas, attributes, and children.</span>
+                <span class="text-dark"><strong>Strict tags.json Validation:</strong> Single source of truth checks tag
+                  schemas, attributes, and children.</span>
               </div>
               <a href="./newDocumentation/03-json-specification.html" class="btn btn-primary btn-sm w-100">
                 <i class="bi bi-book me-1"></i> Read 03 · JSON Spec Guide
@@ -583,7 +629,8 @@
       <!-- Feature Comparison Matrix Table -->
       <div class="card border-0 shadow-sm rounded-3 mb-4 overflow-hidden">
         <div class="card-header bg-light py-2 px-3 border-bottom d-flex align-items-center justify-content-between">
-          <span class="fw-bold small text-dark"><i class="bi bi-table me-2 text-primary"></i>Architectural Paradigm Matrix</span>
+          <span class="fw-bold small text-dark"><i class="bi bi-table me-2 text-primary"></i>Architectural Paradigm
+            Matrix</span>
           <span class="badge bg-white text-secondary border small">Side-by-Side Evaluation</span>
         </div>
         <div class="table-responsive">
@@ -591,9 +638,12 @@
             <thead class="table-light">
               <tr>
                 <th class="py-2 ps-3" style="width: 25%;">Feature / Metric</th>
-                <th class="py-2" style="width: 25%;"><i class="bi bi-filetype-html text-secondary me-1"></i>Normal HTML</th>
-                <th class="py-2" style="width: 25%;"><i class="bi bi-filetype-js text-warning me-1"></i>Vanilla JavaScript</th>
-                <th class="py-2 text-primary pe-3" style="width: 25%;"><i class="bi bi-tag-fill text-primary me-1"></i>json-to-tag (The Simple Way)</th>
+                <th class="py-2" style="width: 25%;"><i class="bi bi-filetype-html text-secondary me-1"></i>Normal HTML
+                </th>
+                <th class="py-2" style="width: 25%;"><i class="bi bi-filetype-js text-warning me-1"></i>Vanilla
+                  JavaScript</th>
+                <th class="py-2 text-primary pe-3" style="width: 25%;"><i
+                    class="bi bi-tag-fill text-primary me-1"></i>json-to-tag (The Simple Way)</th>
               </tr>
             </thead>
             <tbody>
@@ -601,37 +651,45 @@
                 <td class="fw-semibold text-dark ps-3">Data Format</td>
                 <td class="text-secondary">Static HTML markup string</td>
                 <td class="text-secondary">Imperative JS statements</td>
-                <td class="text-primary fw-semibold"><i class="bi bi-check2 text-success me-1"></i>Pure JSON Tree Object</td>
+                <td class="text-primary fw-semibold"><i class="bi bi-check2 text-success me-1"></i>Pure JSON Tree Object
+                </td>
               </tr>
               <tr>
                 <td class="fw-semibold text-dark ps-3">API &amp; DB Portability</td>
                 <td class="text-secondary">Fragile string concatenation</td>
                 <td class="text-danger"><i class="bi bi-x me-1"></i>Cannot serialize executable code</td>
-                <td class="text-primary fw-semibold"><i class="bi bi-check2 text-success me-1"></i>100% JSON REST / DB Ready</td>
+                <td class="text-primary fw-semibold"><i class="bi bi-check2 text-success me-1"></i>100% JSON REST / DB
+                  Ready</td>
               </tr>
               <tr>
                 <td class="fw-semibold text-dark ps-3">XSS Injection Safety</td>
-                <td class="text-danger"><i class="bi bi-exclamation-triangle me-1"></i>High risk when using <code>innerHTML</code></td>
+                <td class="text-danger"><i class="bi bi-exclamation-triangle me-1"></i>High risk when using
+                  <code>innerHTML</code>
+                </td>
                 <td class="text-success"><i class="bi bi-check2 me-1"></i>Safe (property assignment)</td>
-                <td class="text-primary fw-semibold"><i class="bi bi-check2 text-success me-1"></i>Safe (Native node creation)</td>
+                <td class="text-primary fw-semibold"><i class="bi bi-check2 text-success me-1"></i>Safe (Native node
+                  creation)</td>
               </tr>
               <tr>
                 <td class="fw-semibold text-dark ps-3">Code Verbosity &amp; Effort</td>
                 <td class="text-secondary">Low (templates only)</td>
                 <td class="text-danger"><i class="bi bi-x me-1"></i>5x-10x boilerplate lines</td>
-                <td class="text-primary fw-semibold"><i class="bi bi-check2 text-success me-1"></i>Minimal declarative schema</td>
+                <td class="text-primary fw-semibold"><i class="bi bi-check2 text-success me-1"></i>Minimal declarative
+                  schema</td>
               </tr>
               <tr>
                 <td class="fw-semibold text-dark ps-3">Schema &amp; Capability Checks</td>
                 <td class="text-secondary">Browser silently ignores errors</td>
                 <td class="text-danger"><i class="bi bi-x me-1"></i>No schema validation ahead of time</td>
-                <td class="text-primary fw-semibold"><i class="bi bi-check2 text-success me-1"></i><code>tags.json</code> Single Source of Truth</td>
+                <td class="text-primary fw-semibold"><i
+                    class="bi bi-check2 text-success me-1"></i><code>tags.json</code> Single Source of Truth</td>
               </tr>
               <tr>
                 <td class="fw-semibold text-dark ps-3">Runtime Dependencies</td>
                 <td class="text-success"><i class="bi bi-check2 me-1"></i>Zero dependencies</td>
                 <td class="text-success"><i class="bi bi-check2 me-1"></i>Zero dependencies</td>
-                <td class="text-primary fw-semibold"><i class="bi bi-check2 text-success me-1"></i>Zero dependencies (Native DOM)</td>
+                <td class="text-primary fw-semibold"><i class="bi bi-check2 text-success me-1"></i>Zero dependencies
+                  (Native DOM)</td>
               </tr>
             </tbody>
           </table>
@@ -644,16 +702,19 @@
       <div class="p-4 p-md-5">
         <div class="row g-4 align-items-center">
           <div class="col-lg-6">
-            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small mb-2">Code Integration</span>
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 small mb-2">Code
+              Integration</span>
             <h3 class="h4 fw-bold mb-3">Integrate with 2 Lines of JavaScript</h3>
             <p class="text-secondary small mb-4">
-              Works seamlessly in modern ES Module environments, Bundlers (Vite, Webpack, Rollup), and directly inside browser script tags via automatic <code>window.ks.jsonToTag</code> registration.
+              Works seamlessly in modern ES Module environments, Bundlers (Vite, Webpack, Rollup), and directly inside
+              browser script tags via automatic <code>window.ks.jsonToTag</code> registration.
             </p>
             <div class="d-flex gap-3">
               <a href="./jsonUpload/editor.html" class="btn btn-primary btn-sm px-3 fw-semibold">
                 <i class="bi bi-play-circle me-1"></i> Try Live in Editor
               </a>
-              <a href="https://www.npmjs.com/package/@keshavsoft/json-to-tag" target="_blank" rel="noopener" class="btn btn-outline-light btn-sm px-3">
+              <a href="https://www.npmjs.com/package/@keshavsoft/json-to-tag" target="_blank" rel="noopener"
+                class="btn btn-outline-light btn-sm px-3">
                 <i class="bi bi-box-seam me-1"></i> NPM Registry
               </a>
             </div>
@@ -662,17 +723,21 @@
           <div class="col-lg-6">
             <div class="terminal-card">
               <div class="terminal-header">
-                <span class="small font-monospace text-muted" style="font-size: 0.75rem;">app.js (ES Module &amp; Browser)</span>
-                <button class="btn btn-sm btn-outline-secondary py-0 px-2 text-light" style="font-size: 0.75rem;" onclick="copyCode(`import { buildSpecElement } from '@keshavsoft/json-to-tag';\nconst element = buildSpecElement(spec);\ndocument.getElementById('app').appendChild(element);`)">
+                <span class="small font-monospace text-muted" style="font-size: 0.75rem;">app.js (ES Module &amp;
+                  Browser)</span>
+                <button class="btn btn-sm btn-outline-secondary py-0 px-2 text-light" style="font-size: 0.75rem;"
+                  onclick="copyCode(`import { buildSpecElement } from '@keshavsoft/json-to-tag';\nconst element = buildSpecElement(spec);\ndocument.getElementById('app').appendChild(element);`)">
                   <i class="bi bi-clipboard me-1"></i>Copy
                 </button>
               </div>
               <div class="terminal-body" style="font-size: 0.8rem;">
                 <span class="text-secondary">// 1. ES Module Import:</span><br />
-                <span class="text-info">import</span> { buildSpecElement } <span class="text-info">from</span> <span class="text-warning">"@keshavsoft/json-to-tag"</span>;<br /><br />
+                <span class="text-info">import</span> { buildSpecElement } <span class="text-info">from</span> <span
+                  class="text-warning">"@keshavsoft/json-to-tag"</span>;<br /><br />
                 <span class="text-secondary">// 2. Compile directly (v4 direct spec input):</span><br />
                 <span class="text-info">const</span> domElement = buildSpecElement(mySpec);<br />
-                document.getElementById(<span class="text-warning">"container"</span>).appendChild(domElement);<br /><br />
+                document.getElementById(<span
+                  class="text-warning">"container"</span>).appendChild(domElement);<br /><br />
                 <span class="text-secondary">// 3. Browser Global (CDN auto-registered):</span><br />
                 <span class="text-info">const</span> node = window.ks.jsonToTag.buildSpecElement(mySpec);
               </div>
@@ -686,18 +751,21 @@
 
   <!-- Footer -->
   <footer class="bg-white border-top py-4 mt-5">
-    <div class="container-fluid px-3 px-md-4 d-flex justify-content-between align-items-center flex-wrap gap-3" style="max-width: 1240px;">
+    <div class="container-fluid px-3 px-md-4 d-flex justify-content-between align-items-center flex-wrap gap-3"
+      style="max-width: 1240px;">
       <div class="d-flex align-items-center gap-2">
         <i class="bi bi-tag-fill text-primary"></i>
         <span class="fw-bold small text-dark">@keshavsoft/json-to-tag</span>
         <span class="text-muted small">&bull; Declarative JSON-to-DOM Compiler</span>
       </div>
       <div class="d-flex align-items-center gap-3 small text-muted">
-        <a href="https://github.com/keshavsoft/json-to-tag" target="_blank" rel="noopener" class="text-decoration-none text-secondary">
+        <a href="https://github.com/keshavsoft/json-to-tag" target="_blank" rel="noopener"
+          class="text-decoration-none text-secondary">
           <i class="bi bi-github me-1"></i>GitHub
         </a>
         <span>&bull;</span>
-        <a href="https://www.npmjs.com/package/@keshavsoft/json-to-tag" target="_blank" rel="noopener" class="text-decoration-none text-secondary">
+        <a href="https://www.npmjs.com/package/@keshavsoft/json-to-tag" target="_blank" rel="noopener"
+          class="text-decoration-none text-secondary">
           <i class="bi bi-box-seam me-1"></i>NPM
         </a>
         <span>&bull;</span>

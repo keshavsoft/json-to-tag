@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unfound Tags Diagnostic • Tags with Story • @keshavsoft/json-to-tag</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: #1e293b;
+    }
+
+    .table-diagnostic th {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background-color: #f8fafc;
+      color: #475569;
+      font-weight: 700;
+      padding: 11px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    .table-diagnostic td {
+      vertical-align: top;
+      font-size: 0.82rem;
+      padding: 12px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .table-diagnostic tbody tr:hover td {
+      background-color: #fafbfc;
+    }
+
+    .tag-badge {
+      background-color: #fee2e2;
+      color: #dc2626;
+      border: 1px solid #fca5a5;
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.84rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .count-circle {
+      background-color: #dc2626;
+      color: #ffffff;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .pill-yes-yellow {
+      background-color: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .pill-yes-blue {
+      background-color: #e0f2fe;
+      color: #0284c7;
+      border: 1px solid #bae6fd;
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .text-no {
+      color: #94a3b8;
+      font-size: 0.78rem;
+      font-weight: 400;
+    }
+
+    .pill-attr {
+      background-color: #fff1f2;
+      color: #e11d48;
+      border: 1px solid #fecdd3;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 0.74rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .pill-issue {
+      background-color: #fee2e2;
+      color: #dc2626;
+      border: 1px solid #fca5a5;
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    .action-text {
+      color: #881337;
+      font-size: 0.82rem;
+    }
+
+    .card-header-title {
+      letter-spacing: 0.05em;
+      font-size: 0.85rem;
+    }
+
+    .json-code-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.72rem;
+      color: #0f172a;
+      line-height: 1.35;
+      margin: 4px 0 4px 0;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .copy-code-btn {
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      line-height: 1.2;
+    }
+
+    .info-banner {
+      background: #ffffff;
+      border-left: 4px solid #ef4444;
+      border-top: 1px solid #e2e8f0;
+      border-right: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+  </style>
+</head>
+
+<body class="p-3 p-md-4">
+  <div class="container-fluid" style="max-width: 1100px;">
+
+    <!-- Top Header -->
+    <div class="mb-4 pb-2 border-bottom">
+      <h1 class="h4 fw-bold mb-1 text-dark d-flex align-items-center gap-2">
+        <i class="bi bi-shield-exclamation text-danger"></i> Unrecognized Tags
+        <span class="badge bg-danger-subtle text-danger border border-danger-subtle fs-6 fw-normal">Tags with Story • Diagnostic Breakdown</span>
+      </h1>
+      <p class="text-muted small mb-0">Story narrative, diagnostic breakdown, and pre-generated catalog configurations for tags missing from <code>tags.json</code>.</p>
+    </div>
+
+    <!-- Minimal Controls Bar -->
+    <div class="d-flex align-items-center gap-2 mb-4 p-2 bg-white rounded border shadow-sm flex-wrap">
+      <label for="jsonFileInput" class="form-label mb-0 fw-semibold small text-secondary">
+        <i class="bi bi-file-earmark-code text-primary me-1"></i>Select JSON:
+      </label>
+      <input type="file" id="jsonFileInput" class="form-control form-control-sm" accept=".json,application/json"
+        style="max-width: 280px;" />
+
+      <span class="badge bg-light text-secondary border small ms-auto" id="activeFileNameBadge">No file loaded</span>
+    </div>
+
+    <!-- Output Section: Story of your JSON + UNFOUND TAGS DIAGNOSTIC BREAKDOWN Card -->
+    <div id="outputSection" style="display: none;">
+
+      <!-- 1. Story of your JSON Card (Unrecognized Focus) -->
+      <div class="card shadow-sm border mb-4">
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-journal-text fs-5 text-danger"></i>
+            <h6 class="fw-bold mb-0 text-secondary text-uppercase card-header-title">Story of your JSON</h6>
+          </div>
+          <div id="storyVerdictBadge"></div>
+        </div>
+        <div class="card-body p-3">
+          <p class="small text-secondary mb-3" id="storyNarrative"></p>
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-2 border-top">
+            <div class="d-flex flex-wrap align-items-center gap-1" id="tagPillsContainer"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. UNFOUND TAGS DIAGNOSTIC BREAKDOWN Card -->
+      <div class="card shadow-sm border mb-4">
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-list-task text-danger" style="font-size: 1.15rem;"></i>
+            <span class="fw-bold text-secondary text-uppercase card-header-title">
+              UNFOUND TAGS DIAGNOSTIC BREAKDOWN
+            </span>
+          </div>
+          <span class="small text-muted" id="unfoundSummaryCount">Showing 0 unique unfound tag(s)</span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-diagnostic mb-0">
+            <thead>
+              <tr>
+                <th style="width: 130px;">UNFOUND TAG</th>
+                <th style="width: 80px;" class="text-center">COUNT</th>
+                <th style="width: 120px;" class="text-center">CHILDREN?</th>
+                <th style="width: 120px;" class="text-center">TEXT?</th>
+                <th style="width: 140px;">ATTRIBUTES ATTACHED</th>
+                <th style="width: 220px;">DIAGNOSTIC ISSUE</th>
+                <th>RECOMMENDED ACTION &amp; SCHEMA SNIPPET</th>
+              </tr>
+            </thead>
+            <tbody id="unfoundTbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script type="module">
+    const fileInput = document.getElementById("jsonFileInput");
+    const activeFileNameBadge = document.getElementById("activeFileNameBadge");
+    const outputSection = document.getElementById("outputSection");
+    const storyVerdictBadge = document.getElementById("storyVerdictBadge");
+    const storyNarrative = document.getElementById("storyNarrative");
+    const tagPillsContainer = document.getElementById("tagPillsContainer");
+    const unfoundTbody = document.getElementById("unfoundTbody");
+    const unfoundSummaryCount = document.getElementById("unfoundSummaryCount");
+
+    let cachedCatalogKeys = null;
+
+    const fetchCatalogKeys = async () => {
+      if (cachedCatalogKeys) return cachedCatalogKeys;
+
+      const candidates = [
+        "../../tags/tags.json",
+        "../tags/tags.json",
+        "https://keshavsoft.github.io/json-to-tag/tags/tags.json"
+      ];
+
+      for (const url of candidates) {
+        try {
+          const res = await fetch(url);
+          if (res.ok) {
+            const data = await res.json();
+            const keys = Object.keys(data).filter(k => k !== "$schema").map(k => k.toLowerCase());
+            cachedCatalogKeys = new Set(keys);
+            return cachedCatalogKeys;
+          }
+        } catch (e) {
+          // Try next candidate
+        }
+      }
+
+      // Offline baseline tags from catalog
+      cachedCatalogKeys = new Set([
+        "div", "span", "p", "a", "button", "input", "checkbox", "label",
+        "select", "option", "optgroup", "textarea", "form",
+        "h1", "h2", "h3", "h4", "h6",
+        "table", "thead", "tbody", "tfoot", "tr", "th", "td", "colgroup", "col",
+        "ul", "ol", "li", "img", "hr", "br", "datalist"
+      ]);
+      return cachedCatalogKeys;
+    };
+
+    const escapeHtml = (str) => {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    };
+
+    const analyzeUnfoundTags = ({ inSpec, inCatalogKeys }) => {
+      const localSpec = inSpec;
+      const catalogKeys = inCatalogKeys ?? new Set();
+
+      const unfoundMap = new Map();
+      let totalTags = 0;
+
+      const traverseNode = (node, parentTag = null) => {
+        if (!node) return;
+        if (Array.isArray(node)) {
+          node.forEach(item => traverseNode(item, parentTag));
+          return;
+        }
+        if (typeof node !== "object") return;
+
+        const rawTag = node.tagName;
+        if (typeof rawTag === "string" && rawTag.trim()) {
+          totalTags++;
+          const tag = rawTag.trim().toLowerCase();
+
+          // Check if uncataloged
+          if (!catalogKeys.has(tag)) {
+            if (!unfoundMap.has(tag)) {
+              unfoundMap.set(tag, {
+                tag,
+                count: 0,
+                childrenInstances: 0,
+                textInstances: 0,
+                childTags: new Set(),
+                sampleTexts: [],
+                attributesAttached: new Set(),
+                attributeValues: new Map(),
+                parentTags: new Set()
+              });
+            }
+
+            const item = unfoundMap.get(tag);
+            item.count++;
+            if (parentTag) item.parentTags.add(parentTag);
+
+            // Children inspect
+            if (Array.isArray(node.children) && node.children.length > 0) {
+              item.childrenInstances++;
+              node.children.forEach(ch => {
+                if (ch && typeof ch.tagName === "string" && ch.tagName.trim()) {
+                  item.childTags.add(ch.tagName.trim().toLowerCase());
+                }
+              });
+            }
+
+            // Text inspect
+            const textVal = (typeof node.textContent === "string" && node.textContent.trim()) ? node.textContent.trim() :
+              ((typeof node.innerText === "string" && node.innerText.trim()) ? node.innerText.trim() : "");
+            if (textVal) {
+              item.textInstances++;
+              if (item.sampleTexts.length < 2) {
+                item.sampleTexts.push(textVal);
+              }
+            }
+
+            // Attributes inspect
+            const addAttr = (k, v) => {
+              item.attributesAttached.add(k);
+              if (v !== undefined && v !== null && String(v).trim()) {
+                if (!item.attributeValues.has(k)) item.attributeValues.set(k, new Set());
+                if (item.attributeValues.get(k).size < 3) {
+                  item.attributeValues.get(k).add(String(v).trim());
+                }
+              }
+            };
+
+            if (node.classList) addAttr("class", node.classList);
+            if (node.className) addAttr("class", node.className);
+            if (node.id) addAttr("id", node.id);
+            if (node.attributes && typeof node.attributes === "object") {
+              Object.entries(node.attributes).forEach(([k, v]) => addAttr(k, v));
+            }
+          }
+
+          // Traverse children with current tag as parent
+          if (Array.isArray(node.children)) {
+            node.children.forEach(child => traverseNode(child, tag));
+          }
+        } else {
+          if (Array.isArray(node.children)) {
+            node.children.forEach(child => traverseNode(child, parentTag));
+          }
+        }
+      };
+
+      traverseNode(localSpec);
+
+      return {
+        totalTags,
+        unfoundList: Array.from(unfoundMap.values())
+      };
+    };
+
+    const renderStory = ({ totalTags, unfoundList, inFileName }) => {
+      const totalUnfoundInstances = unfoundList.reduce((sum, item) => sum + item.count, 0);
+
+      if (unfoundList.length === 0) {
+        storyVerdictBadge.innerHTML = `
+          <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1">
+            <i class="bi bi-check-circle-fill me-1"></i>100% Catalog Compliant
+          </span>
+        `;
+        storyNarrative.innerHTML = `Specification <strong>${escapeHtml(inFileName)}</strong> contains <strong>${totalTags}</strong> total tags, and all of them are successfully verified in <code>tags.json</code>. Zero uncataloged or missing tags detected.`;
+        tagPillsContainer.innerHTML = `<span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">No unfound tags</span>`;
+        return;
+      }
+
+      storyVerdictBadge.innerHTML = `
+        <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1">
+          <i class="bi bi-exclamation-triangle-fill me-1"></i>${unfoundList.length} Unrecognized Tag Element(s) Detected
+        </span>
+      `;
+
+      const missingTagCodes = unfoundList.map(u => `<code>&lt;${escapeHtml(u.tag)}&gt;</code>`).join(", ");
+      storyNarrative.innerHTML = `Specification <strong>${escapeHtml(inFileName)}</strong> contains <strong>${totalUnfoundInstances}</strong> uncataloged tag instances across <strong>${unfoundList.length}</strong> distinct element types (${missingTagCodes}). These tags lack schema rules in <code>tags.json</code>. You can copy the generated configuration snippets below to catalog them.`;
+
+      tagPillsContainer.innerHTML = unfoundList.map(u => {
+        return `<span class="badge border bg-danger-subtle text-danger border-danger-subtle font-monospace me-1 mb-1" style="font-size: 0.8rem;">&lt;${escapeHtml(u.tag)}&gt; <span class="badge bg-danger rounded-pill ms-1">${u.count}</span></span>`;
+      }).join("");
+    };
+
+    const renderUnfoundTable = (unfoundList) => {
+      unfoundSummaryCount.textContent = `Showing ${unfoundList.length} unique unfound tag(s)`;
+
+      if (unfoundList.length === 0) {
+        unfoundTbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="text-center py-4 text-success fw-medium">
+              <i class="bi bi-check-circle-fill me-2 fs-5 align-middle"></i>
+              All tags in this specification are recognized in tags.json. Zero unfound tags detected.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      unfoundTbody.innerHTML = unfoundList.map(item => {
+        const hasChildren = item.childrenInstances > 0;
+        const hasText = item.textInstances > 0;
+
+        // Inferred semantic role
+        let roleBadge = `<span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle font-monospace mt-1" style="font-size:0.68rem;">Void / Leaf</span>`;
+        if (hasChildren && !hasText) {
+          roleBadge = `<span class="badge bg-primary-subtle text-primary border border-primary-subtle font-monospace mt-1" style="font-size:0.68rem;">Container</span>`;
+        } else if (hasText && !hasChildren) {
+          roleBadge = `<span class="badge bg-info-subtle text-info-emphasis border border-info-subtle font-monospace mt-1" style="font-size:0.68rem;">Text Element</span>`;
+        } else if (hasChildren && hasText) {
+          roleBadge = `<span class="badge bg-primary-subtle text-primary border border-primary-subtle font-monospace mt-1" style="font-size:0.68rem;">Mixed Tag</span>`;
+        }
+
+        // Children cell
+        let childrenHtml = `<span class="text-no">No children</span>`;
+        if (hasChildren) {
+          const childPills = Array.from(item.childTags).map(ct =>
+            `<span class="badge bg-light text-dark border font-monospace me-1 mb-1" style="font-size:0.68rem;">&lt;${escapeHtml(ct)}&gt;</span>`
+          ).join("");
+          childrenHtml = `
+            <span class="pill-yes-yellow">Yes (${item.childrenInstances})</span>
+            <div class="small text-muted mt-1" style="font-size:0.7rem;">Contains:</div>
+            <div class="d-flex flex-wrap gap-1 justify-content-center mt-1">${childPills}</div>
+          `;
+        }
+
+        // Text cell
+        let textHtml = `<span class="text-no">No text</span>`;
+        if (hasText) {
+          const sample = item.sampleTexts[0] || "";
+          const preview = sample.length > 22 ? sample.slice(0, 20) + "…" : sample;
+          textHtml = `
+            <span class="pill-yes-blue">Yes</span>
+            <div class="small text-muted font-monospace mt-1" style="font-size:0.7rem;" title="${escapeHtml(sample)}">
+              "${escapeHtml(preview)}"
+            </div>
+          `;
+        }
+
+        // Attributes cell
+        const attrsArr = Array.from(item.attributesAttached);
+        let attrsHtml = `<span class="text-muted small">None</span>`;
+        if (attrsArr.length > 0) {
+          attrsHtml = attrsArr.map(attr => {
+            const vals = item.attributeValues.get(attr);
+            let valSample = "";
+            if (vals && vals.size > 0) {
+              const firstVal = Array.from(vals)[0];
+              const shortVal = firstVal.length > 18 ? firstVal.slice(0, 16) + "…" : firstVal;
+              valSample = `<div class="text-muted font-monospace" style="font-size:0.68rem; margin-top:1px;">="${escapeHtml(shortVal)}"</div>`;
+            }
+            return `<div class="mb-1"><span class="pill-attr">${escapeHtml(attr)}</span>${valSample}</div>`;
+          }).join("");
+        }
+
+        // Diagnostic Issue cell
+        let issueBadge = "";
+        let issueDesc = "";
+        if (hasChildren && !hasText) {
+          issueBadge = `<span class="pill-issue"><i class="bi bi-diagram-3-fill me-1"></i>Missing Container Schema</span>`;
+          issueDesc = `Used as a parent container with children, but has no structural entry in <code>tags.json</code>.`;
+        } else if (hasText && !hasChildren) {
+          issueBadge = `<span class="pill-issue"><i class="bi bi-chat-left-text-fill me-1"></i>Missing Text Rule</span>`;
+          issueDesc = `Holds inline text content, but catalog lacks an allowed text content rule.`;
+        } else if (hasChildren && hasText) {
+          issueBadge = `<span class="pill-issue"><i class="bi bi-layers-fill me-1"></i>Missing Mixed Rule</span>`;
+          issueDesc = `Holds both nested elements and text, but has no catalog schema.`;
+        } else {
+          issueBadge = `<span class="pill-issue"><i class="bi bi-slash-circle me-1"></i>Unregistered Tag</span>`;
+          issueDesc = `Tag is absent from <code>tags.json</code>. Renderer cannot validate permissions.`;
+        }
+
+        // Recommended Action cell & JSON configuration block
+        const allowsChildrenVal = Boolean(hasChildren);
+        const allowsTextVal = Boolean(hasText);
+        const allowedAttrsArray = attrsArr.length > 0 ? attrsArr : ["class", "id"];
+        const attrsJsonString = JSON.stringify(allowedAttrsArray);
+
+        const configSnippet = `"${item.tag}": {
+  "allowsChildren": ${allowsChildrenVal},
+  "allowsTextContent": ${allowsTextVal},
+  "allowedAttributes": ${attrsJsonString}
+}`;
+
+        let semanticNotice = "Verify spelling or register tag in catalog.";
+        const commonHtml5 = ["nav", "main", "footer", "header", "section", "article", "aside", "figure", "figcaption", "h5"];
+        if (commonHtml5.includes(item.tag)) {
+          semanticNotice = `Standard HTML5 element. Add schema definition into <code>tags.json</code>:`;
+        }
+
+        return `
+          <tr>
+            <td>
+              <span class="tag-badge">&lt;${escapeHtml(item.tag)}&gt;</span>
+              <div>${roleBadge}</div>
+            </td>
+            <td class="text-center">
+              <span class="count-circle">${item.count}</span>
+              <div class="text-muted" style="font-size:0.7rem; margin-top:2px;">${item.count === 1 ? '1 instance' : item.count + ' instances'}</div>
+            </td>
+            <td class="text-center">
+              ${childrenHtml}
+            </td>
+            <td class="text-center">
+              ${textHtml}
+            </td>
+            <td>
+              ${attrsHtml}
+            </td>
+            <td>
+              <div>${issueBadge}</div>
+              <div class="text-secondary small mt-1" style="font-size:0.74rem; line-height:1.35;">${issueDesc}</div>
+            </td>
+            <td>
+              <div class="small text-dark mb-1" style="font-size:0.76rem;">${semanticNotice}</div>
+              <div class="position-relative">
+                <pre class="json-code-box"><code>${escapeHtml(configSnippet)}</code></pre>
+                <button type="button" class="btn btn-xs btn-outline-secondary copy-code-btn" data-snippet="${escapeHtml(configSnippet)}">
+                  <i class="bi bi-clipboard me-1"></i>Copy JSON
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+
+      // Bind copy buttons
+      unfoundTbody.querySelectorAll(".copy-code-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const text = btn.getAttribute("data-snippet");
+          navigator.clipboard.writeText(text).then(() => {
+            const original = btn.innerHTML;
+            btn.innerHTML = `<i class="bi bi-check2 text-success me-1"></i>Copied!`;
+            btn.classList.add("btn-success");
+            btn.classList.remove("btn-outline-secondary");
+            setTimeout(() => {
+              btn.innerHTML = original;
+              btn.classList.remove("btn-success");
+              btn.classList.add("btn-outline-secondary");
+            }, 1800);
+          }).catch(err => {
+            console.error("Clipboard copy failed", err);
+          });
+        });
+      });
+    };
+
+    const processSpecData = async ({ inSpec, inFileName }) => {
+      try {
+        activeFileNameBadge.textContent = inFileName;
+        sessionStorage.setItem("json_to_tag_active_spec", JSON.stringify(inSpec));
+        sessionStorage.setItem("json_to_tag_active_name", inFileName);
+
+        const catalogKeys = await fetchCatalogKeys();
+        const { totalTags, unfoundList } = analyzeUnfoundTags({ inSpec: inSpec, inCatalogKeys: catalogKeys });
+
+        renderStory({ totalTags, unfoundList, inFileName });
+        renderUnfoundTable(unfoundList);
+        outputSection.style.display = "block";
+      } catch (err) {
+        alert("Error analyzing JSON: " + err.message);
+        console.error(err);
+      }
+    };
+
+    const processFile = (file) => {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const json = JSON.parse(e.target.result);
+          processSpecData({ inSpec: json, inFileName: file.name });
+        } catch (err) {
+          alert("Invalid JSON file: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+    };
+
+    fileInput.addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      processFile(file);
+    });
+
+    // Support drag and drop of JSON file
+    window.addEventListener("dragover", (e) => e.preventDefault());
+    window.addEventListener("drop", (e) => {
+      e.preventDefault();
+      const file = e.dataTransfer?.files?.[0];
+      if (file && file.name.endsWith(".json")) {
+        processFile(file);
+      }
+    });
+
+    // Pre-fetch catalog keys in background so it is ready on upload
+    fetchCatalogKeys().catch(() => {});
+  </script>
+</body>
+
+</html>

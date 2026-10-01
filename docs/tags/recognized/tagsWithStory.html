@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Story of your JSON &amp; Breakdown • Recognized Tags • @keshavsoft/json-to-tag</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: #1e293b;
+    }
+
+    .flavor-chip {
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .table-spec th {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background-color: #f1f5f9;
+      color: #475569;
+      vertical-align: middle;
+      padding: 10px 12px;
+    }
+
+    .table-spec td {
+      vertical-align: middle;
+      font-size: 0.84rem;
+      padding: 10px 12px;
+    }
+
+    .tag-badge {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.85rem;
+    }
+
+    .card-header-title {
+      letter-spacing: 0.05em;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+
+<body class="p-3 p-md-4">
+  <div class="container-fluid" style="max-width: 1040px;">
+
+    <!-- Header -->
+    <div class="mb-4 pb-2 border-bottom">
+      <h1 class="h4 fw-bold mb-1 text-dark d-flex align-items-center gap-2">
+        <i class="bi bi-patch-check-fill text-success"></i> Recognized Tags
+        <span class="badge bg-success-subtle text-success border border-success-subtle fs-6 fw-normal">Story &amp;
+          Rules Breakdown</span>
+      </h1>
+      <p class="text-muted small mb-0">Story narrative and structural flavor breakdown for recognized tags in your
+        JSON specification.</p>
+    </div>
+
+    <!-- Minimal Controls Bar -->
+    <div class="d-flex align-items-center gap-2 mb-4 p-2 bg-white rounded border shadow-sm flex-wrap">
+      <label for="jsonFileInput" class="form-label mb-0 fw-semibold small text-secondary">
+        <i class="bi bi-file-earmark-code text-primary me-1"></i>Select JSON:
+      </label>
+      <input type="file" id="jsonFileInput" class="form-control form-control-sm" accept=".json,application/json"
+        style="max-width: 280px;" />
+
+      <span class="badge bg-light text-secondary border small ms-auto" id="activeFileNameBadge">No file loaded</span>
+    </div>
+
+
+    <!-- Output Section: Story of your JSON + Tag Flavors & Rules Breakdown -->
+    <div id="outputSection" style="display: none;">
+
+      <!-- 1. Story of your JSON Card (Recognized Tags Focus) -->
+      <div class="card shadow-sm border mb-4">
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-journal-text fs-5 text-success"></i>
+            <h6 class="fw-bold mb-0 text-secondary text-uppercase card-header-title">Story of your JSON</h6>
+          </div>
+          <div id="storyVerdictBadge"></div>
+        </div>
+        <div class="card-body p-3">
+          <p class="small text-secondary mb-3" id="storyNarrative"></p>
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-2 border-top">
+            <div class="d-flex flex-wrap align-items-center gap-1" id="tagPillsContainer"></div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Tag Flavors & Rules Breakdown Card -->
+      <div class="card shadow-sm border mb-4">
+        <div class="card-header bg-white py-3">
+          <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
+            <h6 class="fw-bold mb-0 text-secondary text-uppercase card-header-title">
+              <i class="bi bi-diagram-3 me-1 text-success"></i> Tag Flavors &amp; Rules Breakdown
+            </h6>
+            <span class="small text-muted" id="matrixDisplayCount">Showing 0 recognized tags</span>
+          </div>
+
+          <!-- Flavor Filter Chips (Recognized Tags Only) -->
+          <div class="d-flex gap-1 flex-wrap pt-2 border-top" id="flavorFilterGroup">
+            <button class="btn btn-sm btn-primary flavor-chip active" data-filter="all">
+              All Recognized (<span id="countAllFilter">0</span>)
+            </button>
+            <button class="btn btn-sm btn-outline-secondary flavor-chip" data-filter="container">
+              Containers (<span id="countContainerFilter">0</span>)
+            </button>
+            <button class="btn btn-sm btn-outline-secondary flavor-chip" data-filter="text">
+              Text Elements (<span id="countTextFilter">0</span>)
+            </button>
+            <button class="btn btn-sm btn-outline-secondary flavor-chip" data-filter="leaf">
+              Void / Leaf (<span id="countLeafFilter">0</span>)
+            </button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover table-spec mb-0">
+            <thead>
+              <tr>
+                <th style="width: 140px;">Tag</th>
+                <th style="width: 80px;" class="text-center">Count</th>
+                <th style="width: 130px;">Flavor</th>
+                <th style="width: 90px;" class="text-center">Children</th>
+                <th style="width: 90px;" class="text-center">Text</th>
+                <th>Allowed Attributes</th>
+                <th>Attributes Used</th>
+                <th style="width: 120px;" class="text-center">Catalog Status</th>
+              </tr>
+            </thead>
+            <tbody id="tagMatrixTbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script type="module">
+    const fileInput = document.getElementById("jsonFileInput");
+    const btnSampleSpec = document.getElementById("btnSampleSpec");
+    const btnLoadSession = document.getElementById("btnLoadSession");
+    const outputSection = document.getElementById("outputSection");
+    const activeFileNameBadge = document.getElementById("activeFileNameBadge");
+
+    const storyVerdictBadge = document.getElementById("storyVerdictBadge");
+    const storyNarrative = document.getElementById("storyNarrative");
+    const tagPillsContainer = document.getElementById("tagPillsContainer");
+
+    const tagMatrixTbody = document.getElementById("tagMatrixTbody");
+    const matrixDisplayCount = document.getElementById("matrixDisplayCount");
+    const countAllFilter = document.getElementById("countAllFilter");
+    const countContainerFilter = document.getElementById("countContainerFilter");
+    const countTextFilter = document.getElementById("countTextFilter");
+    const countLeafFilter = document.getElementById("countLeafFilter");
+    const flavorFilterGroup = document.getElementById("flavorFilterGroup");
+
+    const SAMPLE_SPEC = {
+      tagName: "div",
+      classList: "card p-4 shadow-sm bg-white border",
+      children: [
+        {
+          tagName: "div",
+          classList: "d-flex justify-content-between align-items-center mb-3",
+          children: [
+            { tagName: "h4", classList: "text-primary fw-bold mb-0", textContent: "Sample Specification" },
+            { tagName: "span", classList: "badge bg-success-subtle text-success border border-success-subtle", textContent: "Active Demo" }
+          ]
+        },
+        {
+          tagName: "p",
+          classList: "text-muted small mb-3",
+          textContent: "This specification contains containers, text elements, and input elements to showcase diverse tag flavors."
+        },
+        {
+          tagName: "div",
+          classList: "mb-3",
+          children: [
+            {
+              tagName: "label",
+              classList: "form-label small fw-semibold text-secondary",
+              textContent: "Sample Input Field"
+            },
+            {
+              tagName: "input",
+              classList: "form-control form-control-sm",
+              attributes: { type: "text", placeholder: "Type something...", value: "Pre-filled text" }
+            }
+          ]
+        },
+        {
+          tagName: "div",
+          classList: "d-flex gap-2",
+          children: [
+            {
+              tagName: "button",
+              classList: "btn btn-primary btn-sm px-3",
+              textContent: "Submit Action",
+              attributes: { type: "button" }
+            },
+            {
+              tagName: "button",
+              classList: "btn btn-outline-secondary btn-sm px-3",
+              textContent: "Reset",
+              attributes: { type: "button" }
+            }
+          ]
+        }
+      ]
+    };
+
+    let cachedCatalog = null;
+    let currentRecognizedAnalysis = null;
+    let activeFilter = "all";
+
+    const fetchCatalog = async () => {
+      if (cachedCatalog) return cachedCatalog;
+
+      // Try local relative path first
+      try {
+        const localRes = await fetch("../../tags/tags.json");
+        if (localRes.ok) {
+          cachedCatalog = await localRes.json();
+          return cachedCatalog;
+        }
+      } catch (e) {
+        // Fallback to online
+      }
+
+      try {
+        const onlineRes = await fetch("https://keshavsoft.github.io/json-to-tag/tags/tags.json");
+        if (onlineRes.ok) {
+          cachedCatalog = await onlineRes.json();
+          return cachedCatalog;
+        }
+      } catch (e) {
+        console.warn("Could not fetch online tags.json, using fallback", e);
+      }
+      return {};
+    };
+
+    const traverseSpec = ({ inNode, inCallback }) => {
+      const localNode = inNode;
+      const localCallback = inCallback;
+
+      if (!localNode) return;
+      if (Array.isArray(localNode)) {
+        localNode.forEach(item => traverseSpec({ inNode: item, inCallback: localCallback }));
+        return;
+      }
+      if (typeof localNode !== "object") return;
+
+      localCallback({ inNode: localNode });
+
+      if (Array.isArray(localNode.children)) {
+        localNode.children.forEach(child => traverseSpec({ inNode: child, inCallback: localCallback }));
+      }
+    };
+
+    const analyzeSpecData = ({ inSpec, inCatalog }) => {
+      const localSpec = inSpec;
+      const localCatalog = inCatalog ?? {};
+
+      const catalogKeys = new Set(
+        Object.keys(localCatalog)
+          .filter(k => k !== "$schema")
+          .map(k => k.toLowerCase())
+      );
+
+      const tagStats = {};
+      let unrecognizedCount = 0;
+      let totalTagsCount = 0;
+      let recognizedInstancesCount = 0;
+
+      traverseSpec({
+        inNode: localSpec,
+        inCallback: ({ inNode }) => {
+          const localCurrent = inNode;
+          const rawTag = localCurrent.tagName;
+          if (typeof rawTag !== "string" || !rawTag.trim()) return;
+
+          const tag = rawTag.trim().toLowerCase();
+          totalTagsCount++;
+
+          const inCat = catalogKeys.has(tag);
+          if (!inCat) {
+            unrecognizedCount++;
+            return; // ONLY collect recognized tags!
+          }
+
+          recognizedInstancesCount++;
+
+          if (!tagStats[tag]) {
+            const catInfo = localCatalog[tag] ?? null;
+            const allowsChildren = Boolean(catInfo?.allowsChildren);
+            const allowsTextContent = Boolean(catInfo?.allowsTextContent);
+
+            let flavor = "leaf";
+            if (allowsChildren && !allowsTextContent) flavor = "container";
+            else if (allowsTextContent && !allowsChildren) flavor = "text";
+            else if (allowsChildren && allowsTextContent) flavor = "container";
+
+            tagStats[tag] = {
+              tag,
+              count: 0,
+              inCatalog: true,
+              flavor,
+              allowsChildren,
+              allowsTextContent,
+              allowedAttributes: catInfo?.allowedAttributes ?? [],
+              childTags: catInfo?.childTags ?? [],
+              usedAttributes: new Set()
+            };
+          }
+
+          tagStats[tag].count++;
+
+          if (localCurrent.attributes && typeof localCurrent.attributes === "object") {
+            Object.keys(localCurrent.attributes).forEach(attr => tagStats[tag].usedAttributes.add(attr));
+          }
+          if (localCurrent.classList) {
+            tagStats[tag].usedAttributes.add("class");
+          }
+          if (localCurrent.id) {
+            tagStats[tag].usedAttributes.add("id");
+          }
+        }
+      });
+
+      const recognized = Object.values(tagStats);
+      const containers = recognized.filter(t => t.allowsChildren);
+      const textElements = recognized.filter(t => t.allowsTextContent);
+      const leafElements = recognized.filter(t => !t.allowsChildren && !t.allowsTextContent);
+
+      return {
+        totalTags: totalTagsCount,
+        recognizedInstances: recognizedInstancesCount,
+        unrecognizedCount,
+        recognized,
+        containers,
+        textElements,
+        leafElements
+      };
+    };
+
+    const renderMatrixRows = ({ inTags, inFilter }) => {
+      const localTags = inTags;
+      const localFilter = inFilter;
+
+      let filtered = localTags;
+      if (localFilter === "container") {
+        filtered = localTags.filter(t => t.allowsChildren);
+      } else if (localFilter === "text") {
+        filtered = localTags.filter(t => t.allowsTextContent);
+      } else if (localFilter === "leaf") {
+        filtered = localTags.filter(t => !t.allowsChildren && !t.allowsTextContent);
+      }
+
+      matrixDisplayCount.textContent = `Showing ${filtered.length} of ${localTags.length} recognized tags`;
+
+      if (filtered.length === 0) {
+        tagMatrixTbody.innerHTML = `<tr><td colspan="8" class="text-center text-muted py-4">No recognized tags found for this filter.</td></tr>`;
+        return;
+      }
+
+      tagMatrixTbody.innerHTML = filtered.map(t => {
+        let flavorBadge = `<span class="badge bg-secondary">Other</span>`;
+        if (t.allowsChildren && !t.allowsTextContent) {
+          flavorBadge = `<span class="badge bg-primary-subtle text-primary border border-primary-subtle">Container</span>`;
+        } else if (t.allowsTextContent && !t.allowsChildren) {
+          flavorBadge = `<span class="badge bg-info-subtle text-info-emphasis border border-info-subtle">Text Element</span>`;
+        } else if (t.allowsChildren && t.allowsTextContent) {
+          flavorBadge = `<span class="badge bg-primary-subtle text-primary border border-primary-subtle">Container+Text</span>`;
+        } else {
+          flavorBadge = `<span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">Void / Leaf</span>`;
+        }
+
+        const allowedAttrsHtml = t.allowedAttributes.length > 0
+          ? t.allowedAttributes.map(a => `<span class="badge bg-light text-secondary border font-monospace me-1 mb-1">${a}</span>`).join("")
+          : `<span class="text-muted small">None</span>`;
+
+        const usedAttrsArr = Array.from(t.usedAttributes);
+        const usedAttrsHtml = usedAttrsArr.length > 0
+          ? usedAttrsArr.map(a => {
+            const isPermitted = t.allowedAttributes.includes(a) || a === "class" || a === "id";
+            const badgeCls = isPermitted ? "bg-light text-dark border-secondary-subtle" : "bg-danger-subtle text-danger border-danger";
+            return `<span class="badge ${badgeCls} font-monospace me-1 mb-1">${a}</span>`;
+          }).join("")
+          : `<span class="text-muted small">None used</span>`;
+
+        const childrenCheck = t.allowsChildren
+          ? `<i class="bi bi-check-circle-fill text-success fs-6"></i>`
+          : `<i class="bi bi-dash text-muted"></i>`;
+
+        const textCheck = t.allowsTextContent
+          ? `<i class="bi bi-check-circle-fill text-info fs-6"></i>`
+          : `<i class="bi bi-dash text-muted"></i>`;
+
+        const statusBadge = `<span class="badge bg-success-subtle text-success border border-success-subtle"><i class="bi bi-check me-1"></i>Valid in Catalog</span>`;
+
+        return `
+          <tr>
+            <td>
+              <span class="badge bg-light text-dark border tag-badge">
+                &lt;${t.tag}&gt;
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="badge bg-secondary rounded-pill">${t.count}</span>
+            </td>
+            <td>${flavorBadge}</td>
+            <td class="text-center">${childrenCheck}</td>
+            <td class="text-center">${textCheck}</td>
+            <td>${allowedAttrsHtml}</td>
+            <td>${usedAttrsHtml}</td>
+            <td class="text-center">${statusBadge}</td>
+          </tr>
+        `;
+      }).join("");
+    };
+
+    const processSpecAnalysis = async ({ inSpec, inFileName }) => {
+      const localSpec = inSpec;
+      const localFileName = inFileName ?? "Custom Spec";
+
+      try {
+        sessionStorage.setItem("json_to_tag_active_spec", JSON.stringify(localSpec));
+        sessionStorage.setItem("json_to_tag_active_name", localFileName);
+        if (activeFileNameBadge) {
+          activeFileNameBadge.textContent = localFileName;
+        }
+
+        const tagsCatalog = await fetchCatalog();
+        const analysis = analyzeSpecData({ inSpec: localSpec, inCatalog: tagsCatalog });
+        currentRecognizedAnalysis = analysis;
+
+
+        // 1. Story Card
+        storyVerdictBadge.innerHTML = `<span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1"><i class="bi bi-check-circle-fill me-1"></i>${analysis.recognized.length} Recognized Tag Element(s) Verified</span>`;
+
+        storyNarrative.innerHTML = `Specification <strong>${localFileName}</strong> contains <strong>${analysis.recognizedInstances}</strong> recognized tag instances across <strong>${analysis.recognized.length}</strong> distinct element types (${analysis.containers.length} containers, ${analysis.textElements.length} text elements, and ${analysis.leafElements.length} void/leaf tags). All listed elements are verified in <code>tags.json</code>.`;
+
+        tagPillsContainer.innerHTML = analysis.recognized.map(t => {
+          return `<span class="badge border bg-light text-dark border-secondary-subtle font-monospace me-1 mb-1" style="font-size: 0.8rem;">&lt;${t.tag}&gt; <span class="badge bg-success rounded-pill ms-1">${t.count}</span></span>`;
+        }).join("");
+
+        // 2. Filter Counts
+        countAllFilter.textContent = analysis.recognized.length;
+        countContainerFilter.textContent = analysis.containers.length;
+        countTextFilter.textContent = analysis.textElements.length;
+        countLeafFilter.textContent = analysis.leafElements.length;
+
+        // Render Matrix
+        renderMatrixRows({ inTags: analysis.recognized, inFilter: activeFilter });
+
+        outputSection.style.display = "block";
+      } catch (err) {
+        alert("Error analyzing JSON: " + err.message);
+        console.error(err);
+      }
+    };
+
+    flavorFilterGroup.addEventListener("click", (e) => {
+      const btn = e.target.closest(".flavor-chip");
+      if (!btn || !currentRecognizedAnalysis) return;
+
+      flavorFilterGroup.querySelectorAll(".flavor-chip").forEach(b => {
+        b.classList.remove("btn-primary");
+        b.classList.add("btn-outline-secondary");
+      });
+
+      const filter = btn.dataset.filter;
+      activeFilter = filter;
+
+      btn.classList.remove("btn-outline-secondary");
+      btn.classList.add("btn-primary");
+
+      renderMatrixRows({ inTags: currentRecognizedAnalysis.recognized, inFilter: activeFilter });
+    });
+
+    fileInput.addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const json = JSON.parse(event.target.result);
+          processSpecAnalysis({ inSpec: json, inFileName: file.name });
+        } catch (err) {
+          alert("Invalid JSON file: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    btnSampleSpec.addEventListener("click", () => {
+      processSpecAnalysis({ inSpec: SAMPLE_SPEC, inFileName: "Sample Spec" });
+    });
+
+    // Check if session storage has an existing analyzed spec
+    const checkSessionSpec = () => {
+      try {
+        const savedSpecStr = sessionStorage.getItem("json_to_tag_active_spec");
+        const savedName = sessionStorage.getItem("json_to_tag_active_name") || "Active Spec";
+        if (savedSpecStr && btnLoadSession) {
+          btnLoadSession.style.display = "inline-block";
+          btnLoadSession.title = `Load "${savedName}" from session`;
+          btnLoadSession.addEventListener("click", () => {
+            try {
+              const spec = JSON.parse(savedSpecStr);
+              processSpecAnalysis({ inSpec: spec, inFileName: savedName });
+            } catch (err) {
+              console.warn("Could not parse saved session spec", err);
+            }
+          });
+        }
+      } catch (e) {
+        console.warn("Session check error", e);
+      }
+    };
+
+    checkSessionSpec();
+  </script>
+</body>
+
+</html>

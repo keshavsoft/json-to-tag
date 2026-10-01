@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unrecognized Tags Menu • @keshavsoft/json-to-tag</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <style>
+    body {
+      background-color: #f8fafc;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: #1e293b;
+    }
+    .nav-card {
+      transition: all 0.2s ease-in-out;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      background: #ffffff;
+      height: 100%;
+    }
+    .nav-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+      border-color: #cbd5e1;
+    }
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+
+<body class="p-3 p-md-4">
+  <div class="container-fluid" style="max-width: 960px;">
+
+    <!-- Top Header -->
+    <div class="mb-4 pb-2 border-bottom">
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <h1 class="h4 fw-bold mb-0 text-dark d-flex align-items-center gap-2">
+          <i class="bi bi-shield-exclamation text-danger"></i> Unrecognized Tags
+        </h1>
+        <div class="d-flex align-items-center gap-2 ms-auto">
+          <a href="../index.html" class="btn btn-outline-secondary btn-sm" title="Back to Tags Hub">
+            <i class="bi bi-arrow-left me-1"></i> Tags Hub
+          </a>
+          <a href="../../index.html" class="btn btn-outline-secondary btn-sm" title="Back to Documentation Home">
+            <i class="bi bi-house-door me-1"></i> Home
+          </a>
+        </div>
+      </div>
+      <p class="text-muted small mb-0 mt-1">Select an analysis view to inspect tags missing from the <code>tags.json</code> catalog in your JSON specification.</p>
+    </div>
+
+    <!-- Navigation Cards Grid -->
+    <div class="row g-4 mb-4">
+
+      <!-- Card 1: Tags Only -->
+      <div class="col-12 col-md-6">
+        <div class="nav-card p-4 d-flex flex-column shadow-sm">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="icon-box bg-danger-subtle text-danger">
+              <i class="bi bi-shield-x"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold mb-0 text-dark">Tags Only</h5>
+              <span class="badge bg-light text-secondary border font-monospace small">tagsOnly.html</span>
+            </div>
+          </div>
+          <p class="text-secondary small mb-3 flex-grow-1">
+            Exclusively focuses on uncataloged tags missing from <code>tags.json</code>. Inspects tag counts, parent/children occurrences, text content presence, and attributes attached with diagnostic issues and recommended actions.
+          </p>
+          <ul class="list-unstyled small text-muted mb-4 border-top pt-3">
+            <li class="mb-1"><i class="bi bi-check-circle-fill text-danger me-2"></i>Dedicated table view with no extra metric cards</li>
+            <li class="mb-1"><i class="bi bi-check-circle-fill text-danger me-2"></i>Diagnostic issue breakdown &amp; recommended fixes</li>
+            <li class="mb-1"><i class="bi bi-check-circle-fill text-danger me-2"></i>Inspects children, text content, and attached attributes</li>
+          </ul>
+          <a href="./tagsOnly.html" class="btn btn-danger w-100 fw-semibold">
+            <i class="bi bi-arrow-right-circle me-1"></i> Open Tags Only Diagnostic
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: Tags with Story -->
+      <div class="col-12 col-md-6">
+        <div class="nav-card p-4 d-flex flex-column shadow-sm">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="icon-box bg-primary-subtle text-primary">
+              <i class="bi bi-journal-text"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold mb-0 text-dark">Tags with Story</h5>
+              <span class="badge bg-light text-secondary border font-monospace small">tagsWithStory.html</span>
+            </div>
+          </div>
+          <p class="text-secondary small mb-3 flex-grow-1">
+            Combines an overview narrative "Story of your JSON" for unrecognized elements with the complete Unfound Tags Diagnostic breakdown table. Provides an executive story summary, compliance verdict badge, and missing tag pills.
+          </p>
+          <ul class="list-unstyled small text-muted mb-4 border-top pt-3">
+            <li class="mb-1"><i class="bi bi-check-circle-fill text-primary me-2"></i>Narrative story summary of uncataloged tag occurrences</li>
+            <li class="mb-1"><i class="bi bi-check-circle-fill text-primary me-2"></i>Compliance verdict badge &amp; uncataloged tag pills</li>
+            <li class="mb-1"><i class="bi bi-check-circle-fill text-primary me-2"></i>Interactive Unfound Tags Diagnostic breakdown included</li>
+          </ul>
+          <a href="./tagsWithStory.html" class="btn btn-primary w-100 fw-semibold">
+            <i class="bi bi-arrow-right-circle me-1"></i> Open Tags with Story
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</body>
+
+</html>
