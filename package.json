@@ -1,6 +1,6 @@
 {
   "name": "@keshavsoft/json-to-tag",
-  "version": "1.4.3",
+  "version": "1.6.1",
   "description": "Zero-dependency Custom HTML Web Components and Tailwind CSS tokens for high-performance forms and tables.",
   "publishConfig": {
     "access": "public"
