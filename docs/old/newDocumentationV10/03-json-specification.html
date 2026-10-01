@@ -6,6 +6,68 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>03 · JSON Specification — json-to-tag</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .spec-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 36px 0 14px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .spec-header-row h2 {
+      margin: 0;
+    }
+
+    .spec-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-spec-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #0d1e33;
+      color: #64d7ff;
+      border: 1px solid #1f3f66;
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      font-family: inherit;
+      user-select: none;
+    }
+
+    .btn-spec-action:hover {
+      background: #153254;
+      border-color: #64d7ff;
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(100, 215, 255, 0.2);
+    }
+
+    .btn-spec-action:active {
+      transform: translateY(0);
+    }
+
+    .btn-spec-action.btn-download {
+      background: linear-gradient(135deg, #186fa5, #0f4b73);
+      border-color: #388ac4;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(24, 111, 165, 0.35);
+    }
+
+    .btn-spec-action.btn-download:hover {
+      background: linear-gradient(135deg, #1f85c4, #145b8c);
+      box-shadow: 0 4px 14px rgba(31, 133, 196, 0.45);
+    }
+  </style>
 </head>
 
 <body>
@@ -13,7 +75,7 @@
     <div class="wrap navin">
       <div style="display: flex; align-items: center; gap: 8px; margin-right: auto; flex-wrap: wrap;">
         <a class="brand" href="index.html" style="margin-right: 0;">json-to-tag / docs</a>
-        <span style="color: #cbd5e1; font-weight: 400;">/</span>
+        <span style="color: #2a476e; font-weight: 400;">/</span>
         <span style="color: var(--a); font-size: 12px; font-weight: 800; letter-spacing: .08em;">03 · JSON SPECIFICATION</span>
       </div>
       <div class="navlinks">

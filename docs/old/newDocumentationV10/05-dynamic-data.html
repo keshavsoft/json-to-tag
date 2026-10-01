@@ -8,16 +8,72 @@
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="https://keshavsoft.github.io/json-to-tag/dist/v4/min.js"></script>
   <style>
+    .spec-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 36px 0 14px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .spec-header-row h2 {
+      margin: 0;
+    }
+
+    .spec-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-spec-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #0d1e33;
+      color: #64d7ff;
+      border: 1px solid #1f3f66;
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      font-family: inherit;
+      user-select: none;
+    }
+
+    .btn-spec-action:hover {
+      background: #153254;
+      border-color: #64d7ff;
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(100, 215, 255, 0.2);
+    }
+
+    .btn-spec-action.btn-download {
+      background: linear-gradient(135deg, #186fa5, #0f4b73);
+      border-color: #388ac4;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(24, 111, 165, 0.35);
+    }
+
+    .btn-spec-action.btn-download:hover {
+      background: linear-gradient(135deg, #1f85c4, #145b8c);
+      box-shadow: 0 4px 14px rgba(31, 133, 196, 0.45);
+    }
+
     .interactive-demo-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
+      background: #06111e;
+      border: 1px solid #1c3554;
       border-radius: 14px;
-      padding: 22px;
+      padding: 20px;
       margin: 20px 0;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
     }
 
     @media (max-width: 768px) {
@@ -30,7 +86,7 @@
       display: block;
       font-size: 12px;
       font-weight: 700;
-      color: #475569;
+      color: #8bb5e0;
       text-transform: uppercase;
       letter-spacing: .05em;
       margin-bottom: 6px;
@@ -38,30 +94,27 @@
 
     .demo-input-group input {
       width: 100%;
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
+      background: #091a2e;
+      border: 1px solid #20416b;
       border-radius: 7px;
-      padding: 9px 12px;
-      color: #0f172a;
+      padding: 8px 12px;
+      color: #ffffff;
       font-size: 14px;
       margin-bottom: 12px;
       box-sizing: border-box;
       outline: none;
-      transition: border-color .15s ease, box-shadow .15s ease;
     }
 
     .demo-input-group input:focus {
-      border-color: #0284c7;
-      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+      border-color: #64d7ff;
     }
 
     .live-render-box {
       background: #ffffff;
-      border: 1px solid #e2e8f0;
       border-radius: 10px;
       padding: 20px;
       color: #0f172a;
-      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     }
   </style>
 </head>
@@ -71,7 +124,7 @@
     <div class="wrap navin">
       <div style="display: flex; align-items: center; gap: 8px; margin-right: auto; flex-wrap: wrap;">
         <a class="brand" href="index.html" style="margin-right: 0;">json-to-tag / docs</a>
-        <span style="color: #cbd5e1; font-weight: 400;">/</span>
+        <span style="color: #2a476e; font-weight: 400;">/</span>
         <span style="color: var(--a); font-size: 12px; font-weight: 800; letter-spacing: .08em;">05 · DYNAMIC DATA</span>
       </div>
       <div class="navlinks">
