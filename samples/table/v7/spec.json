@@ -1,0 +1,105 @@
+{
+    "tagName": "table",
+    "attributes": {
+        "class": "table table-hover table-striped align-middle border mb-0"
+    },
+    "children": [
+        {
+            "tagName": "thead",
+            "attributes": {
+                "class": "table-dark"
+            },
+            "children": [
+                {
+                    "tagName": "tr",
+                    "children": [
+                        {
+                            "tagName": "th",
+                            "textContent": "itemName",
+                            "attributes": {
+                                "class": "text-start"
+                            }
+                        },
+                        {
+                            "tagName": "th",
+                            "textContent": "baseUnit",
+                            "attributes": {
+                                "class": "text-start"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "tagName": "tbody",
+            "children": [
+                {
+                    "tagName": "tr",
+                    "children": [
+                        {
+                            "tagName": "td",
+                            "textContent": "0.09/30mm"
+                        },
+                        {
+                            "tagName": "td",
+                            "textContent": "kgs"
+                        }
+                    ]
+                },
+                {
+                    "tagName": "tr",
+                    "children": [
+                        {
+                            "tagName": "td",
+                            "textContent": "0.11-25"
+                        },
+                        {
+                            "tagName": "td",
+                            "textContent": "kgs"
+                        }
+                    ]
+                },
+                {
+                    "tagName": "tr",
+                    "children": [
+                        {
+                            "tagName": "td",
+                            "textContent": "0.11-30"
+                        },
+                        {
+                            "tagName": "td",
+                            "textContent": "kgs"
+                        }
+                    ]
+                },
+                {
+                    "tagName": "tr",
+                    "children": [
+                        {
+                            "tagName": "td",
+                            "textContent": "0.12/40mm"
+                        },
+                        {
+                            "tagName": "td",
+                            "textContent": "kgs"
+                        }
+                    ]
+                },
+                {
+                    "tagName": "tr",
+                    "children": [
+                        {
+                            "tagName": "td",
+                            "textContent": "1.00/50mm"
+                        },
+                        {
+                            "tagName": "td",
+                            "textContent": "mtr"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
