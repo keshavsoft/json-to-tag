@@ -1,7 +1,7 @@
 {
   "name": "@keshavsoft/json-to-tag",
   "version": "1.9.3",
-  "description": "Zero-dependency Custom HTML Web Components and Tailwind CSS tokens for high-performance forms and tables.",
+  "description": "Zero-dependency declarative JSON-to-DOM compiler. Transform JSON specifications into native browser DOM elements via a multi-stage assembly pipeline with built-in tag catalog validation.",
   "publishConfig": {
     "access": "public"
   },
@@ -34,10 +34,13 @@
     "url": "git+https://github.com/keshavsoft/json-to-tag.git"
   },
   "keywords": [
-    "web-components",
-    "table-cell-content",
-    "tailwind-tokens",
-    "custom-elements"
+    "json-to-dom",
+    "declarative-ui",
+    "dom-builder",
+    "json-specification",
+    "zero-dependency",
+    "tag-catalog",
+    "spec-to-dom"
   ],
   "author": "KeshavSoft",
   "license": "ISC",

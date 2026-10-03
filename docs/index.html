@@ -329,7 +329,7 @@
         <i class="bi bi-tag-fill text-primary fs-5"></i>
         <span>json-to-tag</span>
         <span class="badge bg-primary-subtle text-primary border border-primary-subtle ms-1"
-          style="font-size: 0.7rem; font-weight: 600;">v1.4.3</span>
+          style="font-size: 0.7rem; font-weight: 600;">v1.9.3</span>
       </a>
 
       <!-- Quick Nav Links -->
@@ -363,7 +363,7 @@
         <!-- Left: Headline & Pitch -->
         <div class="col-lg-7">
           <div class="hero-badge">
-            <span class="badge bg-primary text-white rounded-pill px-2">v4 Engine</span>
+            <span class="badge bg-primary text-white rounded-pill px-2">v9 Engine</span>
             <span>Zero-Dependency Declarative JSON-to-DOM Compiler</span>
           </div>
 
@@ -440,7 +440,7 @@
 
               <div class="text-secondary mb-1">// Direct Browser CDN Import (ES Module):</div>
               <div class="text-warning-emphasis small" style="font-size: 0.8rem; word-break: break-all;">
-                import { buildSpecElement } from "https://keshavsoft.github.io/json-to-tag/dist/v3/min.js";
+                import { buildSpecElement } from "https://keshavsoft.github.io/json-to-tag/dist/v9/min.js";
               </div>
             </div>
           </div>
@@ -734,7 +734,7 @@
                 <span class="text-secondary">// 1. ES Module Import:</span><br />
                 <span class="text-info">import</span> { buildSpecElement } <span class="text-info">from</span> <span
                   class="text-warning">"@keshavsoft/json-to-tag"</span>;<br /><br />
-                <span class="text-secondary">// 2. Compile directly (v4 direct spec input):</span><br />
+                <span class="text-secondary">// 2. Compile directly (v9 engine):</span><br />
                 <span class="text-info">const</span> domElement = buildSpecElement(mySpec);<br />
                 document.getElementById(<span
                   class="text-warning">"container"</span>).appendChild(domElement);<br /><br />
@@ -749,8 +749,43 @@
 
   </main>
 
+  <!-- Companion Library Cross-Link -->
+  <section class="bg-white border-top border-bottom py-4">
+    <div class="container-fluid px-3 px-md-4" style="max-width: 1240px;">
+      <div class="row align-items-center g-3">
+        <div class="col-md-8">
+          <div class="d-flex align-items-center gap-2 mb-1">
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2">Companion Library</span>
+            <span class="fw-bold text-dark">@keshavsoft/tag-to-json</span>
+          </div>
+          <p class="text-muted small mb-0">
+            Already have live DOM elements and want to capture them as JSON specs?
+            <strong>tag-to-json</strong> is the reverse companion — it traverses any live HTML element using the
+            W3C DOM Tree Walker and extracts a clean <code>json-to-tag</code>-compatible specification.
+            Pass the output directly into <code>buildSpecElement({ inSpec })</code>.
+          </p>
+        </div>
+        <div class="col-md-4 d-flex gap-2 justify-content-md-end flex-wrap">
+          <a href="https://keshavsoft.github.io/tag-to-json/" target="_blank" rel="noopener"
+            class="btn btn-primary btn-sm px-3 fw-semibold">
+            <i class="bi bi-box-arrow-up-right me-1"></i> Live Docs
+          </a>
+          <a href="https://github.com/keshavsoft/tag-to-json" target="_blank" rel="noopener"
+            class="btn btn-outline-dark btn-sm px-3">
+            <i class="bi bi-github me-1"></i> GitHub
+          </a>
+          <a href="https://www.npmjs.com/package/@keshavsoft/tag-to-json" target="_blank" rel="noopener"
+            class="btn btn-outline-danger btn-sm px-3">
+            <i class="bi bi-box-seam me-1"></i> npm
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="bg-white border-top py-4 mt-5">
+
     <div class="container-fluid px-3 px-md-4 d-flex justify-content-between align-items-center flex-wrap gap-3"
       style="max-width: 1240px;">
       <div class="d-flex align-items-center gap-2">

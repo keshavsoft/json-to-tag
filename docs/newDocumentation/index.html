@@ -346,8 +346,9 @@ window.ks.jsonToTag
         const build = fn || window.ks?.jsonToTag?.buildSpecElement;
         if (build) out.replaceChildren(build(spec));
       }
-      import("../dist/v4/min.js")
-        .catch(() => import("https://keshavsoft.github.io/json-to-tag/dist/v4/min.js"))
+      import("../dist/v9/min.js")
+        .catch(() => import("../dist/v4/min.js"))
+        .catch(() => import("https://keshavsoft.github.io/json-to-tag/dist/v9/min.js"))
         .then(mod => render(mod.buildSpecElement || window.ks?.jsonToTag?.buildSpecElement))
         .catch(err => console.error("Could not load preview engine:", err));
     })();

@@ -6,13 +6,10 @@
 [![Live Playground](https://img.shields.io/badge/Live_Playground-Interactive_Demo-4f46e5?style=for-the-badge&logo=googlechrome&logoColor=white)](https://keshavsoft.github.io/json-to-tag/)
 [![npm](https://img.shields.io/npm/v/@keshavsoft/json-to-tag?style=for-the-badge&color=2563eb)](https://www.npmjs.com/package/@keshavsoft/json-to-tag)
 
-🌐 **Documentation & Directory Hub**: [https://keshavsoft.github.io/json-to-tag/](https://keshavsoft.github.io/json-to-tag/)  
-🌐 **New Documentation & Directory Hub**: [https://keshavsoft.github.io/json-to-tag/newDocumentation/](https://keshavsoft.github.io/json-to-tag/newDocumentation/)  
+🌐 **Documentation Hub**: [https://keshavsoft.github.io/json-to-tag/](https://keshavsoft.github.io/json-to-tag/)  
+📖 **Step-by-Step Guide**: [https://keshavsoft.github.io/json-to-tag/newDocumentation/](https://keshavsoft.github.io/json-to-tag/newDocumentation/)  
 🏷️ **Tags Catalog & Rules Analysis**: [https://keshavsoft.github.io/json-to-tag/tags/index.html](https://keshavsoft.github.io/json-to-tag/tags/index.html)  
-📑 **Individual Tag Specifications**: [https://keshavsoft.github.io/json-to-tag/tags/individualTags/label.html](https://keshavsoft.github.io/json-to-tag/tags/individualTags/label.html)  
-🎛️ **Live Interactive Playground**: [https://keshavsoft.github.io/json-to-tag/playground/index.html](https://keshavsoft.github.io/json-to-tag/playground/index.html)  
-📊 **Specification Summary Hub**: [https://keshavsoft.github.io/json-to-tag/summary/index.html](https://keshavsoft.github.io/json-to-tag/summary/index.html)  
-📑 **Table Guide**: [https://keshavsoft.github.io/json-to-tag/table-guide.html](https://keshavsoft.github.io/table-guide.html)
+📊 **Specification Summary Hub**: [https://keshavsoft.github.io/json-to-tag/summary/index.html](https://keshavsoft.github.io/json-to-tag/summary/index.html)
   - 📋 [Tags Only & Frequency Lists](https://keshavsoft.github.io/json-to-tag/summary/tags-only.html)
   - ⚠️ [Not Present (Unrecognized Tags Audit)](https://keshavsoft.github.io/json-to-tag/summary/not-present.html)
   - ✅ [Present (Catalog Verified Tags)](https://keshavsoft.github.io/json-to-tag/summary/present.html)
@@ -54,17 +51,9 @@ npx @keshavsoft/json-to-tag --help
 ### 1. Standard ES Module Import (from npm package)
 
 ```javascript
-// Primary default and named imports
-import buildSpecElement, { 
-  buildSpecElement, 
-  specToDom, 
-  buildSpec, 
-  reviewSpec, 
-  meta 
-} from "@keshavsoft/json-to-tag";
-
-// Or import specifically from /v3 subpath
-import { buildSpecElement, reviewSpec } from "@keshavsoft/json-to-tag/v3";
+// Default and named imports
+import buildSpecElement from "@keshavsoft/json-to-tag";
+import { buildSpecElement, specToDom, buildSpec, reviewSpec, meta } from "@keshavsoft/json-to-tag";
 ```
 
 ### 2. Local Project Import (after NPX scaffolding)
@@ -160,9 +149,9 @@ console.log(review.unrecognizedTags);   // []
 ### 4. Browser Global Usage (Without Bundler)
 
 ```html
-<script type="module" src="./node_modules/@keshavsoft/json-to-tag/src/v3/index.js"></script>
+<script type="module" src="./node_modules/@keshavsoft/json-to-tag/src/v9/index.js"></script>
 <script type="module">
-  const { buildSpecElement, reviewSpec } = window.ks["json-to-tag"];
+  const { buildSpecElement, reviewSpec } = window.ks.jsonToTag;
 
   const el = buildSpecElement({
     inSpec: {
@@ -207,6 +196,33 @@ buildSpecElement({ inSpec: mySpec });
 // Also supported:
 buildSpecElement({ spec: mySpec });
 ```
+
+---
+
+## Round-Trip Workflow with `tag-to-json`
+
+`json-to-tag` has a direct reverse companion: [`@keshavsoft/tag-to-json`](https://www.npmjs.com/package/@keshavsoft/tag-to-json).
+
+While `json-to-tag` **builds** DOM elements from JSON specs, `tag-to-json` **extracts** specs from any live rendered DOM element. Together they form a complete lossless round-trip loop:
+
+```javascript
+import { tagToJson } from "@keshavsoft/tag-to-json";
+import { buildSpecElement } from "@keshavsoft/json-to-tag";
+
+// 1. Capture an existing DOM element as a portable JSON spec
+const existingElement = document.querySelector("#my-card");
+const spec = tagToJson({ inElement: existingElement });
+
+// 2. Rebuild it anywhere — same markup, zero innerHTML
+const clone = buildSpecElement({ inSpec: spec });
+document.getElementById("target").appendChild(clone);
+```
+
+> 🔁 The spec output from `tagToJson()` is **100% compatible** with `buildSpecElement({ inSpec })` — no transformation needed.
+
+- **[`@keshavsoft/tag-to-json` on npm](https://www.npmjs.com/package/@keshavsoft/tag-to-json)**
+- **[Live Demo & Showcase](https://keshavsoft.github.io/tag-to-json/)**
+- **[GitHub](https://github.com/keshavsoft/tag-to-json)**
 
 ---
 
