@@ -1,7 +1,7 @@
-//#region src/v9/meta.js
+//#region src/v10/meta.js
 var e = {
-	version: "v9",
-	description: "JSON-to-DOM engine with SVG namespace support, mixed text content, and centralized traversal"
+	version: "v10",
+	description: "JSON-to-DOM engine with SVG namespace support, mixed text content, centralized traversal, and input guard validation"
 }, t = ({ inFuncDefinition: t, inReviewSpec: n } = {}) => {
 	if (typeof globalThis > "u" || !t) return;
 	globalThis.ks ??= {};
@@ -354,10 +354,29 @@ var e = {
 		recognizedTags: i.recognizedTags,
 		unrecognizedTags: i.unrecognizedTags
 	};
-}, y = (e = {}) => m(e?.spec ?? e?.inSpec ?? e), b = y, x = m;
+}, y = (e = {}) => {
+	let t = e && typeof e == "object" && ("inSpec" in e || "inspec" in e || "spec" in e) ? e.inSpec ?? e.inspec ?? e.spec : e, n = e?.inshowLog ?? e?.inShowLog ?? e?.showLog;
+	if (t == null) throw console.error("spec must not be null or undefined"), Error("spec must not be null or undefined");
+	let r = typeof Node < "u" && t instanceof Node, i = Array.isArray(t), a = typeof t == "object" && !!t;
+	if (!r && !i && !a && typeof t != "string" && typeof t != "number") throw console.error("spec must be an object, array, or DOM node"), TypeError("spec must be an object, array, or DOM node");
+	if (a && !i && !r) {
+		if (!t.tagName && t.textContent === void 0 && t.text === void 0) throw console.error("spec must have a tagName"), Error("spec must have a tagName");
+		if (t.tagName !== void 0 && (typeof t.tagName != "string" || t.tagName.trim() === "")) throw console.error("tagName must be a non-empty string"), TypeError("tagName must be a non-empty string");
+	}
+	if (n !== void 0 && typeof n != "boolean") throw console.error("showLog must be a boolean"), TypeError("showLog must be a boolean");
+	return !0;
+}, b = (e = {}) => {
+	let t = e?.spec ?? e?.inSpec ?? e, n = e?.showLog ?? e?.inShowLog;
+	y({
+		inSpec: t,
+		inshowLog: n
+	}), n && console.log("buildSpecElement 1 :", t);
+	let r = m(t);
+	return n && console.log("buildSpecElement 2 :", r), r;
+}, x = b, S = m;
 t({
-	inFuncDefinition: y,
+	inFuncDefinition: b,
 	inReviewSpec: v
 });
 //#endregion
-export { x as buildSpec, y as buildSpecElement, y as default, e as meta, v as reviewSpec, b as specToDom, m as traverse };
+export { S as buildSpec, b as buildSpecElement, b as default, y as gaurdFunc, y as guardFunc, e as meta, v as reviewSpec, x as specToDom, m as traverse };
