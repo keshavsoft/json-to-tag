@@ -1,6 +1,6 @@
 {
   "name": "@keshavsoft/json-to-tag",
-  "version": "1.10.1",
+  "version": "1.10.2",
   "description": "Zero-dependency declarative JSON-to-DOM compiler. Transform JSON specifications into native browser DOM elements via a multi-stage assembly pipeline with built-in tag catalog validation.",
   "publishConfig": {
     "access": "public"

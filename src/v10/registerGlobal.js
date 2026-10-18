@@ -1,14 +1,13 @@
 import meta from "./meta.js";
 
-export const registerGlobal = ({ inFuncDefinition, inReviewSpec } = {}) => {
+export const registerGlobal = (inFuncDefinition) => {
     if (typeof globalThis === "undefined" || !inFuncDefinition) return;
 
     globalThis.ks ??= {};
 
     const api = {
         meta,
-        buildSpecElement: inFuncDefinition,
-        reviewSpec: inReviewSpec
+        buildSpecElement: inFuncDefinition
     };
 
     globalThis.ks["json-to-tag"] = api;

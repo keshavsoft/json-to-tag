@@ -1,6 +1,5 @@
 import registerGlobal from "./registerGlobal.js";
 import { traverse } from "./traverse.js";
-import reviewSpec from "../v4/review/index.js";
 import meta from "./meta.js";
 
 const buildSpecElement = (inArgs = {}) => {
@@ -16,13 +15,9 @@ export {
     specToDom,
     buildSpec,
     traverse,
-    reviewSpec,
     meta
 };
 
-registerGlobal({
-    inFuncDefinition: buildSpecElement,
-    inReviewSpec: reviewSpec
-});
+registerGlobal(buildSpecElement);
 
 export default buildSpecElement;
