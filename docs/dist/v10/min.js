@@ -1,6 +1,6 @@
 //#region src/v10/meta.js
 var e = {
-	version: "v9",
+	version: "v10",
 	description: "JSON-to-DOM engine with SVG namespace support, mixed text content, and centralized traversal"
 }, t = (t) => {
 	if (typeof globalThis > "u" || !t) return;

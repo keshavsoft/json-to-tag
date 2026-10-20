@@ -1,5 +1,5 @@
 export const meta = {
-    version: "v9",
+    version: "v10",
     description: "JSON-to-DOM engine with SVG namespace support, mixed text content, and centralized traversal"
 };
 
