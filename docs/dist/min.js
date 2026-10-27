@@ -1,7 +1,7 @@
-//#region src/v10/meta.js
+//#region src/v12/meta.js
 var e = {
-	version: "v10",
-	description: "JSON-to-DOM engine with SVG namespace support, mixed text content, and centralized traversal"
+	version: "v12",
+	description: "JSON-to-DOM engine powered by decoupled external-action traversal engine"
 }, t = (t) => {
 	if (typeof globalThis > "u" || !t) return;
 	globalThis.ks ??= {};
@@ -10,7 +10,37 @@ var e = {
 		buildSpecElement: t
 	};
 	globalThis.ks["json-to-tag"] = n, globalThis.ks.jsonToTag = n;
-}, n = (e) => e == null ? null : typeof Node < "u" && e instanceof Node ? e : typeof e == "string" || typeof e == "number" ? document.createTextNode(String(e)) : typeof e == "object" && (e.nodeType === 3 || e.tagName === "#text" || !e.tagName && (e.textContent !== void 0 || e.text !== void 0)) ? document.createTextNode(e.textContent ?? e.text ?? "") : m(e), r = (e) => Array.isArray(e) ? e.map(n).flat(Infinity).filter(Boolean) : [], i = (e) => e ?? e, a = "http://www.w3.org/2000/svg", o = /* @__PURE__ */ new Set(/* @__PURE__ */ "svg.path.symbol.use.g.circle.ellipse.rect.line.polyline.polygon.text.tspan.defs.clippath.mask.pattern.marker.lineargradient.radialgradient.stop.image.filter.fegaussianblur.femerge.femergenode".split(".")), s = ({ inTagName: e }) => {
+}, n = ({ inItems: e, inFunc: t }) => {
+	let n = e, r = t;
+	return Array.isArray(n) ? n.map((e) => i({
+		inSpec: e,
+		inFunc: r
+	})).flat(Infinity).filter(Boolean) : [];
+}, r = ({ inSpec: e, inFunc: t }) => {
+	let r = e, i = t;
+	if (!r || typeof r != "object" || Array.isArray(r)) return null;
+	let a = typeof i == "function" ? i(r) : null;
+	if (Array.isArray(r.children)) {
+		let e = n({
+			inItems: r.children,
+			inFunc: i
+		});
+		if (a && typeof a.append == "function" && Array.isArray(e)) {
+			let t = e.filter(Boolean);
+			t.length && a.append(...t);
+		}
+	}
+	return a;
+}, i = ({ inSpec: e, inFunc: t }) => {
+	let i = e, a = t;
+	return i == null ? null : typeof Node < "u" && i instanceof Node ? i : Array.isArray(i) ? n({
+		inItems: i,
+		inFunc: a
+	}) : typeof i == "object" ? r({
+		inSpec: i,
+		inFunc: a
+	}) : typeof i == "string" || typeof i == "number" ? typeof document < "u" ? document.createTextNode(String(i)) : String(i) : null;
+}, a = "http://www.w3.org/2000/svg", o = /* @__PURE__ */ new Set(/* @__PURE__ */ "svg.path.symbol.use.g.circle.ellipse.rect.line.polyline.polygon.text.tspan.defs.clippath.mask.pattern.marker.lineargradient.radialgradient.stop.image.filter.fegaussianblur.femerge.femergenode".split(".")), s = ({ inTagName: e }) => {
 	let t = e?.toLowerCase();
 	if (!t) return null;
 	if (t === "checkbox") {
@@ -50,10 +80,9 @@ var e = {
 }, p = (e) => {
 	if (!e || typeof e != "object" || Array.isArray(e) || !e.tagName) return null;
 	let t = s({ inTagName: e.tagName });
-	if (!t) return null;
-	if (c({
+	return t ? (c({
 		inElement: t,
-		inTextContent: i(e.textContent),
+		inTextContent: e.textContent,
 		inTagName: e.tagName
 	}), l({
 		inElement: t,
@@ -64,12 +93,11 @@ var e = {
 	}), f({
 		inElement: t,
 		inClassList: e.classList
-	}), Array.isArray(e.children)) {
-		let n = r(e.children);
-		n.length && t.append(...n);
-	}
-	return t;
-}, m = (e) => e == null ? null : typeof Node < "u" && e instanceof Node ? e : Array.isArray(e) ? r(e) : typeof e == "object" ? p(e) : typeof e == "string" || typeof e == "number" ? document.createTextNode(String(e)) : null, h = (e = {}) => m(e?.spec ?? e?.inSpec ?? e), g = h, _ = m;
-t(h);
+	}), t) : null;
+}, m = (e = {}) => i({
+	inSpec: e?.spec ?? e?.inSpec ?? e,
+	inFunc: p
+}), h = m, g = m;
+t(m);
 //#endregion
-export { _ as buildSpec, h as buildSpecElement, h as default, e as meta, g as specToDom, m as traverse };
+export { g as buildSpec, m as buildSpecElement, m as default, e as meta, h as specToDom, i as traverse };
